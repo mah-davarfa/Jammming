@@ -1,0 +1,38 @@
+{
+    "playlists": [
+      {
+        "name": "My Playlist",
+        "last_modified": "2023-01-01T00:00:00Z",
+        "tracks": [
+          {
+            "name": "Song Title",
+            "artist": "Artist Name",
+            "album": "Album Name",
+            "duration_ms": 240000,
+            "uri": "spotify:track:12345"
+          },
+          {
+            "name": "Another Song",
+            "artist": "Another Artist",
+            "album": "Another Album",
+            "duration_ms": 180000,
+            "uri": "spotify:track:67890"
+          }
+        ]
+      }
+    ],
+    "streaming_history": [
+      {
+        "date": "2023-01-01T00:00:00Z",
+        "track": "Song Title",
+        "artist": "Artist Name",
+        "msPlayed": 240000
+      },
+      {
+        "date": "2023-01-02T00:00:00Z",
+        "track": "Another Song",
+        "artist": "Another Artist",
+        "msPlayed": 180000
+      }
+    ]
+  }
