@@ -1,0 +1,26 @@
+.banner {
+    text-align: center;
+}
+
+.searchBar {
+    
+    color: white;
+}
+
+.searchBar:focus {
+    outline: 2px solid rgb(250, 250, 14); 
+}
+
+.bannerInput {
+    border: 1px solid brown;
+}
+
+.bannerButton {
+    border: 1px solid red;
+    padding-left: 1px;
+    margin-left: 2px;
+}
+
+.bannerButton:focus {
+    outline: 2px solid rgb(12, 245, 12);
+}
