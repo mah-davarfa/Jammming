@@ -2,16 +2,19 @@ import React ,{useState} from 'react';
 import './Banner.css';
 
 
-export default function SearchBar(){
+export default function SearchBar({onSearch}){
 const [search , setSearch] = useState('');
-    const handleSubmit = (e) => {
+  
+const handleSubmit = (e) => {
         e.preventDefault();
-        
+        if(search.trim()){
+        onSearch(search);
+    }
     }
     const handleOnChange = (e) => {
-        if((e.target.value).trim()){
+        
             setSearch(e.target.value);
-        }
+        
     }
     return(
        <>  
@@ -27,7 +30,7 @@ const [search , setSearch] = useState('');
                 value={search} 
                 />
                 <button className='bannerButton'
-                 type='submit'> Search </button>
+                 type='submit' disabled ={!search.trim()}> Search </button>
             </form>
         </div>
      </>

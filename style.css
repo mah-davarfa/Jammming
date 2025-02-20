@@ -13,16 +13,17 @@ body{
 .list-group{
     border: 3px solid rgb(237, 229, 229);
     border-radius: 50%; 
-    width: 25%; 
-    height: 25%; 
+    width: 20%; 
+    height: 40%; 
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
-    align-items: left; 
+    justify-content: center;
+    align-items: center; 
     margin-top: 20px;
     font-size: 8px;
     padding: 5px;
     background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 .list-group h1{
    font-size: 12px;

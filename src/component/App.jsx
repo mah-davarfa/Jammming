@@ -1,25 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Banner from './Banner.jsx';
-import './Banner.css';
-import Data from './exampFetch.jsx';
+import Data from './Data.jsx';
 import SearchBar from './searchBar.jsx';
+import SearchResults from './SearchResults.jsx';
 import './App.css';
 
-export default App
+
+
 
  function App () {
+  const [userName, setUserName] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
+  const handleNameSubmit = (name)=>{
+    setUserName(name);
+  }
+  const handleSearch =(search)=>{
+    setSearchTerm(search);
+  }
+const handleSearchTerm = (data) => {
+  setSearchResults(data);
+}
   return (
     <>
     <div className='App'>
-    <div className='AppBanner'>
-      <Banner/>
-     </div>
-    <div className='AppSearchBar'> 
-      <SearchBar/>
-      <Data/>
-    </div>
+      <div className='AppBanner'>
+        <Banner onNameSubmit={handleNameSubmit}/>
+      </div>
+    
+      
+      {userName &&(
+      <div>
+        <SearchBar onSearch={handleSearch}/>
+        <Data searchTerm={searchTerm} onSearchTerm={handleSearchTerm}/>
+        <SearchResults searchResults={searchResults} /> 
+      </div>
+      )}
     </div>
     </>
   )
 };
+export default App;
