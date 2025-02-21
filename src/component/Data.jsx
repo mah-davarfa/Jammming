@@ -6,6 +6,7 @@ export default function Data({searchTerm ,onSearchTerm}) {
 const [data ,setdata] = useState(null);
    
             useEffect(()=>{
+                if (!searchTerm) return;
                 fetch('./data.json')
                 .then((res)=>res.JSON())
                 .then((data)=>
