@@ -1,5 +1,5 @@
 import react from 'react';
-function AlbumCard(){
+function AlbumCard({name, artist, image, releaseDate, genre}) {
     return(
         <div className="card">
       <img src={image} alt={name} />

@@ -23,6 +23,7 @@ const SearchResults = ({searchResults}) => {
                />);
 
             }else if(item.type.trim().toLowerCase()==='track'){
+              
               return  (
               <SongCard 
                   key={item.id}  
@@ -31,6 +32,7 @@ const SearchResults = ({searchResults}) => {
                   artist={item.artists[0]?.name}
                   album={item.album?.name}
                   image={item.album?.images[0]?.url}
+                 preview={ (!(item.preview_url===null))?item.preview_url:null}
                   genre={item.artists[0]?.genres?.join(',') || 'Unknown'}
               />);
 

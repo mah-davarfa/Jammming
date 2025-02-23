@@ -1,7 +1,7 @@
 import react from 'react';
 
 
-function ArtistCard(){
+function ArtistCard({name, image, genre, popularity}){
     
     return(
         <div className='card'>
