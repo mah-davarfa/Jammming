@@ -22,7 +22,7 @@ export default function Banner({onNameSubmit}) {
       <>  
         <div className='banner'>
 
-            <h1>welcome to Jammming {name}! </h1>
+            <h1>welcome to Jammming {submitted ? name : ''}! </h1>
             {!submitted && 
             <form onSubmit= {submitHandler} 
              className='searchBar'>

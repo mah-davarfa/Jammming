@@ -3,15 +3,18 @@ import AlbumCard from './AlbumCard';
 import SongCard from './SongCard';
 import ArtistCard from './ArtistCard';
 const SearchResults = ({searchResults}) => {
-    
+  const searchResultsArray =
+  searchResults && typeof searchResults === "object" && searchResults.type
+    ? [searchResults]
+    : [];
     
    return(
     <div>
         <h2>search results</h2>
-      { searchResults && searchResults.length > 0  ? (
-        searchResults.map((item)=>{
+      { searchResultsArray && searchResultsArray.length > 0  ? (
+        searchResultsArray.map((item)=>{
             
-            if(item.type.trim().toLowerCase()==='album'){
+            if(item.type.toLowerCase()==='album'){
               return (
              <AlbumCard
                   key={item.id} 
@@ -44,11 +47,13 @@ const SearchResults = ({searchResults}) => {
                   name={item.name}
                   image={item.images[0]?.url}
                   genre={item.genres?.join(',') || 'Unknown'}
-                  popularity={item.popularity}
+                  popularity={item.popularity || 'Unknown'}
                 />);
-              }          
+              }           
         })
-      ) : (<p>search result not avilable </p>
+      ) : (     searchResults && Object.keys(searchResults).length > 0 ? (
+        <p>search result not available</p>
+      ) : null
 
       )}  
     </div>

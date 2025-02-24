@@ -3,13 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
+/* body{
     background-image: url(./imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg);
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center; 
     color: rgb(242, 238, 238)
-}
+}*/
 .list-group{
     border: 3px solid rgb(237, 229, 229);
     border-radius: 50%; 

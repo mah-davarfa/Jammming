@@ -8,17 +8,20 @@ const [data ,setdata] = useState(null);
             useEffect(()=>{
                 if (!searchTerm) return;
                 fetch('./data.json')
-                .then((res)=>res.JSON())
+                .then((res)=>res.json())
                 .then((data)=>
-                    {setdata(data)
-                    onSearchTerm(data);
+                  {setdata(data)
+                   onSearchTerm(data)
+                  
             })
-                 .catch((error)=>clonsol.error('Error in fetching:', error))
+            .catch((error)=>console.error('Error in fetching:', error));
+
             },[searchTerm] )
-            if(!data){
+            if (!searchTerm) {return null;}
+           else if(!data){
                 return <div>Loading...</div>
             }
-
+return
     (
         <div>
 
