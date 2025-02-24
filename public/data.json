@@ -1,24 +1,28 @@
-
 {
   "external_urls": {
-    "spotify": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
+    "spotify": "https://open.spotify.com/artist/123456"
   },
   "followers": {
-    "href": "string",
-    "total": 0
+    "href": null,
+    "total": 1050000
   },
-  "genres": ["Prog rock", "Grunge"],
-  "href": "string",
-  "id": "06HL4z0CvFAxyc27GXpf02",
+  "genres": ["Pop", "Rock", "Indie"],
+  "href": "https://api.spotify.com/v1/artists/123456",
+  "id": "123456",
   "images": [
     {
-      "url": "https://i.scdn.co/image/ab6761610000e5ebf237d4c4b9d1d2a8a805cf4f",
-      "height": 300,
-      "width": 300
+      "url": "https://images.saymedia-content.com/.image/t_share/MTc0OTkyNzc3OTUwNzM0MzA0/the-hairvolution-of-taylor-swift.jpg",
+      "height": 640,
+      "width": 640
+    },
+    {
+      "url": "https://i.scdn.co/image/ab67616100005174b23e1b8a6a7b2c4d3a4e3a5b",
+      "height": 320,
+      "width": 320
     }
   ],
-  "name": "Taylor Swift",
-  "popularity": 0,
+  "name": "The Sample Band",
+  "popularity": 75,
   "type": "artist",
-  "uri": "string"
+  "uri": "spotify:artist:123456"
 }

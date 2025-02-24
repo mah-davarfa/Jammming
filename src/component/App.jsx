@@ -20,7 +20,7 @@ import './App.css';
     setSearchTerm(search);
   }
 const handleSearchTerm = (data) => {
-  setSearchResults(data);
+  setSearchResults(Array.isArray(data)? data :[data]);
 }
   return (
     <>

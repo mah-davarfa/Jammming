@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function Data({searchTerm ,onSearchTerm}) {
 
-    //While up dating fetch i need to use searTerm to be fetched
+    //While up dating fetch i need to use searchTerm to be fetched
 const [data ,setdata] = useState(null);
    
             useEffect(()=>{

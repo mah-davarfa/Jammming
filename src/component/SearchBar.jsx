@@ -4,18 +4,23 @@ import './Banner.css';
 
 export default function SearchBar({onSearch}){
 const [search , setSearch] = useState('');
-  
+const [cleanSearch , setCleanSearch] = useState(true);
+//const [errorSearch , setErrorSearch] = useState(fales);
+
 const handleSubmit = (e) => {
         e.preventDefault();
         if(search.trim()){
         onSearch(search);
+        setCleanSearch(false);
     }
     }
     const handleOnChange = (e) => {
         
             setSearch(e.target.value);
-        
+            if (cleanSearch===false){
+            setCleanSearch(true);
     }
+}
     return(
        <>  
         <div className='banner'>
@@ -27,7 +32,7 @@ const handleSubmit = (e) => {
                 onChange={handleOnChange}
                 type='text'
                 placeholder='Enter Artist or Album Name' 
-                value={search} 
+                value={cleanSearch ? search : ''} 
                 />
                 <button className='bannerButton'
                  type='submit' disabled ={!search.trim()}> Search </button>
