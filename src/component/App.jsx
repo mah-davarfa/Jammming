@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Banner from './Banner.jsx';
 import Data from './Data.jsx';
-import SearchBar from './searchBar.jsx';
+import SearchBar from './SearchBar.jsx';
 import SearchResults from './SearchResults.jsx';
 import './App.css';
 

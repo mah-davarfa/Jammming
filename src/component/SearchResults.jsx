@@ -8,6 +8,7 @@ const SearchResults = ({searchResults}) => {
     ? [searchResults]
     : [];
     
+
    return(
     <div>
         <h2>search results</h2>
@@ -51,7 +52,7 @@ const SearchResults = ({searchResults}) => {
                 />);
               }           
         })
-      ) : (     searchResults && Object.keys(searchResults).length > 0 ? (
+      ) : (searchResults && Object.keys(searchResults).length > 0 ? (
         <p>search result not available</p>
       ) : null
 
