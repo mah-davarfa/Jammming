@@ -10,7 +10,8 @@ const SearchResults = ({searchResults}) => {
 
     if(searchResults && searchResults.length>0){
       setSearchResultsAll((prev)=>{
-         const uniqueResults = searchResults.filter((item)=>
+         const uniqueResults = 
+         searchResults.filter((item)=>
         !searchResultsAll.some((item2)=>
           (item2.id===item.id)));
         
@@ -36,6 +37,8 @@ const SearchResults = ({searchResults}) => {
                   image={item.images[0]?.url}
                   releaseDate={item.release_date}
                   genre={item.genres?.join(',') || 'Unknown'}
+                  songs={item.tracks?.items}
+                  totalOfSongs={item.tracks.total}
                />);
 
             }else if(item.type.trim().toLowerCase()==='track'){
