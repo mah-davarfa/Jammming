@@ -4,9 +4,9 @@ import Data from './Data.jsx';
 import SearchBar from './SearchBar.jsx';
 import SearchResults from './SearchResults.jsx';
 import './App.css';
+import {AppProvider} from '../context/AppContext.jsx';
 
-
-
+///
 
  function App () {
   const [userName, setUserName] = useState('');
@@ -28,13 +28,15 @@ const handleSearchTerm = (data) => {
       <div className='AppBanner'>
         <Banner onNameSubmit={handleNameSubmit}/>
       </div>
-    
-      
+     
       {userName &&(
       <div>
+        <AppProvider/>
         <SearchBar onSearch={handleSearch}/>
         <Data searchTerm={searchTerm} onSearchTerm={handleSearchTerm}/>
         <SearchResults searchResults={searchResults} /> 
+        {/* i must add playList and selectedSong to inside of wrapper after create them!*/}
+        <AppProvider/>
       </div>
       )}
     </div>

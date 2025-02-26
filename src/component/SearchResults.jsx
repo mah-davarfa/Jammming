@@ -1,10 +1,16 @@
-import React,{useState,useEffect}  from 'react';
+import React,{useState,useEffect,useContext}  from 'react';
 import AlbumCard from './AlbumCard';
 import SongCard from './SongCard';
 import ArtistCard from './ArtistCard';
+import {AppContext} from '../context/AppContext';
+
+
+
 const SearchResults = ({searchResults}) => {
  const [searchResultTag, setSearchResultTag] = useState(false);
  const [searchResultsAll, setSearchResultsAll] = useState([]);
+ const {setNoResult} = useContext(AppContext);
+  
  
   useEffect(()=>{
 
@@ -18,8 +24,12 @@ const SearchResults = ({searchResults}) => {
       return [...prev,...uniqueResults];
       })
       setSearchResultTag(true);
+      setNoResult(false);
     }
+      setNoResult(true);
     },[searchResults]);
+    
+    
   
    return(
     <div>
