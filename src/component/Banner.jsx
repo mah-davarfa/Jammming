@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import './Banner.css';
+import '../styles/Banner.css';
 
 
 export default function Banner({onNameSubmit}) {
@@ -25,7 +25,7 @@ export default function Banner({onNameSubmit}) {
             <h1>welcome to Jammming {submitted ? name : ''}! </h1>
             {!submitted && 
             <form onSubmit= {submitHandler} 
-             className='searchBar'>
+             className="search-container">
                 <input  onChange={handlerNameInput}
                  className='bannerInput' 
                  value={name} 
@@ -33,7 +33,7 @@ export default function Banner({onNameSubmit}) {
                 placeholder='please Enter your name'
                 />
 
-                <button className='bannerButton'
+                <button 
                  type='submit'>Submit</button>
          </form>}
         

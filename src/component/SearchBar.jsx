@@ -1,14 +1,14 @@
 import React ,{useState,useContext} from 'react';
-import './Banner.css';
 import {AppContext} from '../context/AppContext.jsx';
+import '../styles/SearchBar.css';
+
 
 export default function SearchBar({onSearch}){
 const [search , setSearch] = useState('');
 const [cleanSearch , setCleanSearch] = useState(true);
 //const [errorSearch , setErrorSearch] = useState(fales);
+const {noResult} = useContext(AppContext);
 
-
-   const {noResult} = useContext(AppContext);
 
 
 const handleSubmit = (e) => {
@@ -27,18 +27,18 @@ const handleSubmit = (e) => {
 }
     return(
        <>  
-        <div className='banner'>
+        <div >
             <h1>Search for Artist or Album</h1>
             <form onSubmit={handleSubmit}
             className='searchBar'>
                 <input 
-                className='bannerInput'
+                
                 onChange={handleOnChange}
                 type='text'
                 placeholder='Search for Artist or Album Name' 
                 value={cleanSearch ? search : ''} 
                 />
-                <button className='bannerButton'
+                <button 
                  type='submit' disabled ={!search.trim()}> Search </button>
                  {noResult ?<p>Search result not available</p>: null }
             </form>

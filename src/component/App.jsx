@@ -3,8 +3,8 @@ import Banner from './Banner.jsx';
 import Data from './Data.jsx';
 import SearchBar from './SearchBar.jsx';
 import SearchResults from './SearchResults.jsx';
-import './App.css';
-import {AppProvider} from '../context/AppContext.jsx';
+
+
 
 ///
 
@@ -24,19 +24,19 @@ const handleSearchTerm = (data) => {
 }
   return (
     <>
-    <div className='App'>
-      <div className='AppBanner'>
+    <div >
+      <div >
         <Banner onNameSubmit={handleNameSubmit}/>
       </div>
      
       {userName &&(
       <div>
-        <AppProvider/>
+        
         <SearchBar onSearch={handleSearch}/>
         <Data searchTerm={searchTerm} onSearchTerm={handleSearchTerm}/>
         <SearchResults searchResults={searchResults} /> 
         {/* i must add playList and selectedSong to inside of wrapper after create them!*/}
-        <AppProvider/>
+        
       </div>
       )}
     </div>

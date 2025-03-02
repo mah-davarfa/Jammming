@@ -8,8 +8,7 @@ import {AppContext} from '../context/AppContext';
 
 const SearchResults = ({searchResults}) => {
  const [searchResultTag, setSearchResultTag] = useState(false);
- const [searchResultsAll, setSearchResultsAll] = useState([]);
- const {setNoResult} = useContext(AppContext);
+  const {setNoResult,searchResultsAll,setSearchResultsAll} = useContext(AppContext);
   
  
   useEffect(()=>{
