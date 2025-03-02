@@ -13,7 +13,9 @@ const SearchResults = ({searchResults}) => {
  
   useEffect(()=>{
 
-    if(searchResults && searchResults.length>0){
+      if(!searchResults)return;
+
+    if(searchResults.length>0){
       setSearchResultsAll((prev)=>{
          const uniqueResults = 
          searchResults.filter((item)=>
@@ -24,8 +26,8 @@ const SearchResults = ({searchResults}) => {
       })
       setSearchResultTag(true);
       setNoResult(false);
-    }
-      setNoResult(true);
+    } else if (searchResultsAll.length>0 && searchResults.length === 0)
+      {setNoResult(true);}
     },[searchResults]);
     
     
@@ -76,11 +78,9 @@ const SearchResults = ({searchResults}) => {
                 />);
               }           
         })
-      ) : (searchResultsAll && searchResultsAll.length > 0 ? (
-        <p>search result not available</p>
       ) : null
 
-      )}  
+      }  
     </div>
    )
 }

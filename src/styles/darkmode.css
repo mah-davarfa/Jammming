@@ -1,0 +1,102 @@
+.dark-mode, .light-mode {
+    min-height: 100vh;
+    width: 100%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dark-mode{
+    background-color: #333;
+    color: #fff;
+}
+.light-mode{
+    background-color: #fff;
+    color: #000;
+}
+.toggle-button{
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: white !important;
+    color: #000000;
+    cursor: pointer;
+    font-weight: bold;  
+    margin: 10px;
+}
+.toggle-light-button{
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color:#000000;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;  
+    margin: 10px;
+}
+/* Search Container Button */
+.light-mode .search-container button {
+    background-color: rgba(116, 112, 112, 0.705);
+    color: #000;
+    border: 1px solid #ddd;
+}
+
+.light-mode .search-container button:hover {
+    background-color: #f0f0f0;
+}
+
+
+.dark-mode .search-container button {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+.dark-mode .search-container button:hover {
+    background-color: #444;
+}
+
+/* Input Field */
+.dark-mode .search-container input {
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #555;
+    transition: border-color 0.3s ease;
+}
+
+.dark-mode .search-container input:hover,
+.dark-mode .search-container input:focus {
+    border-color: #555;
+}
+@keyframes neon-border {
+    0% { border-color: #555; }
+    25% { border-color: #888; }
+    50% { border-color: #bbb; }
+    75% { border-color: #aaa; }
+    100% { border-color: #555; }
+}
+
+.dark-mode .search-container input:not(:hover):not(:focus) {
+    animation: neon-border 3s infinite;
+}
+
+.light-mode .search-container input {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+.light-mode .search-container input:hover,
+.light-mode .search-container input:focus {
+    border-color: #999;
+}
+
+.light-mode .search-container input:not(:hover):not(:focus) {
+    animation: neon-border-light 3s infinite;
+}
+
+@keyframes neon-border-light {
+    0% { border-color: #ddd; }
+    25% { border-color: #ffae42; } /* Orange */
+    50% { border-color: #ff5e62; } /* Red */
+    75% { border-color: #ffa07a; } /* Light salmon */
+    100% { border-color: #ddd; }
+}

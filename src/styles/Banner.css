@@ -47,4 +47,16 @@ input::placeholder {
       button:hover {
         background-color: #444;
       }
-      
+      .banner h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 2rem;
+        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f; 
+        animation: neon-glow 2.5s infinite alternate;
+    }
+    
+    @keyframes neon-glow {
+        0% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f; }
+        50% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #8a2be2, 0 0 20px #8a2be2; }
+        100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f; }
+    }

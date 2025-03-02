@@ -1,6 +1,6 @@
 import React ,{useState,useContext} from 'react';
 import {AppContext} from '../context/AppContext.jsx';
-import '../styles/SearchBar.css';
+import '../styles/searchBar.css';
 
 
 export default function SearchBar({onSearch}){
@@ -28,19 +28,18 @@ const handleSubmit = (e) => {
     return(
        <>  
         <div >
-            <h1>Search for Artist or Album</h1>
-            <form onSubmit={handleSubmit}
-            className='searchBar'>
+             <form onSubmit={handleSubmit}
+            className='search-container'>
                 <input 
                 
                 onChange={handleOnChange}
                 type='text'
-                placeholder='Search for Artist or Album Name' 
+                placeholder='Search Artist or Album Name' 
                 value={cleanSearch ? search : ''} 
                 />
                 <button 
                  type='submit' disabled ={!search.trim()}> Search </button>
-                 {noResult ?<p>Search result not available</p>: null }
+                 {noResult && <p className='no-result'>Search result not available</p> }
             </form>
         </div>
      </>

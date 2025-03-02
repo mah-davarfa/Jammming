@@ -1,0 +1,36 @@
+.search-container {
+    display: flex;;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.search-container input::placeholder {
+    color: #bbb;
+}
+.search-container button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;  
+}
+
+.no-result {
+    color: red;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+@media (max-width: 668px) {
+    .search-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    .no-result {
+        margin-left: 0;
+        margin-top: 5px;
+        text-align: center;
+    }
+}
