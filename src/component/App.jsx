@@ -14,9 +14,9 @@ import '../styles/darkmode.css';
 
  function App () {
   const [userName, setUserName] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const{isDarkMode} = useContext(AppContext);
+  
+ 
+  const{isDarkMode,searchTerm,setSearchTerm,searchResults, setSearchResults} = useContext(AppContext);
   
   const handleNameSubmit = (name)=>{
     setUserName(name);
@@ -38,8 +38,8 @@ const handleSearchTerm = (data) => {
       {userName &&(
       <div>
         <SearchBar onSearch={handleSearch}/>
-        <Data searchTerm={searchTerm} onSearchTerm={handleSearchTerm}/>
-        <SearchResults searchResults={searchResults} /> 
+        <Data  onSearchTerm={handleSearchTerm}/>
+        <SearchResults /> 
         {/* i must add playList and selectedSong to inside of wrapper after create them!*/}
         
       </div>

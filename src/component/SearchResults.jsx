@@ -6,30 +6,31 @@ import {AppContext} from '../context/AppContext';
 
 
 
-const SearchResults = ({searchResults}) => {
+const SearchResults = () => {
  const [searchResultTag, setSearchResultTag] = useState(false);
-  const {setNoResult,searchResultsAll,setSearchResultsAll} = useContext(AppContext);
+  const {setNoResult,searchResultsAll,setSearchResultsAll,searchResults,} = useContext(AppContext);
   
- 
+  
   useEffect(()=>{
 
       if(!searchResults)return;
 
     if(searchResults.length>0){
+
       setSearchResultsAll((prev)=>{
          const uniqueResults = 
          searchResults.filter((item)=>
-        !searchResultsAll.some((item2)=>
+        !prev.some((item2)=>
           (item2.id===item.id)));
         
       return [...prev,...uniqueResults];
       })
       setSearchResultTag(true);
       setNoResult(false);
-    } else if (searchResultsAll.length>0 && searchResults.length === 0)
+
+    } else if (searchResultsAll.length > 0 && searchResults.length === 0 && searchResultTag)
       {setNoResult(true);}
-    },[searchResults]);
-    
+    },[searchResults,])   
     
   
    return(
@@ -38,7 +39,7 @@ const SearchResults = ({searchResults}) => {
       { searchResultsAll && searchResultsAll.length > 0  ? (
         searchResultsAll.map((item)=>{
             
-            if(item.type.toLowerCase()==='album'){
+            if(item.type && item.type.toLowerCase()==='album'){
               return (
              <AlbumCard
                   key={item.id} 
@@ -52,7 +53,7 @@ const SearchResults = ({searchResults}) => {
                   totalOfSongs={item.tracks.total}
                />);
 
-            }else if(item.type.trim().toLowerCase()==='track'){
+            }else if(item.type && item.type.trim().toLowerCase()==='track'){
               
               return  (
               <SongCard 
@@ -66,7 +67,7 @@ const SearchResults = ({searchResults}) => {
                   genre={item.artists[0]?.genres?.join(',') || 'Unknown'}
               />);
 
-            }else if(item.type.trim().toLowerCase()==='artist'){
+            }else if(item.type && item.type.trim().toLowerCase()==='artist'){
               return  (
               <ArtistCard 
                   key={item.id} 

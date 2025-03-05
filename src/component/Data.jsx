@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useContext} from 'react';
+import { AppContext } from '../context/AppContext.jsx';
 
-export default function Data({searchTerm ,onSearchTerm}) {
 
-    //While up dating fetch i need to use searchTerm to be fetched
+export default function Data({onSearchTerm}) {
+
+    //While up dating fetch i need to use searchTerm to be fetched and Spotify guideline fetching( based on artist song and album)
 const [data ,setdata] = useState(null);
    
+    const {searchTerm} = useContext(AppContext);
+
             useEffect(()=>{
                 if (!searchTerm) return;
                 fetch('./data.json')

@@ -15,7 +15,7 @@
     padding: 10px 15px;
     border-radius: 5px;
     border: none;
-    background-color: white !important;
+    background-color: white;
     color: #000000;
     cursor: pointer;
     font-weight: bold;  
@@ -36,6 +36,7 @@
     background-color: rgba(116, 112, 112, 0.705);
     color: #000;
     border: 1px solid #ddd;
+    text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
 }
 
 .light-mode .search-container button:hover {
@@ -47,6 +48,7 @@
     background-color: #333;
     color: #fff;
     border: 1px solid #555;
+    text-shadow: 0 0  5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f;
 }
 
 .dark-mode .search-container button:hover {
@@ -95,8 +97,8 @@
 
 @keyframes neon-border-light {
     0% { border-color: #ddd; }
-    25% { border-color: #ffae42; } /* Orange */
-    50% { border-color: #ff5e62; } /* Red */
-    75% { border-color: #ffa07a; } /* Light salmon */
+    25% { border-color: #ffae42; } 
+    50% { border-color: #ff5e62; } 
+    75% { border-color: #ffa07a; } 
     100% { border-color: #ddd; }
 }
