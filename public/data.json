@@ -1,23 +1,36 @@
 {
-  "external_urls": {
-    "spotify": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
-  },
-  "followers": {
-    "href": null,
-    "total": 50000000
-  },
-  "genres": ["pop", "country"],
-  "href": "https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02",
-  "id": "06HL4z0CvFAxyc27GXpf02",
-  "images": [
+  "id": "3n3Ppam7vgaVa1iaRUc9Lp",
+  "name": "Blinding Lights",
+  "artists": [
     {
-      "url": "https://i.scdn.co/image/ab6761610000e5ebf237d4c4b9d1d2a8a805cf4f",
-      "height": 640,
-      "width": 640
+      "id": "1Xyo4u8uXC1ZmMpatF05PJ",
+      "name": "The Weeknd",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ"
+      }
     }
   ],
-  "name": "Taylor Swift",
+  "album": {
+    "id": "4yP0hdKOZPNshxUOjY0cZj",
+    "name": "After Hours",
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab67616d00001e02a6f96e3a0f1dfe16e011e3e0",
+        "height": 640,
+        "width": 640
+      }
+    ],
+    "external_urls": {
+      "spotify": "https://open.spotify.com/album/4yP0hdKOZPNshxUOjY0cZj"
+    }
+  },
+  "preview_url": "https://p.scdn.co/mp3-preview/123abc456def789ghi",
+  "duration_ms": 200040,
   "popularity": 95,
-  "type": "artist",
-  "uri": "spotify:artist:06HL4z0CvFAxyc27GXpf02"
+  "explicit": false,
+  "type": "track",
+  "uri": "spotify:track:3n3Ppam7vgaVa1iaRUc9Lp",
+  "external_urls": {
+    "spotify": "https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp"
+  }
 }

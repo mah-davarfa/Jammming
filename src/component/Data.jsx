@@ -12,7 +12,13 @@ const [data ,setdata] = useState(null);
             useEffect(()=>{
                 if (!searchTerm) return;
                 fetch('./data.json')
-                .then((res)=>res.json())
+                    .then((res)=>{
+                        if(!res.ok){
+                            throw new Error(`HTTP error! status:${res.status}`);
+                        }
+                        return res.json();
+                    })
+                
                 .then((data)=>
                   {setdata(data)
                    onSearchTerm(data)

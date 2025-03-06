@@ -5,6 +5,8 @@ import SearchBar from './SearchBar.jsx';
 import ToggleMode from './ToggleMode.jsx';
 import SearchResults from './SearchResults.jsx';
 import { AppContext } from '../context/AppContext.jsx';
+import PlaySong from './PlaySong.jsx';
+import Playlist from './Playlist.jsx';
 import '../styles/darkmode.css';
 
 
@@ -16,7 +18,7 @@ import '../styles/darkmode.css';
   const [userName, setUserName] = useState('');
   
  
-  const{isDarkMode,searchTerm,setSearchTerm,searchResults, setSearchResults} = useContext(AppContext);
+  const{isDarkMode,setSearchTerm, setSearchResults} = useContext(AppContext);
   
   const handleNameSubmit = (name)=>{
     setUserName(name);
@@ -41,7 +43,8 @@ const handleSearchTerm = (data) => {
         <Data  onSearchTerm={handleSearchTerm}/>
         <SearchResults /> 
         {/* i must add playList and selectedSong to inside of wrapper after create them!*/}
-        
+        <Playlist/>
+        <PlaySong />
       </div>
       )}
     </div>

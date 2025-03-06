@@ -12,12 +12,12 @@ function ArtistCard({id, name, image, genre, popularity}){
     }
 
     const handelgetSong=()=>{
-        setSearchTerm(id);
+        setSearchTerm(id);//adjust latter
     };
     
     return(
         <div className='card'>
-        <img src={image} alt={name} />
+        <img src={image} alt={name} width={250} height={250}/>
         <h3>{name}<button onClick={handelgetSong}>Get top Songs</button></h3>
         <p>Genre: {genre}</p>   
         <p>Popularity: {popularity}</p>

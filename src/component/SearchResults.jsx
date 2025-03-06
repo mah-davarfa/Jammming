@@ -30,7 +30,7 @@ const SearchResults = () => {
 
     } else if (searchResultsAll.length > 0 && searchResults.length === 0 && searchResultTag)
       {setNoResult(true);}
-    },[searchResults,])   
+    },[searchResults])   
     
   
    return(
@@ -65,8 +65,10 @@ const SearchResults = () => {
                   image={item.album?.images[0]?.url}
                  preview={ (!(item.preview_url===null))?item.preview_url:null}
                   genre={item.artists[0]?.genres?.join(',') || 'Unknown'}
+                  popularity={item.popularity || 'Unknown'}
+                  uri={item.uri}
               />);
-
+ 
             }else if(item.type && item.type.trim().toLowerCase()==='artist'){
               return  (
               <ArtistCard 
