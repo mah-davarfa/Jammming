@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext,useEffect} from 'react';
 import {AppContext} from '../context/AppContext';
 import Playlist from './Playlist';
 import PlaySong from './PlaySong';
 
 function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
 
- const {setSearchResults,setSearchResultsAll, setSelectedSong,playlist,setPlaylist} =useContext(AppContext);
+ const {setSearchResults,setSearchResultsAll,currentSong,setCurrentSong, setSelectedSong,selectedSong,playlist,setPlaylist} =useContext(AppContext);
    
  const handleRemove=(e)=>{
         e.stopPropagation();
@@ -17,7 +17,13 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
         setSelectedSong({
             id,name, artist, album, image, preview,popularity,uri
         });
-    }
+     }
+     useEffect(()=>{
+        if(selectedSong){
+            setCurrentSong(selectedSong.id)
+        }
+     },[selectedSong,setCurrentSong])
+    
 
     return(
         <>
@@ -37,8 +43,9 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
                 <p>uri:{uri}</p>
                 <p>ID:{id}</p>
                 <button onClick={handleRemove}>Remove</button>
-                <button>Add to Playlist</button>
-                <button onClick={handlePlay}>Play </button>
+                <button >Add to Playlist</button>
+                <button onClick={handlePlay}>{currentSong===id ? 'Now Playing' : 'Play'}
+                </button>
            
         </div>
         </>

@@ -11,10 +11,13 @@ export const AppProvider = ({children}) => {
 const [searchResultsAll, setSearchResultsAll] = useState([]);
 const[isDarkMode, setIsDarkMode] = useState(false);
 const [searchResults, setSearchResults] = useState([]);
+const [currentSong,setCurrentSong] = useState(null);
 
-  return (
+  
+return (
     <AppContext.Provider value=
-    {{searchResults, setSearchResults,
+    {{currentSong,setCurrentSong,
+      searchResults, setSearchResults,
       isDarkMode, setIsDarkMode,
       searchTerm, setSearchTerm,
       searchResultsAll, setSearchResultsAll,
