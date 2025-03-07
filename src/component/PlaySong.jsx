@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {AppContext} from '../context/AppContext';
 
  export const PlaySong = ()=>{
-    const {selectedSong,searchResultsAll}=useContext(AppContext);
+    const {handleRemove,selectedSong,searchResultsAll}=useContext(AppContext);
 
    
     
@@ -21,7 +21,7 @@ import {AppContext} from '../context/AppContext';
             </p>
             </>
             );
-             }//i have picture for background cover for css that need to be used and over that this p tag show.
+             }
     return (  
         <div className='play-song'>
              <img src={selectedSong.image} alt={selectedSong.name}  width={250} height={250}/>
@@ -36,7 +36,8 @@ import {AppContext} from '../context/AppContext';
                 <source src={selectedSong.preview} type="audio/mpeg"/>
                 Your browser does not support the audio element.
             </audio>): (<p>This song is not playable from source, try another song.</p>)}
-
+            <button onClick={()=>handleRemove(selectedSong.id)}>Remove This Song from Jammming</button>
+            <botton>Add To PlayList</botton>    
         </div>
 
     )

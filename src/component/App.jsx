@@ -42,7 +42,6 @@ const handleSearchTerm = (data) => {
         <SearchBar onSearch={handleSearch}/>
         <Data  onSearchTerm={handleSearchTerm}/>
         <SearchResults /> 
-        {/* i must add playList and selectedSong to inside of wrapper after create them!*/}
         <Playlist/>
         <PlaySong />
       </div>

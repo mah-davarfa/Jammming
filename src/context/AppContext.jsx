@@ -13,7 +13,15 @@ const[isDarkMode, setIsDarkMode] = useState(false);
 const [searchResults, setSearchResults] = useState([]);
 const [currentSong,setCurrentSong] = useState(null);
 
-  
+  const handleRemove=(id)=>{
+            if(id===currentSong){
+              setSelectedSong(null);
+              setCurrentSong(null);
+          }
+              setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
+              setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
+      }
+
 return (
     <AppContext.Provider value=
     {{currentSong,setCurrentSong,
@@ -23,7 +31,8 @@ return (
       searchResultsAll, setSearchResultsAll,
      noResult  , setNoResult,
      selectedSong, setSelectedSong, 
-     playlist,  setPlaylist}}>
+     playlist,  setPlaylist,
+     handleRemove}}>
       {children}
     </AppContext.Provider>
   )

@@ -5,13 +5,10 @@ import PlaySong from './PlaySong';
 
 function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
 
- const {setSearchResults,setSearchResultsAll,currentSong,setCurrentSong, setSelectedSong,selectedSong,playlist,setPlaylist} =useContext(AppContext);
+ const {handleRemove,currentSong,setCurrentSong,
+     setSelectedSong,selectedSong,playlist,setPlaylist} =useContext(AppContext);
    
- const handleRemove=(e)=>{
-        e.stopPropagation();
-            setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
-            setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
-    }
+ 
     const handlePlay =()=>{
         
         setSelectedSong({
@@ -42,7 +39,7 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
                 <p>popularity:{popularity}</p>
                 <p>uri:{uri}</p>
                 <p>ID:{id}</p>
-                <button onClick={handleRemove}>Remove</button>
+                <button onClick={()=>handleRemove(id) }>Remove</button>
                 <button >Add to Playlist</button>
                 <button onClick={handlePlay}>{currentSong===id ? 'Now Playing' : 'Play'}
                 </button>
