@@ -3,7 +3,7 @@ import AlbumCard from './AlbumCard';
 import SongCard from './SongCard';
 import ArtistCard from './ArtistCard';
 import {AppContext} from '../context/AppContext';
-
+import '../styles/darkmode.css'
 
 
 const SearchResults = () => {
@@ -35,13 +35,15 @@ const SearchResults = () => {
   
    return(
     <div>
-        {searchResultTag ? <h2>search results</h2>:null}
+        {searchResultTag ? <h3>search results</h3>:null}
+        <div className='list'>
       { searchResultsAll && searchResultsAll.length > 0  ? (
-        searchResultsAll.map((item)=>{
+      
+       searchResultsAll.map((item)=>{
             
             if(item.type && item.type.toLowerCase()==='album'){
               return (
-             <AlbumCard
+               <AlbumCard
                   key={item.id} 
                   id={item.id}
                   name={item.name}
@@ -83,7 +85,8 @@ const SearchResults = () => {
         })
       ) : null
 
-      }  
+      } 
+      </div> 
     </div>
    )
 }

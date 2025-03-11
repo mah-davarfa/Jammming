@@ -12,7 +12,7 @@
     color: #000;
 }
 .toggle-button{
-    padding: 10px 15px;
+    padding: 10px 10px;
     border-radius: 5px;
     border: none;
     background-color: white;
@@ -22,7 +22,7 @@
     margin: 10px;
 }
 .toggle-light-button{
-    padding: 10px 15px;
+    padding: 10px 10px;
     border-radius: 5px;
     border: none;
     background-color:#000000;
@@ -31,31 +31,49 @@
     font-weight: bold;  
     margin: 10px;
 }
-/* Search Container Button */
+
 .light-mode .search-container button {
     background-color: rgba(116, 112, 112, 0.705);
     color: #000;
-    border: 1px solid #ddd;
+    border: 1px solid #c49b9b;
+    text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
+    
+}
+.light-mode .playlist-item-card{
+    background-color: rgba(116, 112, 112, 0.705);
+    color: #000;
+    border: 1px solid #c49b9b;
     text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
 }
-
-.light-mode .search-container button:hover {
-    background-color: #f0f0f0;
-}
-
 
 .dark-mode .search-container button {
     background-color: #333;
     color: #fff;
-    border: 1px solid #555;
-    text-shadow: 0 0  5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f;
+    border: 2px solid #555;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f;
+    animation: neon-border 3s infinite alternate;
 }
 
 .dark-mode .search-container button:hover {
     background-color: #444;
 }
+@keyframes neon-border {
+    0% { box-shadow: 0 0 5px #555; }
+    25% { box-shadow: 0 0 10px #888; }
+    50% { box-shadow: 0 0 15px #bbb; }
+    75% { box-shadow: 0 0 10px #aaa; }
+    100% { box-shadow: 0 0 5px #555; }
+}
 
-/* Input Field */
+.dark-mode .search-container button {
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #555;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f;
+    animation: neon-border 3s infinite alternate;
+}
+
+
 .dark-mode .search-container input {
     background-color: #333;
     color: #fff;
@@ -63,8 +81,8 @@
     transition: border-color 0.3s ease;
 }
 
-.dark-mode .search-container input:hover,
-.dark-mode .search-container input:focus {
+.dark-mode .search-container   input:hover,
+.dark-mode .search-container  input:focus {
     border-color: #555;
 }
 @keyframes neon-border {
@@ -101,4 +119,120 @@
     50% { border-color: #ff5e62; } 
     75% { border-color: #ffa07a; } 
     100% { border-color: #ddd; }
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; 
+    gap: 20px;
+    padding: 20px;
+}
+.main-container button{
+    margin:.2rem;
+    border-radius: 20px;
+    padding: .1rem;
+}
+
+.main-container button:hover{
+    margin:.3rem;
+    border-radius: 10px;
+    padding: .2rem;
+}
+.list  {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px; 
+    max-width: min(25vw, 300px); 
+    overflow-y: auto;
+    height: 70vh;
+    border-right: 2px solid #ddd;
+}
+
+
+.playlist-item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid #aaa;  
+    padding: 10px;
+}
+
+
+
+.play-song {
+    text-align: center;
+    border: 2px solid #ccc;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.dark-mode .main-container {
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode .list {
+    background-color: #222; 
+    color: white;   
+    border-right: 2px solid #444;
+}
+
+.dark-mode .list {
+    border-left: 2px solid #444;
+}
+
+.dark-mode .play-song {
+    border: 2px solid #555;
+}
+
+/*  Light Mode Adjustments */
+.light-mode .main-container {
+    background-color: #f8f8f8;
+    color: black;
+}
+
+.light-mode .list {
+    background-color: #fff; 
+    color: black;           
+    border-right: 2px solid #ddd;
+}
+
+.light-mode .list {
+    border-left: 2px solid #ddd;
+}
+
+.light-mode .play-song {
+    border: 2px solid #ccc;
+}
+
+/*  **Make it responsive for tablets & mobile** */
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 1fr 1fr; 
+         gap:10px;
+         .list,
+         .play-song {
+             max-width: 100%; 
+             padding: 10px; 
+             margin: 0;
+         }
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr; /* Collapse to 1 column on mobile */
+    }
+
+    .list {
+        max-width: 100%; /* Take full width */
+        border: none;
+        height: auto;
+    }
 }

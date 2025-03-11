@@ -1,6 +1,6 @@
 import react, {useState,useContext} from 'react';
 import  {AppContext} from '../context/AppContext';
-
+import '../styles/darkmode.css';
 
 function ArtistCard({id, name, image, genre, popularity}){
 
@@ -16,7 +16,7 @@ function ArtistCard({id, name, image, genre, popularity}){
     };
     
     return(
-        <div className='card'>
+        <div className='playlist-item-card'>
         <img src={image} alt={name} width={250} height={250}/>
         <h3>{name}<button onClick={handelgetSong}>Get top Songs</button></h3>
         <p>Genre: {genre}</p>   

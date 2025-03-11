@@ -1,6 +1,6 @@
 import react , {useContext , useState} from 'react';
 import { AppContext } from '../context/AppContext';
-
+import '../styles/darkmode.css';
 
 function AlbumCard({name, artist, image, releaseDate, genre, songs, totalOfSongs,id}) {
 
@@ -18,7 +18,7 @@ function AlbumCard({name, artist, image, releaseDate, genre, songs, totalOfSongs
     setSearchTerm(id);//adjust later
   };
     return(
-        <div className="card"  >
+        <div className="playlist-item-card"  >
       <img src={image} alt={name} width={250} height={250}/>
       <h3>{name}</h3>
       <p>Artist: {artist}</p>

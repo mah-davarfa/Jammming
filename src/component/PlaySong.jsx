@@ -1,30 +1,34 @@
 import React, {useContext} from 'react';
 import {AppContext} from '../context/AppContext';
-
- export const PlaySong = ()=>{
-    const {handleRemove,selectedSong,searchResultsAll}=useContext(AppContext);
-
+import '../styles/darkmode.css';
+ 
+export const PlaySong = ()=>{
+    const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,setPlaylist}=useContext(AppContext);
+    
+    
    
     
     if(searchResultsAll.length>0){
+       
     if (!selectedSong) {
         return (
-            <>
-            <img 
-            className='background-for-playSong' 
-            src='../../imag/background.jpg'
-            alt='Background'
-            width={250} height={250}
-            />
-        <p>
-            No song selected. Click 'Play' on a song to start playing.
-            </p>
-            </>
+            <div className='play-song'>
+                <p>
+                No song selected. Click 'Play' on a song to start playing.
+                </p>
+                <img 
+                className='background-for-playSong' 
+                src='../../imag/background.jpg'
+                alt='Background'
+                width={400} height={380}
+                />
+            </div>
+            
             );
              }
     return (  
         <div className='play-song'>
-             <img src={selectedSong.image} alt={selectedSong.name}  width={250} height={250}/>
+             <img src={selectedSong.image} alt={selectedSong.name}  width={500} height={500}/>
             <h3>Playing : {selectedSong.name}</h3>
             <p>Artist: {selectedSong.artist}</p>
             <p>Album: {selectedSong.album}</p>
@@ -37,7 +41,9 @@ import {AppContext} from '../context/AppContext';
                 Your browser does not support the audio element.
             </audio>): (<p>This song is not playable from source, try another song.</p>)}
             <button onClick={()=>handleRemove(selectedSong.id)}>Remove This Song from Jammming</button>
-            <botton>Add To PlayList</botton>    
+            <button onClick={()=>handleAddToPlaylist(selectedSong)}>
+                {addedToPlaylist.includes(selectedSong.id) ? 'Already in Playlist':"Add To PlayList"}
+                    </button>    
         </div>
 
     )

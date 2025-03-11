@@ -41,9 +41,11 @@ const handleSearchTerm = (data) => {
       <div>
         <SearchBar onSearch={handleSearch}/>
         <Data  onSearchTerm={handleSearchTerm}/>
+        <div className='main-container'>
         <SearchResults /> 
-        <Playlist/>
         <PlaySong />
+        <Playlist/>
+        </div>
       </div>
       )}
     </div>

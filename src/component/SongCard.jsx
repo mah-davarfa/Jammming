@@ -1,36 +1,30 @@
-import React, {useContext,useEffect} from 'react';
+import React, {useContext} from 'react';
 import {AppContext} from '../context/AppContext';
 import Playlist from './Playlist';
 import PlaySong from './PlaySong';
+import '../styles/darkmode.css';
 
 function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
 
- const {handleRemove,currentSong,setCurrentSong,
-     setSelectedSong,selectedSong,playlist,setPlaylist} =useContext(AppContext);
+ const {handleRemove,currentSong,handlePlay,
+    handleAddToPlaylist,addedToPlaylist} =useContext(AppContext);
    
  
-    const handlePlay =()=>{
+   
         
-        setSelectedSong({
-            id,name, artist, album, image, preview,popularity,uri
-        });
-     }
-     useEffect(()=>{
-        if(selectedSong){
-            setCurrentSong(selectedSong.id)
-        }
-     },[selectedSong,setCurrentSong])
-    
+           
+       
+     
 
     return(
         <>
-        <div className='card'>
-                <img src={image} alt={name}  width={250} height={250}/>
+        <div className='playlist-item-card '>
+                <img src={image} alt={name} width={200} height={200}/>
                 <h3>{name}</h3>
                 <p>Artist: {artist}</p>
                 <p>Album: {album}</p>
                 {preview ? (
-                    <audio controls>
+                    <audio >
                         <source src={preview} type="audio/mpeg" />
                         Your browser does not support the audio element.
                     </audio>
@@ -40,8 +34,12 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
                 <p>uri:{uri}</p>
                 <p>ID:{id}</p>
                 <button onClick={()=>handleRemove(id) }>Remove</button>
-                <button >Add to Playlist</button>
-                <button onClick={handlePlay}>{currentSong===id ? 'Now Playing' : 'Play'}
+                <button onClick={()=>handleAddToPlaylist({name,artist,album,preview,popularity,uri,id,image})}>
+                    {addedToPlaylist.includes(id) ? 'Already in Playlist':"Add To PlayList"}
+                </button>
+                <button onClick={()=>handlePlay
+                    ({name,artist,album,preview,popularity,uri,id,image})}>
+                        {currentSong ? 'Now Playing' : 'Play'}
                 </button>
            
         </div>
