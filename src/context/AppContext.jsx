@@ -22,7 +22,7 @@ const handleRemove=(id)=>{
           }
               setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
               setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
-             
+              setPlaylist((pre)=>pre.filter((item)=>item.id !==id));
       }
 
       const handlePlay =(song)=>{
@@ -53,6 +53,7 @@ const handleRemove=(id)=>{
          useEffect(()=>{
           setAddedToPlaylist((playlist.map((item)=>item.id)))
          },[playlist])
+
 
 return (
     <AppContext.Provider value=
