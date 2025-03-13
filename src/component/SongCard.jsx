@@ -39,7 +39,7 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
                 </button>
                 <button onClick={()=>handlePlay
                     ({name,artist,album,preview,popularity,uri,id,image})}>
-                        {currentSong ? 'Now Playing' : 'Play'}
+                        {currentSong===id ? 'Now Playing' : 'Play'}
                 </button>
            
         </div>
