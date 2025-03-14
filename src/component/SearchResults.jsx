@@ -7,8 +7,8 @@ import '../styles/darkmode.css'
 
 
 const SearchResults = () => {
- const [searchResultTag, setSearchResultTag] = useState(false);
-  const {setNoResult,searchResultsAll,setSearchResultsAll,searchResults,} = useContext(AppContext);
+ 
+  const {setNoResult,searchResultsAll,setSearchResultsAll,searchResults,setSearchResultTag,searchResultTag} = useContext(AppContext);
   
   
   useEffect(()=>{

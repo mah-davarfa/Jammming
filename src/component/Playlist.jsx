@@ -1,9 +1,23 @@
-import React,{useContext} from 'react';
+import React,{useContext,useState} from 'react';
 import {AppContext} from '../context/AppContext';
 import '../styles/darkmode.css';
 
 const Playlist=()=>{
-
+   
+    const [isEditing,setIsEditing]=useState(false);
+   const [playlistTitle,setPlaylistTitle]=useState("PlayList");
+   
+    const handleEdit =()=>{
+        if(isEditing){
+            setIsEditing(false);
+        }else{
+            setIsEditing(true);
+        }
+    }
+    const handlePlaylistTitle=(e)=>{
+        setPlaylistTitle(e.target.value);
+    }
+    
     const {handlePlay,currentSong,handleRemove,playlist,searchResultsAll,playlistLimitReached}=useContext(AppContext);
    
       if (searchResultsAll.length>0 && playlist.length === 0 ){
@@ -14,9 +28,21 @@ const Playlist=()=>{
     <div className ='list'>
       
         
-    {playlist.length>0 && <h3>{playlistLimitReached ? 
-     'Playlist have reached to the limit of 10 songs,Either Transfer to spotify or Remove some songs ': 
-     "Play List"}</h3>}
+            {playlist.length>0 &&(
+               
+               <div>             
+                {playlistLimitReached ? (
+                <h3 className="warning-text">
+                    'Playlist have reached to the limit of 10 songs,Either Transfer to spotify or Remove some songs'
+                </h3>
+                ):(
+                    <div className="playlist-header">
+                    {!isEditing? ( <h3>{playlistTitle}</h3>):(<input  onChange={handlePlaylistTitle} value={playlistTitle} type='text' placeholder='pick a name for  Title'></input>) }
+                        <button onClick={handleEdit}>{!isEditing ? "Edit" : "save"}</button>
+                        <button>Save to Spotify</button>
+                    </div>)}
+               </div>)}
+                
         {playlist.map((song, index)=>(
         <div key={index} className ='playlist-item-card'>
             <img src={song.image} alt={song.name}  

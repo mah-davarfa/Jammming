@@ -3,14 +3,14 @@ import {AppContext} from '../context/AppContext';
 import '../styles/darkmode.css';
  
 export const PlaySong = ()=>{
-    const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll}=useContext(AppContext);
+    const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,searchResultTag}=useContext(AppContext);
     
     
    
     
     if(searchResultsAll.length>0){
        
-    if (!selectedSong  ) {
+    if (!selectedSong ) {
         return (
             <div className='play-song'>
                 <p>
