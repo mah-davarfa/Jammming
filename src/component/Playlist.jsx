@@ -27,7 +27,7 @@ const Playlist=()=>{
             <p>popularity:{song.popularity}</p>
             <p>uri:{song.uri}</p>
             <p>ID:{song.id}</p>
-            <button onClick={()=>handleRemove(song.id)}>Remove this song</button>
+            <button onClick={()=>handleRemove(song.id,'playlist')}>Remove this song</button>
             <button>Add to Spotify</button>
             <button onClick={()=>handlePlay(song)}>
                 {currentSong===song.id ? 'Now Playing':'Play'}

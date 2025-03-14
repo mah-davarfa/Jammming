@@ -3,14 +3,14 @@ import {AppContext} from '../context/AppContext';
 import '../styles/darkmode.css';
  
 export const PlaySong = ()=>{
-    const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,setPlaylist}=useContext(AppContext);
+    const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll}=useContext(AppContext);
     
     
    
     
     if(searchResultsAll.length>0){
        
-    if (!selectedSong) {
+    if (!selectedSong  ) {
         return (
             <div className='play-song'>
                 <p>
@@ -40,7 +40,7 @@ export const PlaySong = ()=>{
                 <source src={selectedSong.preview} type="audio/mpeg"/>
                 Your browser does not support the audio element.
             </audio>): (<p>This song is not playable from source, try another song.</p>)}
-            <button onClick={()=>handleRemove(selectedSong.id)}>Remove This Song from Jammming</button>
+            <button onClick={()=>handleRemove(selectedSong.id,'playsong')}>Remove This Song </button>
             <button onClick={()=>handleAddToPlaylist(selectedSong)}>
                 {addedToPlaylist.includes(selectedSong.id) ? 'Already in Playlist':"Add To PlayList"}
                     </button>    

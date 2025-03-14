@@ -18,12 +18,8 @@ const SearchResults = () => {
     if(searchResults.length>0){
 
       setSearchResultsAll((prev)=>{
-         const uniqueResults = 
-         searchResults.filter((item)=>
-        !prev.some((item2)=>
-          (item2.id===item.id)));
-        
-      return [...prev,...uniqueResults];
+         const combainResults = [...prev, ...searchResults]
+         return [...new Map(combainResults.map((item)=>[item.id,item])).values()];
       })
       setSearchResultTag(true);
       setNoResult(false);

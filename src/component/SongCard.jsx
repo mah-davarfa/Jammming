@@ -33,7 +33,7 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
                 <p>popularity:{popularity}</p>
                 <p>uri:{uri}</p>
                 <p>ID:{id}</p>
-                <button onClick={()=>handleRemove(id) }>Remove</button>
+                <button onClick={()=>handleRemove(id,'songcard') }>Remove</button>
                 <button onClick={()=>handleAddToPlaylist({name,artist,album,preview,popularity,uri,id,image})}>
                     {addedToPlaylist.includes(id) ? 'Already in Playlist':"Add To PlayList"}
                 </button>

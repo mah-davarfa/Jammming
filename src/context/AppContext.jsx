@@ -15,15 +15,20 @@ export const AppProvider = ({children}) => {
   const [addedToPlaylist , setAddedToPlaylist]=useState(null);
   const [playlistLimitReached, setPlaylistLimitReached]=useState(false);  
     
-      const handleRemove=(id)=>{
-            if(id===currentSong){
+      const handleRemove=(id,form)=>{
+            if(form==='playsong'){
+              setSelectedSong(null);
+              setCurrentSong(null);
+          } 
+          if(form==='songcard'){
+              setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
+              setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
               setSelectedSong(null);
               setCurrentSong(null);
           }
-              setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
-              setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
+          if(form==='playlist'){
              setPlaylist((pre)=>pre.filter((item)=>item.id !==id));
-             
+          }  
       }
 
       const handlePlay =(song)=>{
@@ -42,7 +47,7 @@ export const AppProvider = ({children}) => {
                             }}
                          })          
                          
-           //CHANGING PAY TO NOW PLAYING AND REVERSE
+           //CHANGING PLAY TO NOW PLAYING AND REVERSE
            useEffect(()=>{
             if(selectedSong){
                 setCurrentSong(selectedSong.id)
