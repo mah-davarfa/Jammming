@@ -32,22 +32,29 @@ const handleSearchTerm = (data) => {
   return (
     <>
     <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
-      <div >
-        <Banner onNameSubmit={handleNameSubmit}/>
-        <ToggleMode />  
-      </div>
-     
-      {userName &&(
-      <div>
-        <SearchBar onSearch={handleSearch}/>
-        <Data  onSearchTerm={handleSearchTerm}/>
-        <div className='main-container'>
-        <SearchResults /> 
-        <PlaySong />
-        <Playlist/>
-        </div>
-      </div>
-      )}
+          <div className={'bannerContainer'}>
+            <Banner onNameSubmit={handleNameSubmit}/>
+            
+          </div>
+        
+          {userName &&(
+          <div>
+              <div className={'SearchToggleBar'}>
+                <div >
+                <ToggleMode /> 
+                </div>
+                <div className={"right-SearchToggleBar"}>
+                <SearchBar onSearch={handleSearch}/>
+                </div>
+              </div>
+            <Data  onSearchTerm={handleSearchTerm}/>
+            <div className='main-container'>
+                <SearchResults /> 
+                <PlaySong />
+                <Playlist/>
+            </div>
+          </div>
+          )}
     </div>
     </>
   )

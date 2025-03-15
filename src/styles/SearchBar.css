@@ -3,14 +3,15 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-top: 10px;
+    
     flex-wrap: wrap;
+    margin: 10px;
 }
 .search-container input::placeholder {
     color: #bbb;
 }
 .search-container button {
-    padding: 10px 15px;
+    padding: 10px 10px;
     border-radius: 5px;
     border: none;
     cursor: pointer;

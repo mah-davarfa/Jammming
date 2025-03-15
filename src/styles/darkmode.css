@@ -11,6 +11,22 @@
     background-color: #fff;
     color: #000;
 }
+.bannerContainer{
+    border: 1px solid rgb(194, 9, 9);
+}
+.SearchToggleBar{
+display:flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+margin: 10px;
+border: 1px solid red;
+
+}
+.right-SearchToggleBar{
+    margin:auto;
+}
+
 .toggle-button{
     padding: 10px 10px;
     border-radius: 5px;
@@ -20,6 +36,7 @@
     cursor: pointer;
     font-weight: bold;  
     margin: 10px;
+    border:1px solid red;
 }
 .toggle-light-button{
     padding: 10px 10px;
@@ -126,6 +143,7 @@
     grid-template-columns: 1fr 2fr 1fr; 
     gap: 20px;
     padding: 20px;
+    border: 2px solid blue;
 }
 .main-container button{
     margin:.2rem;
