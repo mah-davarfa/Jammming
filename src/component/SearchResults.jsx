@@ -31,7 +31,7 @@ const SearchResults = () => {
   
    return(
     <div>
-        {searchResultTag ? <h3>search results</h3>:null}
+        {searchResultTag ? <h3 className={'SearchResult-title'}>search results</h3>:null}
         <div className='list'>
       { searchResultsAll && searchResultsAll.length > 0  ? (
       

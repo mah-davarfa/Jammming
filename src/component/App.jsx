@@ -31,31 +31,33 @@ const handleSearchTerm = (data) => {
 }
   return (
     <>
-    <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
-          <div className={'bannerContainer'}>
-            <Banner onNameSubmit={handleNameSubmit}/>
+      <div className={'frame-container'}>
+        <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
+              <div className={'bannerContainer'}>
+                <Banner onNameSubmit={handleNameSubmit}/>
+                
+              </div>
             
-          </div>
-        
-          {userName &&(
-          <div>
-              <div className={'SearchToggleBar'}>
-                <div >
-                <ToggleMode /> 
-                </div>
-                <div className={"right-SearchToggleBar"}>
-                <SearchBar onSearch={handleSearch}/>
+              {userName &&(
+              <div>
+                  <div className={'SearchToggleBar'}>
+                    <div className={"left-SearchToggleBar"}>
+                    <ToggleMode /> 
+                    </div>
+                    <div className={"right-SearchToggleBar"}>
+                    <SearchBar onSearch={handleSearch}/>
+                    </div>
+                  </div>
+                <Data  onSearchTerm={handleSearchTerm}/>
+                <div className='main-container'>
+                    <SearchResults /> 
+                    <PlaySong />
+                    <Playlist/>
                 </div>
               </div>
-            <Data  onSearchTerm={handleSearchTerm}/>
-            <div className='main-container'>
-                <SearchResults /> 
-                <PlaySong />
-                <Playlist/>
-            </div>
-          </div>
-          )}
-    </div>
+              )}
+        </div>
+      </div> 
     </>
   )
 };

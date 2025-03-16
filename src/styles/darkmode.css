@@ -1,6 +1,15 @@
-.dark-mode, .light-mode {
-    min-height: 100vh;
+.frame-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+ 
+.dark-mode, .light-mode {
+    
+    
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 .dark-mode{
@@ -11,6 +20,9 @@
     background-color: #fff;
     color: #000;
 }
+.playlist-header{
+    text-align: center;
+}
 .bannerContainer{
     border: 1px solid rgb(194, 9, 9);
 }
@@ -19,7 +31,7 @@ display:flex;
 justify-content: space-between;
 align-items: center;
 flex-wrap: wrap;
-margin: 10px;
+
 border: 1px solid red;
 
 }
@@ -27,6 +39,9 @@ border: 1px solid red;
     margin:auto;
 }
 
+.SearchResult-title{
+    text-align: center;
+}
 .toggle-button{
     padding: 10px 10px;
     border-radius: 5px;
@@ -36,8 +51,9 @@ border: 1px solid red;
     cursor: pointer;
     font-weight: bold;  
     margin: 10px;
-    border:1px solid red;
+    
 }
+
 .toggle-light-button{
     padding: 10px 10px;
     border-radius: 5px;
@@ -62,7 +78,24 @@ border: 1px solid red;
     border: 1px solid #c49b9b;
     text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
 }
-
+.playlist-item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #aaa;  
+    margin: auto;
+    padding:10px;
+}
+.play-song {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #aaa;  
+    margin: auto;
+    padding:10px;
+}
 .dark-mode .search-container button {
     background-color: #333;
     color: #fff;
@@ -141,8 +174,8 @@ border: 1px solid red;
 .main-container {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr; 
-    gap: 20px;
-    padding: 20px;
+   
+    
     border: 2px solid blue;
 }
 .main-container button{
@@ -164,32 +197,8 @@ border: 1px solid red;
     overflow-y: auto;
     height: 70vh;
     border-right: 2px solid #ddd;
-}
-
-
-.playlist-item-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    border-bottom: 1px solid #aaa;  
     padding: 10px;
-}
-
-
-
-.play-song {
-    text-align: center;
-    border: 2px solid #ccc;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-
+  }
 .dark-mode .main-container {
     background-color: #222;
     color: white;
@@ -237,7 +246,7 @@ border: 1px solid red;
          .list,
          .play-song {
              max-width: 100%; 
-             padding: 10px; 
+            
              margin: 0;
          }
     }

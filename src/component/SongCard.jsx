@@ -19,7 +19,7 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
     return(
         <>
         <div className='playlist-item-card '>
-                <img src={image} alt={name} width={200} height={200}/>
+                <img src={image} alt={name} width={150} height={150}/>
                 <h3>{name}</h3>
                 <p>Artist: {artist}</p>
                 <p>Album: {album}</p>
@@ -31,8 +31,8 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
                     ) : (<p>Preview not available</p>)}
    
                 <p>popularity:{popularity}</p>
-                <p>uri:{uri}</p>
-                <p>ID:{id}</p>
+               {/* <p>uri:{uri}</p>*/}
+                {/*<p>ID:{id}</p>*/}
                 <button onClick={()=>handleRemove(id,'songcard') }>Remove</button>
                 <button onClick={()=>handleAddToPlaylist({name,artist,album,preview,popularity,uri,id,image})}>
                     {addedToPlaylist.includes(id) ? 'Already in Playlist':"Add To PlayList"}

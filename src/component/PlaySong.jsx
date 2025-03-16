@@ -28,13 +28,13 @@ export const PlaySong = ()=>{
              }
     return (  
         <div className='play-song'>
-             <img src={selectedSong.image} alt={selectedSong.name}  width={500} height={500}/>
+             <img src={selectedSong.image} alt={selectedSong.name}  width={250} height={250}/>
             <h3>Playing : {selectedSong.name}</h3>
             <p>Artist: {selectedSong.artist}</p>
             <p>Album: {selectedSong.album}</p>
             <p>popularity:{selectedSong.popularity}</p>
-            <p>uri:{selectedSong.uri}</p>
-            <p>ID:{selectedSong.id}</p>
+           {/* <p>uri:{selectedSong.uri}</p>*/}
+           {/* <p>ID:{selectedSong.id}</p>*/}
             {selectedSong.preview ? (
                 <audio controls>
                 <source src={selectedSong.preview} type="audio/mpeg"/>
