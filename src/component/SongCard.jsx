@@ -8,13 +8,7 @@ function SongCard({name,artist,album,preview,popularity,uri,id,image}) {
 
  const {handleRemove,currentSong,handlePlay,
     handleAddToPlaylist,addedToPlaylist} =useContext(AppContext);
-   
- 
-   
-        
-           
        
-     
 
     return(
         <>

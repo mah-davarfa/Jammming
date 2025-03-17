@@ -17,7 +17,6 @@ export const PlaySong = ()=>{
                 No song selected. Click 'Play' on a song to start playing.
                 </p>
                 <img 
-                className='background-for-playSong' 
                 src='../../imag/background.jpg'
                 alt='Background'
                 width={400} height={380}

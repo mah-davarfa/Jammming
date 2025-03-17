@@ -235,7 +235,7 @@ border: 1px solid red;
     border: 2px solid #555;
 }
 
-/*  Light Mode Adjustments */
+
 .light-mode .main-container {
     background-color: #f8f8f8;
     color: black;
@@ -271,11 +271,11 @@ border: 1px solid red;
 
 @media (max-width: 768px) {
     .main-container {
-        grid-template-columns: 1fr; /* Collapse to 1 column on mobile */
+        grid-template-columns: 1fr; 
     }
 
     .list {
-        max-width: 100%; /* Take full width */
+        max-width: 100%; 
         border: none;
         height: auto;
     }
