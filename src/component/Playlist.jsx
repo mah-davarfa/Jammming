@@ -21,7 +21,11 @@ const Playlist=()=>{
     const {handlePlay,currentSong,handleRemove,playlist,searchResultsAll,playlistLimitReached}=useContext(AppContext);
    
       if (searchResultsAll.length>0 && playlist.length === 0 ){
-        return (<p>Your playlist is empty. Add a song!</p>);
+        return (
+        <div className={'playlist-empty'}>
+          <p>Your playlist is empty. Add a song!</p>
+        </div>
+    );
     }
         
     return(

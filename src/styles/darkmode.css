@@ -46,11 +46,7 @@ border: 1px solid red;
 .SearchResult-title {
     text-align: center;
 }
- .playlist-item-card h3 {
-   margin: 0 auto;
-   text-align: center;
  
-}
 .toggle-button{
     padding: 10px 10px;
     border-radius: 5px;
@@ -96,6 +92,15 @@ border: 1px solid red;
     margin: auto;
     padding:10px;
 }
+.playlist-item-card h3 {
+    margin: 0 auto;
+    text-align: center;
+  
+ }
+ .playlist-empty{
+    margin: 0 auto;
+    text-align: center;
+ }
 .play-song {
     display: flex;
     flex-direction: column;
