@@ -19,11 +19,11 @@
     color: #000;
 }
 .playlist-title{
-    position:relative;
+    /*need to be fixed at the top would not scroll*/
     
 }
 .playlist-header{
-   position: fixed;
+   
     text-align: center;
     border: 1px solid red;
 }
