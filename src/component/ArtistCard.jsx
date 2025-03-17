@@ -21,7 +21,7 @@ function ArtistCard({id, name, image, genre, popularity}){
         <h3>{name}<button onClick={handelgetSong}>Get top Songs</button></h3>
         <p>Genre: {genre}</p>   
         <p>Popularity: {popularity}</p>
-        <p>id:{id}</p>
+        {/*<p>id:{id}</p> */}
         <button  onClick={handleRemove}>Remove</button>
         </div>
     )

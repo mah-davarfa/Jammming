@@ -8,9 +8,7 @@
   }
  
 .dark-mode, .light-mode {
-    
-    
-    transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 .dark-mode{
     background-color: #333;
@@ -20,8 +18,14 @@
     background-color: #fff;
     color: #000;
 }
+.playlist-title{
+    position:relative;
+    
+}
 .playlist-header{
+   position: fixed;
     text-align: center;
+    border: 1px solid red;
 }
 .bannerContainer{
     border: 1px solid rgb(194, 9, 9);
@@ -39,8 +43,13 @@ border: 1px solid red;
     margin:auto;
 }
 
-.SearchResult-title{
+.SearchResult-title {
     text-align: center;
+}
+ .playlist-item-card h3 {
+   margin: 0 auto;
+   text-align: center;
+ 
 }
 .toggle-button{
     padding: 10px 10px;
@@ -73,7 +82,7 @@ border: 1px solid red;
     
 }
 .light-mode .playlist-item-card{
-    background-color: rgba(116, 112, 112, 0.705);
+    
     color: #000;
     border: 1px solid #c49b9b;
     text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
@@ -262,4 +271,5 @@ border: 1px solid red;
         border: none;
         height: auto;
     }
+    
 }

@@ -27,10 +27,10 @@ const Playlist=()=>{
     return(
     <div className ='list'>
       
-        
+           <div className={'playlist-title'}>
             {playlist.length>0 &&(
                
-               <div>             
+               <div className={'playlist-header'}>             
                 {playlistLimitReached ? (
                 <h3 className="warning-text">
                     'Playlist have reached to the limit of 10 songs,Either Transfer to spotify or Remove some songs'
@@ -42,6 +42,7 @@ const Playlist=()=>{
                         <button>Save to Spotify</button>
                     </div>)}
                </div>)}
+           </div>
                 
         {playlist.map((song, index)=>(
         <div key={index} className ='playlist-item-card'>
