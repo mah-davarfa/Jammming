@@ -19,14 +19,14 @@
     color: #000;
 }
 .playlist-title{
-    /*need to be fixed at the top would not scroll*/
+  position: sticky;
+  top: 0;
+  background-color: inherit;
+  text-align: center;
+  
     
 }
-.playlist-header{
-   
-    text-align: center;
-    border: 1px solid red;
-}
+
 .bannerContainer{
     border: 1px solid rgb(194, 9, 9);
 }
@@ -104,6 +104,12 @@ border: 1px solid red;
     border-bottom: 1px solid #aaa;  
     margin: auto;
     padding:10px;
+    
+}
+.play-song img{
+   max-width:100%;
+   object-fit:contain;
+   height: auto;
 }
 .dark-mode .search-container button {
     background-color: #333;
@@ -206,7 +212,7 @@ border: 1px solid red;
     overflow-y: auto;
     height: 70vh;
     border-right: 2px solid #ddd;
-    padding: 10px;
+    
   }
 .dark-mode .main-container {
     background-color: #222;
@@ -217,9 +223,6 @@ border: 1px solid red;
     background-color: #222; 
     color: white;   
     border-right: 2px solid #444;
-}
-
-.dark-mode .list {
     border-left: 2px solid #444;
 }
 
