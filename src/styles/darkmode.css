@@ -18,9 +18,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid #aaa;  
-    margin: auto;
+    border: 1px solid #aaa; 
     padding:10px;
+    
 }
 
  /*.list  .playlist-list{
@@ -75,7 +75,7 @@
    height: auto;
 }
    */
- .play-song{
+ .play-song-c {
     text-align: center;
     border:2px solid #ccc;
     padding:5px;
@@ -170,7 +170,7 @@ border: 1px solid red;
     text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
     
 }
-.main-container
+
 .light-mode .playlist-item-card{
     
     color: #000;
@@ -261,9 +261,11 @@ border: 1px solid red;
 }
 
 .main-container button:hover{
-    margin:.3rem;
+    margin:.1rem;
     border-radius: 10px;
-    padding: .2rem;
+    padding: .1rem;
+    background-color: #ccccd1;
+    color: black;
 }
 
 .dark-mode .main-container {
@@ -305,8 +307,24 @@ border: 1px solid red;
 /*  **Make it responsive for tablets & mobile** */
 @media (max-width: 1024px) {
     .main-container {
+        display: grid;
         grid-template-columns: 1fr 1fr; 
-         gap:10px;}
+        grid-template-areas:
+        "search play"
+        "playlist playlist" ;
+         gap:10px;
+        }
+        .search-results-c{
+            grid-area:search;
+        }
+        .play-song-c{
+            grid-area:play;
+        }
+        .playlist-area-c{
+            grid-area: playlist;
+        }
+        
+        
          .list,.playlist-list,
          .play-song {
              max-width: 100%; 
@@ -318,13 +336,31 @@ border: 1px solid red;
 
 @media (max-width: 768px) {
     .main-container {
-        grid-template-columns: 1fr; 
-    }
-
-    .list, .playlist-list{
-        max-width: 100%; 
-        border: none;
-        height: auto;
-    }
+        
+            display: grid;
+            grid-template-columns: 1fr; 
+            grid-template-areas:
+            "search "
+            "play"
+            "playlist" ;
+             gap:10px;
+            }
+            .search-results-c{
+                grid-area:search;
+            }
+            .play-song-c{
+                grid-area:play;
+            }
+            .playlist-area-c{
+                grid-area: playlist;
+            }
+            
+            
+             .list,.playlist-list,
+             .play-song {
+                 max-width: 100%; 
+                
+                 margin: 0;
+             }
+        }
     
-}

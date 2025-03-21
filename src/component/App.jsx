@@ -50,9 +50,15 @@ const handleSearchTerm = (data) => {
                   </div>
                 <Data  onSearchTerm={handleSearchTerm}/>
                 <div className='main-container'>
-                    <SearchResults /> 
-                    <PlaySong />
-                    <Playlist/>
+                    <div className={"search-results-c"}>
+                       <SearchResults /> 
+                    </div>
+                    <div  className={"play-song-c"}>
+                       <PlaySong />
+                    </div>
+                    <div className={"playlist-area-c"}>
+                      <Playlist/>
+                    </div>
                 </div>
               </div>
               )}
