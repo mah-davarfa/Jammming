@@ -13,7 +13,8 @@ const ToggleMode = () => {
         return (
         <div>
             <button onClick={togglMode} 
-            className={!isDarkMode ?'toggle-light-button':'toggle-button'}>{isDarkMode?'Light  mode': 'Dark Mode'}
+            className={!isDarkMode ?'toggle-light-button':'toggle-button'}>
+                {isDarkMode?'Light  Mode': 'Dark Mode'}
 
             </button>
         </div>

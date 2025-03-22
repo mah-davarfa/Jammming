@@ -5,7 +5,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0;
-  }
+  } 
   .main-container {
     display: grid;
  /*   grid-template-columns: 1fr 2fr 1fr; */
@@ -13,15 +13,55 @@
    gap:5px; 
    border: 2px solid blue;
 }
+.main-container h3 {
+    text-align: center;
+    font-family: Arial, sans-serif; 
+    word-wrap: break-word;
+    font-size: clamp(0.8rem,1.5vw,1.1rem);
+   } 
+.main-container p {
+text-align: center;
+font-family: Arial, sans-serif; 
+word-wrap: break-word;
+font-size: clamp(0.7rem,1.5vw,1rem);
+line-height: 1.5rem;
+}
+.main-container button{
+  padding: 4px 6px;
+  margin: 2px 0;
+  font-size: 0.7rem;
+  border-radius: 20px;
+}
+
   .playlist-item-card {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 1px solid #aaa; 
-    padding:10px;
-    
-}
+    padding:5px;
+    gap:5px;
+    width: 100%;
+    max-width: 300px;
+       
+  }
+  .playlist-item-card img {
+    max-width:120px;
+    width: 100%;
+   object-fit:contain;
+    height: auto;
+    object-fit: contain;
+    padding: 5px;
+  }
+  .play-song img{
+    max-width:300px;
+    width: 100%;
+   object-fit:contain;
+    height: auto;
+    object-fit: contain;
+    padding: 10px;
+  }
 
  /*.list  .playlist-list{
     display: flex;
@@ -40,7 +80,7 @@
     overflow-y:auto;
     border-right:2px solid #ddd;
     padding: 5px;
-    height: 70vh;
+    
   }
   .playlist-title{
     position: sticky;
@@ -77,14 +117,13 @@
    */
  .play-song-c {
     text-align: center;
-    border:2px solid #ccc;
-    padding:5px;
-    margin:auto;
+    border:3px solid #ccc;
+    padding: 10px;
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 90%;
+    width:100%;
     
  }  
  .playlist-item-card h3 {
@@ -103,11 +142,7 @@
     width: 100%;
     max-width: 250px;
  }
- .play-song img {
-    max-width:100%;
-   object-fit:contain;
-   height: auto;
-}
+
 .dark-mode, .light-mode {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -253,12 +288,6 @@ border: 1px solid red;
     100% { border-color: #ddd; }
 }
 
-
-.main-container button{
-    margin:.2rem;
-    border-radius: 20px;
-    padding: .1rem;
-}
 
 .main-container button:hover{
     margin:.1rem;

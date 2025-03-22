@@ -9,7 +9,7 @@ export const AppProvider = ({children}) => {
   const [selectedSong, setSelectedSong] = useState(null);
   const [playlist, setPlaylist] = useState([]);
   const [searchResultsAll, setSearchResultsAll] = useState([]);
-  const[isDarkMode, setIsDarkMode] = useState(false);
+  const[isDarkMode, setIsDarkMode] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [currentSong,setCurrentSong] = useState(null);
   const [addedToPlaylist , setAddedToPlaylist]=useState(null);
