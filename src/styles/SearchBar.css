@@ -10,6 +10,9 @@
 .search-container input::placeholder {
     color: #bbb;
 }
+.SearchResult-title {
+    margin-top: 5px;
+}
 .search-container button {
     padding: 10px 10px;
     border-radius: 5px;

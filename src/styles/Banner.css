@@ -6,13 +6,13 @@
         background-color: #121212;
         color: white;
         text-align:center;
-        padding: 20px;
-        border-radius: 20px;
-        height: max(16vh, 130px);
+        padding: 47px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
         
 }
 .banner h1{
-        font-size: 2rem;
+        font-size: clamp(0.8rem,1vw,1.1rem);
         margin-bottom: 10px;
 }
 .search-container{

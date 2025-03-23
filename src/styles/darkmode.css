@@ -11,22 +11,22 @@
  /*   grid-template-columns: 1fr 2fr 1fr; */
    grid-template-columns: 3fr 2fr 2fr;
    gap:5px; 
-   border: 2px solid blue;
-}
-.main-container h3 {
+  } 
+
+.frame-container h3 {
     text-align: center;
     font-family: Arial, sans-serif; 
     word-wrap: break-word;
     font-size: clamp(0.8rem,1.5vw,1.1rem);
    } 
-.main-container p {
+.frame-container p {
 text-align: center;
 font-family: Arial, sans-serif; 
 word-wrap: break-word;
 font-size: clamp(0.7rem,1.5vw,1rem);
 line-height: 1.5rem;
 }
-.main-container button{
+.frame-container button{
   padding: 4px 6px;
   margin: 2px 0;
   font-size: 0.7rem;
@@ -78,7 +78,6 @@ line-height: 1.5rem;
     grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
     gap:10px;
     overflow-y:auto;
-    border-right:2px solid #ddd;
     padding: 5px;
     
   }
@@ -87,7 +86,7 @@ line-height: 1.5rem;
     top: 0;
     background-color: inherit;
     text-align: center;
-    border:1px solid red;
+    margin-top: 5px;
     }
   .playlist-list{
     display:grid;
@@ -95,7 +94,7 @@ line-height: 1.5rem;
     gap:10px;
     padding: 5px;
     overflow-y:auto;
-    height: 65vh;
+  
     align-content: flex-start;
   }
  /*
@@ -117,8 +116,8 @@ line-height: 1.5rem;
    */
  .play-song-c {
     text-align: center;
-    border:3px solid #ccc;
-    padding: 10px;
+    border: 3px solid #888;
+    margin-top: 10px;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -134,7 +133,7 @@ line-height: 1.5rem;
  .playlist-empty{
     margin: 0 auto;
     text-align: center;
-    border:solid #ddd;
+    
     padding: 5px;
     height: 70vh;
  }
@@ -155,22 +154,20 @@ line-height: 1.5rem;
     color: #000;
 }
 
-.bannerContainer{
-    border: 1px solid rgb(194, 9, 9);
-}
+
 .SearchToggleBar{
 display:flex;
 justify-content: space-between;
 align-items: center;
 flex-wrap: wrap;
 
-border: 1px solid red;
-
 }
 .right-SearchToggleBar{
     margin:auto;
 }
-
+.left-SearchToggleBar{
+    margin: 8px;
+}
 .SearchResult-title {
     text-align: center;
 }
@@ -305,8 +302,7 @@ border: 1px solid red;
 .dark-mode .list {
     background-color: #222; 
     color: white;   
-    border-right: 2px solid #444;
-    border-left: 2px solid #444;
+   
 }
 
 .dark-mode .play-song {
@@ -322,12 +318,10 @@ border: 1px solid red;
 .light-mode .list {
     background-color: #fff; 
     color: black;           
-    border-right: 2px solid #ddd;
+   
 }
 
-.light-mode .list {
-    border-left: 2px solid #ddd;
-}
+
 
 .light-mode .play-song {
     border: 2px solid #ccc;
@@ -356,10 +350,13 @@ border: 1px solid red;
         
          .list,.playlist-list,
          .play-song {
-             max-width: 100%; 
-            
-             margin: 0;
+            max-width: 100%; 
+            margin: 0;
          }
+         .playlist-area-c{
+            border-top:2px solid  #888;
+         }
+         
     }
 
 
@@ -390,6 +387,9 @@ border: 1px solid red;
                  max-width: 100%; 
                 
                  margin: 0;
+             }
+             .playlist-area-c{
+                border-top:none;
              }
         }
     
