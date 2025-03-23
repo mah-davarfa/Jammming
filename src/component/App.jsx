@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext,useEffect} from 'react';
 import Banner from './Banner.jsx';
 import Data from './Data.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -18,7 +18,7 @@ import '../styles/darkmode.css';
   const [userName, setUserName] = useState('');
   const [isSearchStarted, setIsSearchStarted] = useState(false);
  
-  const{isDarkMode,setSearchTerm, setSearchResults} = useContext(AppContext);
+  const{isDarkMode,setSearchTerm, setSearchResults,searchResultsAll} = useContext(AppContext);
   
   const handleNameSubmit = (name)=>{
     setUserName(name);
@@ -30,6 +30,13 @@ const handleSearchTerm = (data) => {
   setSearchResults(Array.isArray(data)? data :[data]);
   setIsSearchStarted(true);
 }
+
+useEffect(()=>{
+  if(searchResultsAll.length === 0){
+    setIsSearchStarted(false); 
+  }
+},[searchResultsAll])
+
   return (
     <>
       <div className={'frame-container'}>
