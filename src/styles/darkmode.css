@@ -6,6 +6,19 @@
     margin: 0 auto;
     padding: 0;
   } 
+  .startup-Background{
+    width: 100%;
+    object-fit:contain;
+     height: auto;
+     object-fit: contain;
+  }
+  .search-startup-Background{
+    width: 100%;
+    object-fit:contain;
+     height: auto;
+     object-fit: contain;
+     
+  }
   .main-container {
     display: grid;
  /*   grid-template-columns: 1fr 2fr 1fr; */
@@ -390,6 +403,9 @@ flex-wrap: wrap;
              }
              .playlist-area-c{
                 border-top:none;
+             }
+             .play-song-c{
+                padding: 5px;
              }
         }
     

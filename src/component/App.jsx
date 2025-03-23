@@ -16,7 +16,7 @@ import '../styles/darkmode.css';
 
  function App () {
   const [userName, setUserName] = useState('');
-  
+  const [isSearchStarted, setIsSearchStarted] = useState(false);
  
   const{isDarkMode,setSearchTerm, setSearchResults} = useContext(AppContext);
   
@@ -28,17 +28,18 @@ import '../styles/darkmode.css';
   }
 const handleSearchTerm = (data) => {
   setSearchResults(Array.isArray(data)? data :[data]);
+  setIsSearchStarted(true);
 }
   return (
     <>
       <div className={'frame-container'}>
         <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
-              <div className={'bannerContainer'}>
+              <div >
                 <Banner onNameSubmit={handleNameSubmit}/>
                 
               </div>
             
-              {userName &&(
+              {userName ?(
               <div>
                   <div className={'SearchToggleBar'}>
                     <div className={"left-SearchToggleBar"}>
@@ -49,6 +50,12 @@ const handleSearchTerm = (data) => {
                     </div>
                   </div>
                 <Data  onSearchTerm={handleSearchTerm}/>
+                {!isSearchStarted ? (<div>
+                  <img src='../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg' 
+                    alt='startup-Background' 
+                    className='search-startup-Background'
+                  />
+                  </div>):(
                 <div className='main-container'>
                     <div className={"search-results-c"}>
                        <SearchResults /> 
@@ -59,9 +66,14 @@ const handleSearchTerm = (data) => {
                     <div className={"playlist-area-c"}>
                       <Playlist/>
                     </div>
-                </div>
+                </div>)}
               </div>
-              )}
+              ):(<div>
+                <img src='../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg'
+                 alt='startUpBackground' 
+                 className='startup-Background'
+                 />
+              </div>)}
         </div>
       </div> 
     </>

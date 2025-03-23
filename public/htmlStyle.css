@@ -23,7 +23,7 @@ html, body {
  top: 1vh;
  left: 3.9vw;
  z-index: 1; 
- background-color: #181818;
+ 
 border-radius: 25px;
 max-height: 15vh;
 display: flex;
@@ -33,6 +33,7 @@ align-items: center;
 justify-content: flex-start;
 flex-shrink: 0;
 color: #ccc;
+font-size: clamp(0.8rem,1vw,1.1rem);
 }
 
 
