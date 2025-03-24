@@ -1,5 +1,6 @@
 import React , {useState} from 'react';
 import '../styles/Banner.css';
+import '../styles/darkMode.css';
 
 
 export default function Banner({onNameSubmit}) {

@@ -32,7 +32,7 @@ const Playlist=()=>{
         <div className="playlist-container">
           {playlist.length > 0 && (
             <div className="playlist-title">
-              <div className="playlist-header">
+              <div >
                 {playlistLimitReached ? (
                   <h3 className="warning-text">
                     Playlist has reached limit of 10 songs. Either Transfer or Remove.
@@ -40,7 +40,7 @@ const Playlist=()=>{
                 ) : (
                   <>
                     {!isEditing ? (
-                      <h3>{playlistTitle}</h3>
+                      <h3 className='warning-text'>{playlistTitle}</h3>
                     ) : (
                       <input
                         onChange={handlePlaylistTitle}
@@ -49,7 +49,9 @@ const Playlist=()=>{
                         placeholder="Pick a name for title"
                       />
                     )}
-                    <button onClick={handleEdit}>{!isEditing ? 'Edit' : 'Save'}</button>
+                    <button onClick={handleEdit}>
+                      {!isEditing ? 'Edit' : 'Save'}
+                    </button>
                     <button>Save to Spotify</button>
                   </>
                 )}

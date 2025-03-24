@@ -6,22 +6,16 @@
     margin: 0 auto;
     padding: 0;
   } 
-  .startup-Background{
+  .startup-Background,
+  .search-startup-Background {
     width: 100%;
     object-fit:contain;
      height: auto;
      object-fit: contain;
   }
-  .search-startup-Background{
-    width: 100%;
-    object-fit:contain;
-     height: auto;
-     object-fit: contain;
-     
-  }
+  
   .main-container {
-    display: grid;
- /*   grid-template-columns: 1fr 2fr 1fr; */
+   display: grid;
    grid-template-columns: 3fr 2fr 2fr;
    gap:5px; 
   } 
@@ -41,7 +35,7 @@ line-height: 1.5rem;
 }
 .frame-container button{
   padding: 4px 6px;
-  margin: 2px 0;
+  margin: 2px 4px;
   font-size: 0.7rem;
   border-radius: 20px;
 }
@@ -60,9 +54,16 @@ line-height: 1.5rem;
     }
     .SearchResult-title {
         text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: bold;
     }
-     
-    .toggle-button{
+     .warning-text{
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: bold;
+         }
+    
+    .toggle-dark-button{
         padding: 10px 10px;
         border-radius: 5px;
         border: none;
@@ -72,6 +73,16 @@ line-height: 1.5rem;
         font-weight: bold;  
         margin: 10px;
         
+    }
+    .toggle-light-button{
+        padding: 10px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color:#000000;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;  
+        margin: 10px;
     }
 
   .playlist-item-card {
@@ -94,6 +105,9 @@ line-height: 1.5rem;
     height: auto;
     object-fit: contain;
     padding: 5px;
+  }
+  .play-song{
+    padding: 5px;;
   }
   .play-song img{
     max-width:300px;
@@ -128,8 +142,9 @@ line-height: 1.5rem;
     background-color: inherit;
     text-align: center;
     margin-top: 5px;
-    }
-  .playlist-list{
+    
+  }
+ .playlist-list{
     display:grid;
     grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
     gap:10px;
@@ -157,7 +172,6 @@ line-height: 1.5rem;
    */
  .play-song-c {
     text-align: center;
-    border: 3px solid #888;
     margin-top: 10px;
     display:flex;
     flex-direction: column;
@@ -182,56 +196,76 @@ line-height: 1.5rem;
     width: 100%;
     max-width: 250px;
  }
+/*colors for dark and light mode*/
+
+
 
 .dark-mode, .light-mode {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 .dark-mode{
-    background-color: #333;
+    background-color: #131111;
     color: #fff;
 }
 .light-mode{
-    background-color: #ebebf3d2;
+    background-color: #66a5ad75;
     color: #000;
 }
 
-.toggle-light-button{
-    padding: 10px 10px;
-    border-radius: 5px;
-    border: none;
-    background-color:#000000;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;  
-    margin: 10px;
+
+.light-mode .playlist-item-card {
+    background-color: #688eada9;
+    border: 1px solid #c49b9b;
+    text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
+}
+
+.light-mode .play-song-c {
+    border: 3px solid #888;
+}
+.light-mode .play-song {
+    border: 2px solid #ccc;
+    background-color: #527083f1;
+}
+
+.dark-mode .play-song {
+    border: 2px solid #555;
+    background-color: #4245479a;
+}
+.dark-mode .play-song-c {
+    border: 3px solid #ad9e9e;
+}
+
+.dark-mode .playlist-item-card {
+    background-color: #46728d3d;
+    border: 1px solid #555;
+    text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
+}
+.dark-mode .search-container button:hover {
+    background-color: #444;
 }
 
 .light-mode .search-container button {
     background-color: rgba(116, 112, 112, 0.705);
     color: #000;
-    border: 1px solid #c49b9b;
-    text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
-    
-}
-
-.light-mode .playlist-item-card{
-    
-    color: #000;
-    border: 1px solid #c49b9b;
+    border: 2px solid #c49b9b;
     text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
 }
-
+.light-mode .main-container button{
+    background-color:rgba(116, 112, 112, 0.705);
+    color: rgb(201, 221, 15);
+    font-weight: bold;
+    border: 2px solid #c49b9b;
+    text-shadow: 0 0  5px lightslategray , 0 0 10px lightslategray, 0 0 15px black, 0 0 20px black;
+}
 .dark-mode .search-container button {
-    background-color: #333;
+    background-color: #756d6d;
     color: #fff;
     border: 2px solid #555;
     text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f;
     animation: neon-border 3s infinite alternate;
 }
 
-.dark-mode .search-container button:hover {
-    background-color: #444;
-}
+
 @keyframes neon-border {
     0% { box-shadow: 0 0 5px #555; }
     25% { box-shadow: 0 0 10px #888; }
@@ -287,6 +321,9 @@ line-height: 1.5rem;
 .light-mode .search-container input:not(:hover):not(:focus) {
     animation: neon-border-light 3s infinite;
 }
+.light-mode .search-container button:not(:hover):not(:focus) {
+    animation: neon-border-light 3s infinite;
+}
 
 @keyframes neon-border-light {
     0% { border-color: #ddd; }
@@ -305,47 +342,18 @@ line-height: 1.5rem;
     color: black;
 }
 
-.dark-mode .main-container {
-    background-color: #222;
-    color: white;
-}
-
-.dark-mode .list {
-    background-color: #222; 
-    color: white;   
-   
-}
-
-.dark-mode .play-song {
-    border: 2px solid #555;
-}
-
-
-.light-mode .main-container {
-    background-color: #f8f8f8;
-    color: black;
-}
-
-.light-mode .list {
-    background-color: #fff; 
-    color: black;           
-   
-}
 
 
 
-.light-mode .play-song {
-    border: 2px solid #ccc;
-}
 
 /*  **Make it responsive for tablets & mobile** */
 @media (max-width: 1024px) {
     .main-container {
         display: grid;
-        grid-template-columns: 1fr 1fr; 
+        grid-template-columns: 1fr 1fr 1fr; 
         grid-template-areas:
-        "search play"
-        "playlist playlist" ;
+        "search search play"
+        "playlist playlist playlist";
          gap:10px;
         }
         .search-results-c{
