@@ -1,3 +1,6 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap");
+
 .frame-container {
     display: flex;
     flex-direction: column;
@@ -6,15 +9,19 @@
     margin: 0 auto;
     padding: 0;
   } 
-  .startup-Background,
-  .search-startup-Background {
+.SearchResult-title,
+.warning-text {
+  font-family: 'Cinzel', serif;
+}
+.startup-Background,
+.search-startup-Background {
     width: 100%;
     object-fit:contain;
      height: auto;
      object-fit: contain;
   }
   
-  .main-container {
+.main-container {
    display: grid;
    grid-template-columns: 3fr 2fr 2fr;
    gap:5px; 
@@ -22,13 +29,13 @@
 
 .frame-container h3 {
     text-align: center;
-    font-family: Arial, sans-serif; 
+    font-family: 'Cinzel', serif;
     word-wrap: break-word;
     font-size: clamp(0.8rem,1.5vw,1.1rem);
    } 
 .frame-container p {
 text-align: center;
-font-family: Arial, sans-serif; 
+font-family: 'Cinzel', serif;
 word-wrap: break-word;
 font-size: clamp(0.7rem,1.5vw,1rem);
 line-height: 1.5rem;
@@ -46,24 +53,14 @@ line-height: 1.5rem;
     flex-wrap: wrap;
     
     }
-    .right-SearchToggleBar{
+.right-SearchToggleBar{
         margin:auto;
     }
-    .left-SearchToggleBar{
+.left-SearchToggleBar{
         margin: 8px;
     }
-    .SearchResult-title {
-        text-align: center;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-weight: bold;
-    }
-     .warning-text{
-        text-align: center;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-weight: bold;
-         }
     
-    .toggle-dark-button{
+.toggle-dark-button{
         padding: 10px 10px;
         border-radius: 5px;
         border: none;
@@ -74,7 +71,7 @@ line-height: 1.5rem;
         margin: 10px;
         
     }
-    .toggle-light-button{
+.toggle-light-button{
         padding: 10px 10px;
         border-radius: 5px;
         border: none;
@@ -85,7 +82,7 @@ line-height: 1.5rem;
         margin: 10px;
     }
 
-  .playlist-item-card {
+.playlist-item-card {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -98,7 +95,7 @@ line-height: 1.5rem;
     max-width: 300px;
        
   }
-  .playlist-item-card img {
+.playlist-item-card img {
     max-width:120px;
     width: 100%;
    object-fit:contain;
@@ -106,10 +103,10 @@ line-height: 1.5rem;
     object-fit: contain;
     padding: 5px;
   }
-  .play-song{
+.play-song{
     padding: 5px;;
   }
-  .play-song img{
+.play-song img{
     max-width:300px;
     width: 100%;
    object-fit:contain;
@@ -128,7 +125,7 @@ line-height: 1.5rem;
     border-right: 2px solid #ddd;
     
   }*/
-  .list{
+.list{
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
     gap:10px;
@@ -136,7 +133,7 @@ line-height: 1.5rem;
     padding: 5px;
     
   }
-  .playlist-title{
+.playlist-title{
     position: sticky;
     top: 0;
     background-color: inherit;
@@ -144,7 +141,7 @@ line-height: 1.5rem;
     margin-top: 5px;
     
   }
- .playlist-list{
+.playlist-list{
     display:grid;
     grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
     gap:10px;
@@ -170,7 +167,7 @@ line-height: 1.5rem;
    height: auto;
 }
    */
- .play-song-c {
+.play-song-c {
     text-align: center;
     margin-top: 10px;
     display:flex;
@@ -180,19 +177,19 @@ line-height: 1.5rem;
     width:100%;
     
  }  
- .playlist-item-card h3 {
+.playlist-item-card h3 {
     margin: 0 auto;
     text-align: center;
   
  }
- .playlist-empty{
+.playlist-empty{
     margin: 0 auto;
     text-align: center;
     
     padding: 5px;
     height: 70vh;
  }
- .play-song audio{
+.play-song audio{
     width: 100%;
     max-width: 250px;
  }
