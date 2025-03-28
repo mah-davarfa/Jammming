@@ -6,12 +6,15 @@ export default function Data({onSearchTerm}) {
 
     //While up dating fetch i need to use searchTerm to be fetched and Spotify guideline fetching( based on artist song and album)
 const [data ,setdata] = useState(null);
+const [token ,setToken] = useState(null);
    
     const {searchTerm} = useContext(AppContext);
 
             useEffect(()=>{
                 if (!searchTerm) return;
-                fetch('./data.json')
+        const getData = async()=>{    
+            
+            fetch('./data.json')
                     .then((res)=>{
                         if(!res.ok){
                             throw new Error(`HTTP error! status:${res.status}`);
@@ -25,7 +28,8 @@ const [data ,setdata] = useState(null);
                   
             })
             .catch((error)=>console.error('Error in fetching:', error));
-
+        }
+        getData();
             },[searchTerm] )
             if (!searchTerm) {return null;}
            else if(!data){
@@ -39,3 +43,4 @@ return
     )
 }
     
+
