@@ -42,7 +42,10 @@ const handleSubmit = (e) => {
                     disabled ={!search.trim()}> 
                     Search 
                  </button>
-                 {noResult && <p className='no-result'>Search result not available</p> }
+                 {noResult && 
+                 <p className='no-result'>
+                    Search result not available
+                </p> }
             </form>
         </div>
      </>

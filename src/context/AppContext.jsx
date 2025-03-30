@@ -14,7 +14,10 @@ export const AppProvider = ({children}) => {
   const [currentSong,setCurrentSong] = useState(null);
   const [addedToPlaylist , setAddedToPlaylist]=useState(null);
   const [playlistLimitReached, setPlaylistLimitReached]=useState(false);  
-  const [searchResultTag, setSearchResultTag] = useState(false);  
+  const [searchResultTag, setSearchResultTag] = useState(false); 
+  const [continueToSearchAsGuest , setContinueToSearchAsGuest] = useState(false);
+  const [continueToSearchAfterLogin , setContinueToSearchAfterLogin] = useState(false);
+  
       const handleRemove=(id,form)=>{
             if(form==='playsong'){
               setSelectedSong(null);
@@ -67,7 +70,9 @@ export const AppProvider = ({children}) => {
 
 return (
     <AppContext.Provider value=
-    {{searchResultTag, setSearchResultTag,
+    {{continueToSearchAsGuest , setContinueToSearchAsGuest,
+      continueToSearchAfterLogin , setContinueToSearchAfterLogin, 
+      searchResultTag, setSearchResultTag,
       addedToPlaylist , setAddedToPlaylist,
       currentSong,setCurrentSong,
       searchResults, setSearchResults,

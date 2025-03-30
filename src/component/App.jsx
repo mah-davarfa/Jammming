@@ -18,7 +18,7 @@ import '../styles/darkmode.css';
   const [userName, setUserName] = useState('');
   const [isSearchStarted, setIsSearchStarted] = useState(false);
  
-  const{isDarkMode,setSearchTerm, setSearchResults,searchResultsAll} = useContext(AppContext);
+  const{isDarkMode,setSearchTerm, setSearchResults,searchResultsAll,continueToSearchAfterLogin,continueToSearchAsGuest} = useContext(AppContext);
   
   const handleNameSubmit = (name)=>{
     setUserName(name);
@@ -46,7 +46,7 @@ useEffect(()=>{
                 
               </div>
             
-              {userName ?(
+              {continueToSearchAsGuest || continueToSearchAfterLogin ?(
               <div>
                   <div className={'SearchToggleBar'}>
                     <div className={"left-SearchToggleBar"}>

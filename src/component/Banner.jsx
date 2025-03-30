@@ -1,14 +1,15 @@
-import React , {useState} from 'react';
+import React , {useState,useContext} from 'react';
 import '../styles/Banner.css';
 import '../styles/darkMode.css';
-
+import { AppContext } from '../context/AppContext.jsx';
 
 export default function Banner({onNameSubmit}) {
     const [name, setName] = useState('')
     const [submitted ,setSubmitted]=useState(false);
-    const [continueToSearch , setContinueToSearch] = useState(false);
+   const {setContinueToSearchAfterLogin,setContinueToSearchAsGuest} = useContext(AppContext);
     
-     const handlerNameInput = (e) => {setName(e.target.value)};
+    
+    const handlerNameInput = (e) => {setName(e.target.value)};
         
     const submitHandler = (e) => {  
         e.preventDefault();
@@ -17,15 +18,14 @@ export default function Banner({onNameSubmit}) {
         onNameSubmit(name);
        }
     }
-    const handleLogin = () => {
+    const handleLoginToSpotify = () => {
     ///window.location.href =
-    setContinueToSearch(true);
+    setContinueToSearchAfterLogin(true);///must use to login to spotify
     }
-    const handleGuest = () => {
-        setContinueToSearch(true);
+    const handleContinueAsGuest = () => {
+        setContinueToSearchAsGuest(true);///must contrinue as guest
     }
-        
-    return(
+      return (  
       <>  
         <div className='banner'>
            
@@ -34,12 +34,12 @@ export default function Banner({onNameSubmit}) {
             <div>
             <button 
                          type='submit'
-                         onClick={handleLogin}>
+                         onClick={handleLoginToSpotify}>
                             Log in to Spotify
                         </button>
                         <button
                          type='submit'
-                         onClick={handleGuest}>
+                         onClick={handleContinueAsGuest}>
                             continue As Guest
                         </button> 
             </div> ): ''}           
