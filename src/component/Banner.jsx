@@ -4,37 +4,13 @@ import '../styles/darkMode.css';
 import { AppContext } from '../context/AppContext.jsx';
 
 export default function Banner() {
-    const [name, setName] = useState('')
-    const [submitted ,setSubmitted]=useState(false);
+   
    
     const { continueToSearchAfterLogin,setContinueToSearchAsGuest,
-    continueToSearchAsGuest,handleLoginToSpotify} = useContext(AppContext);
+    continueToSearchAsGuest,handleLoginToSpotify,submitted,name,handlerNameInput,submitHandler} = useContext(AppContext);
     
     
-    const handlerNameInput = (e) => {setName(e.target.value)};
-        
-    const submitHandler = (e) => {  
-        e.preventDefault();
-       if(name.trim()){
-        setSubmitted(true);
-       
-       }
-    }
-    //useing useEffect to save the logical atate for after re-directing from spotify
-    useEffect(()=>{
-        localStorage.setItem('name', JSON.stringify(name));
-        localStorage.setItem('submitted', JSON.stringify(submitted));
-         }, [name,submitted]);
    
-         useEffect(()=>{
-        const storedName = localStorage.getItem('name');
-        const storedSubmitted = localStorage.getItem('submitted');
-        
-        if(storedName && storedSubmitted){
-            setName(JSON.parse(storedName));
-            setSubmitted(JSON.parse(storedSubmitted));
-        }
-    },[]);
 
     const handleContinueAsGuest = () => {
         setContinueToSearchAsGuest(true);

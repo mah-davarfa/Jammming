@@ -3,7 +3,7 @@ import { AppContext } from '../context/AppContext.jsx';
 
 
 export default function Data({onSearchTerm}) {
-
+  console.log("📦 Data component mounted!");
     //While up dating fetch i need to use searchTerm to be fetched and Spotify guideline fetching( based on artist song and album)
 const [data ,setdata] = useState(null);
 const [guestToken ,setGuestToken] = useState(null);  
@@ -42,33 +42,10 @@ const [guestToken ,setGuestToken] = useState(null);
                       }
                     }
                     getGuestToken(); 
-                  }else {
-                    
-                    //(Authorization Code Flow)extracting info(code) from URL that spotify redirect back to app after user logedin,
-                                  //parsing the code from URL
-                  const queryParams = new URLSearchParams(window.location.search);
-                  const code = queryParams.get('code');
-
-                    if (code) {
-                      // Exchange code for token (you’ll do this next step)
-                      console.log('Authorization code:', code);
-                      setContinueToSearchAfterLogin(true);
-                      
-                    }
-                  
-                      
-              }
+                  }
               
-    },[continueToSearchAsGuest,continueToSearchAfterLogin] )
-    useEffect(()=>{
-      const queryparams = new URLSearchParams(window.location.Search);
-      const code = queryparams.get('code');
-      if(code){
-        console.log('Authorization code:', code);
-        setContinueToSearchAfterLogin(true);
-      } 
-      setContinueToSearchAfterLogin(false);
-    },[]);
+    },[continueToSearchAsGuest] )
+    
 
     return (
         <div>

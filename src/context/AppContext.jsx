@@ -18,7 +18,35 @@ export const AppProvider = ({children}) => {
   const [continueToSearchAsGuest , setContinueToSearchAsGuest] = useState(false);
   const [continueToSearchAfterLogin , setContinueToSearchAfterLogin] = useState(false);
   const [userToken ,setUserToken] = useState(null);
+  const [name, setName] = useState(() => {
+    const stored = localStorage.getItem('name');
+    try{
+      return stored && stored !== 'undefined' ? JSON.parse(stored) : '';
+    }catch{
+      return '';
+    }
+  });
+  const [submitted ,setSubmitted]=useState(()=>{
+    const storedSubmitted = localStorage.getItem('submitted');
+    return storedSubmitted ? JSON.parse(storedSubmitted) : false;
+  });
+
+  const handlerNameInput = (e) => {setName(e.target.value)};
+        
+  const submitHandler = (e) => {  
+      e.preventDefault();
+     if(name.trim()){
+      setSubmitted(true);
+     
+     }
+  }
+  //useing useEffect to save the logical atate for after re-directing from spotify
+  useEffect(()=>{
+      localStorage.setItem('name', JSON.stringify(name));
+      localStorage.setItem('submitted', JSON.stringify(submitted));
+       }, [name,submitted]);
  
+  
       const handleRemove=(id,form)=>{
             if(form==='playsong'){
               setSelectedSong(null);
@@ -50,7 +78,7 @@ export const AppProvider = ({children}) => {
                              return [...prev , song]
                             }}
                          })          
-                         
+                    
            //CHANGING PLAY TO NOW PLAYING AND REVERSE
            useEffect(()=>{
             if(selectedSong){
@@ -119,10 +147,20 @@ export const AppProvider = ({children}) => {
           `&code_challenge=${codeChallenge}`;
           window.location.href= SPOTIFY_AUTH_URL;
           }
-        
+          useEffect(() => {
+            const queryParams = new URLSearchParams(window.location.search);
+            const code = queryParams.get('code');
+          
+            if (code) {
+              console.log('🎯 Authorization code found in URL:', code);
+              setContinueToSearchAfterLogin(true);
+            }
+          }, []);
+          
 return (
     <AppContext.Provider value=
-    {{userToken ,setUserToken,
+    {{name, setName,submitted ,setSubmitted,
+      userToken ,setUserToken,
       continueToSearchAsGuest , setContinueToSearchAsGuest,
       continueToSearchAfterLogin , setContinueToSearchAfterLogin, 
       searchResultTag, setSearchResultTag,
@@ -136,7 +174,8 @@ return (
      selectedSong, setSelectedSong, 
      playlist,  setPlaylist,
      handleRemove,handlePlay,handleAddToPlaylist, 
-     handleLoginToSpotify,playlistLimitReached}}>
+     handleLoginToSpotify,playlistLimitReached, 
+     handlerNameInput,submitHandler}}>
       {children}
     </AppContext.Provider>
   )
