@@ -17,7 +17,8 @@ export const AppProvider = ({children}) => {
   const [searchResultTag, setSearchResultTag] = useState(false); 
   const [continueToSearchAsGuest , setContinueToSearchAsGuest] = useState(false);
   const [continueToSearchAfterLogin , setContinueToSearchAfterLogin] = useState(false);
-  
+  const [userToken ,setUserToken] = useState(null);
+ 
       const handleRemove=(id,form)=>{
             if(form==='playsong'){
               setSelectedSong(null);
@@ -66,11 +67,63 @@ export const AppProvider = ({children}) => {
          useEffect(()=>{
           setAddedToPlaylist((playlist.map((item)=>item.id)))
          },[playlist])
+         
+         
+         /////////PKCE AUTHORIZATION CODE FLOW FOR SPOTIFY LOGIN///////////
+         //create a random string for the code_verifier
+          const generateRandomString =(length)=>{
+            const ster = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result='';
+            for(let j=0; j<length; j++){
+              const randomSterindex = Math.floor(Math.random()*ster.length);
+              result+=ster[randomSterindex];
+            }
+            return result;
+          }
+          async function generateChallengeCode (codeVerifier) {
+            ///convert string to binary data
+            const encoder = new TextEncoder();
+            //convert to bytes
+            const data =encoder.encode(codeVerifier);
+            //hash the bytes using SHA-256
+            const digest =await window.crypto.subtle.digest('SHA-256' , data);
+            // calling next function to convert to safe base64url
+            return base64UrlEncode(digest);
+          }
+          //convert to safe base64url
+          function base64UrlEncode (buffer) {
+            //Take a binary buffer, convert it into an array of bytes, then turn those bytes into string into Base64 and convert or remove(/\+=)
+            //new Uint8Array(buffer) will convert the buffer to an array of bytes
+            //String.fromCharCode will convert the array of bytes to a string
+            //btoa will convert the string to Base64
+            return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+            .replace(/\+/g,'-')
+            .replace(/\//g,'_')
+            .replace(/=+$/,'');
+          }
 
-
+         const handleLoginToSpotify =async () => {
+          const codeVerifier = generateRandomString(128);
+          const codeChallenge = await generateChallengeCode(codeVerifier);
+          localStorage.setItem('code_verifier-spotify', codeVerifier); 
+          const client_id='dc90f37b8774443685687850b885de75';
+          const redirect_uri = "http://localhost:5173/";
+          const scope = 'playlist-modify-public playlist-modify-private';
+                                             
+          const SPOTIFY_AUTH_URL = `https://accounts.spotify.com/authorize` +
+          `?response_type=code` +
+          `&client_id=${client_id}` +
+          `&scope=${encodeURIComponent(scope)}` +
+          `&redirect_uri=${encodeURIComponent(redirect_uri)}` +
+          `&code_challenge_method=S256` +
+          `&code_challenge=${codeChallenge}`;
+          window.location.href= SPOTIFY_AUTH_URL;
+          }
+        
 return (
     <AppContext.Provider value=
-    {{continueToSearchAsGuest , setContinueToSearchAsGuest,
+    {{userToken ,setUserToken,
+      continueToSearchAsGuest , setContinueToSearchAsGuest,
       continueToSearchAfterLogin , setContinueToSearchAfterLogin, 
       searchResultTag, setSearchResultTag,
       addedToPlaylist , setAddedToPlaylist,
@@ -83,7 +136,7 @@ return (
      selectedSong, setSelectedSong, 
      playlist,  setPlaylist,
      handleRemove,handlePlay,handleAddToPlaylist, 
-     playlistLimitReached}}>
+     handleLoginToSpotify,playlistLimitReached}}>
       {children}
     </AppContext.Provider>
   )

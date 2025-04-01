@@ -15,14 +15,12 @@ import '../styles/darkmode.css';
 ///
 
  function App () {
-  const [userName, setUserName] = useState('');
+  
   const [isSearchStarted, setIsSearchStarted] = useState(false);
  
   const{isDarkMode,setSearchTerm, setSearchResults,searchResultsAll,continueToSearchAfterLogin,continueToSearchAsGuest} = useContext(AppContext);
   
-  const handleNameSubmit = (name)=>{
-    setUserName(name);
-  }
+  
   const handleSearch =(search)=>{
     setSearchTerm(search);
   }
@@ -42,7 +40,7 @@ useEffect(()=>{
       <div className={'frame-container'}>
         <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
               <div >
-                <Banner onNameSubmit={handleNameSubmit}/>
+                <Banner />
                 
               </div>
             

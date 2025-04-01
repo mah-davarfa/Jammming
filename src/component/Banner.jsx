@@ -1,12 +1,14 @@
-import React , {useState,useContext} from 'react';
+import React , {useEffect,useState,useContext} from 'react';
 import '../styles/Banner.css';
 import '../styles/darkMode.css';
 import { AppContext } from '../context/AppContext.jsx';
 
-export default function Banner({onNameSubmit}) {
+export default function Banner() {
     const [name, setName] = useState('')
     const [submitted ,setSubmitted]=useState(false);
-   const {setContinueToSearchAfterLogin,setContinueToSearchAsGuest} = useContext(AppContext);
+   
+    const { continueToSearchAfterLogin,setContinueToSearchAsGuest,
+    continueToSearchAsGuest,handleLoginToSpotify} = useContext(AppContext);
     
     
     const handlerNameInput = (e) => {setName(e.target.value)};
@@ -15,16 +17,30 @@ export default function Banner({onNameSubmit}) {
         e.preventDefault();
        if(name.trim()){
         setSubmitted(true);
-        onNameSubmit(name);
+       
        }
     }
-    const handleLoginToSpotify = () => {
-    ///window.location.href =
-    setContinueToSearchAfterLogin(true);///must use to login to spotify
-    }
+    //useing useEffect to save the logical atate for after re-directing from spotify
+    useEffect(()=>{
+        localStorage.setItem('name', JSON.stringify(name));
+        localStorage.setItem('submitted', JSON.stringify(submitted));
+         }, [name,submitted]);
+   
+         useEffect(()=>{
+        const storedName = localStorage.getItem('name');
+        const storedSubmitted = localStorage.getItem('submitted');
+        
+        if(storedName && storedSubmitted){
+            setName(JSON.parse(storedName));
+            setSubmitted(JSON.parse(storedSubmitted));
+        }
+    },[]);
+
     const handleContinueAsGuest = () => {
-        setContinueToSearchAsGuest(true);///must contrinue as guest
+        setContinueToSearchAsGuest(true);
     }
+   
+
       return (  
       <>  
         <div className='banner'>
@@ -32,16 +48,16 @@ export default function Banner({onNameSubmit}) {
             <h1>welcome to Jammming {submitted ? name : ''}! </h1>
             {submitted?(
             <div>
-            <button 
+            {!continueToSearchAfterLogin &&  (<button 
                          type='submit'
-                         onClick={handleLoginToSpotify}>
+                         onClick={handleLoginToSpotify} >
                             Log in to Spotify
-                        </button>
-                        <button
+                        </button>)}
+                        {(!continueToSearchAsGuest && !continueToSearchAfterLogin) ? <button
                          type='submit'
                          onClick={handleContinueAsGuest}>
                             continue As Guest
-                        </button> 
+                        </button>: '' }
             </div> ): ''}           
             {!submitted && 
             <form onSubmit= {submitHandler} 

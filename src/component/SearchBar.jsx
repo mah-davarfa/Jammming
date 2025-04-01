@@ -34,7 +34,7 @@ const handleSubmit = (e) => {
                 
                 onChange={handleOnChange}
                 type='text'
-                placeholder='Search Artist or Album Name' 
+                placeholder='Search for Artist or Album Name' 
                 value={cleanSearch ? search : ''} 
                 />
                 <button 

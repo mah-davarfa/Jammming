@@ -6,9 +6,86 @@ export default function Data({onSearchTerm}) {
 
     //While up dating fetch i need to use searchTerm to be fetched and Spotify guideline fetching( based on artist song and album)
 const [data ,setdata] = useState(null);
-   
-    const {searchTerm} = useContext(AppContext);
+const [guestToken ,setGuestToken] = useState(null);  
 
+    const {searchTerm,userToken,setUserToken,
+      continueToSearchAsGuest,
+      continueToSearchAfterLogin,
+      setContinueToSearchAfterLogin,handleLoginToSpotify} = useContext(AppContext);
+
+      const client_id='dc90f37b8774443685687850b885de75' 
+      const client_Secret='9b08e01df6924139973772576d03d47b'
+            //check if user picked to login or continue as guest
+            useEffect(()=>{
+      
+            ///////checks if user cclicked on guest,then fetch the Client Credentials Flow to get guestToken
+                  if (continueToSearchAsGuest){
+                    const getGuestToken = async ()=>{
+                      const credentials = btoa(`${client_id}:${client_Secret}`);
+                      try {
+                        const response = await fetch('https://accounts.spotify.com/api/token', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization':`Basic ${credentials}`
+                          },
+                          body: 'grant_type=client_credentials',
+                        });
+                        if (response.ok) {
+                        const token = await response.json();
+                        setGuestToken(token.access_token);
+                        console.log("guest token is:" , token.access_token);
+                      }
+                      throw new Error(`HTTP status:${response.status}`);
+                      } catch (error){
+                        console.log('Error in fetching gust token:', error);
+                      }
+                    }
+                    getGuestToken(); 
+                  }else {
+                    
+                    //(Authorization Code Flow)extracting info(code) from URL that spotify redirect back to app after user logedin,
+                                  //parsing the code from URL
+                  const queryParams = new URLSearchParams(window.location.search);
+                  const code = queryParams.get('code');
+
+                    if (code) {
+                      // Exchange code for token (you’ll do this next step)
+                      console.log('Authorization code:', code);
+                      setContinueToSearchAfterLogin(true);
+                      
+                    }
+                  
+                      
+              }
+              
+    },[continueToSearchAsGuest,continueToSearchAfterLogin] )
+    useEffect(()=>{
+      const queryparams = new URLSearchParams(window.location.Search);
+      const code = queryparams.get('code');
+      if(code){
+        console.log('Authorization code:', code);
+        setContinueToSearchAfterLogin(true);
+      } 
+      setContinueToSearchAfterLogin(false);
+    },[]);
+
+    return (
+        <div>
+
+        </div>
+    )}
+
+          //////fetching the searches based on what token need to be use 
+
+
+
+
+
+
+
+
+  /*  ///different disign///
             useEffect(()=>{
                 if (!searchTerm) return;
                 fetch('./data.json')
@@ -41,9 +118,9 @@ return
 
 
 
+/////////////
 
 
-/*
 import React, { useState, useEffect ,useContext} from 'react';
 import { AppContext } from '../context/AppContext.jsx';
 

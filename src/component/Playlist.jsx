@@ -52,7 +52,7 @@ const Playlist=()=>{
                     <button onClick={handleEdit}>
                       {!isEditing ? 'Edit' : 'Save'}
                     </button>
-                    <button>Save to Spotify</button>
+                    <button>Save to Spotify if you loged in</button>
                   </>
                 )}
               </div>
