@@ -5,7 +5,8 @@ import '../styles/darkMode.css';
 
 const ToggleMode = () => {
 
-    const {isDarkMode , setIsDarkMode} = useContext(AppContext);
+    const {isDarkMode , setIsDarkMode,setUserToken,setContinueToSearchAsGuest,
+        setContinueToSearchAfterLogin,setSubmitted,setName} = useContext(AppContext);
         const togglMode = () => {
             setIsDarkMode((prevMode) => !prevMode);
         }
@@ -16,6 +17,18 @@ const ToggleMode = () => {
             className={!isDarkMode ?'toggle-light-button':'toggle-dark-button'}>
                 {isDarkMode?'Light  Mode': 'Dark Mode'}
 
+            </button>
+            <button onClick={()=>{
+                localStorage.setItem('name',JSON.stringify('')) 
+                localStorage.setItem('submitted',JSON.stringify(false))
+                localStorage.setItem('code_verifier-spotify',JSON.stringify(''))
+                setName('');
+                setSubmitted(false);
+                setContinueToSearchAfterLogin(false);
+                setUserToken(null);
+                setContinueToSearchAsGuest(false);
+                 }}>
+                Log Out
             </button>
         </div>
     )
