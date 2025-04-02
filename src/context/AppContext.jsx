@@ -153,48 +153,49 @@ export const AppProvider = ({children}) => {
           }
           useEffect(() => {
             const queryParams = new URLSearchParams(window.location.search);
-            const Authorization_code = queryParams.get('code');
+            const authorizationCode = queryParams.get('code');
           
-            if (Authorization_code) {
-              console.log('🎯 Authorization code found in URL:', code);
+            if (authorizationCode) {
+              console.log('Authorization code found in URL:', authorizationCode);
               setContinueToSearchAfterLogin(true);
-              getAccessToken();
-              ////////////getting user access token//////////
-              ///i need for body 1-grant_type 2-code 3-client_id 4-code_verifier 5-redirect_uri
-              //i need for header 1-Content-Type
+          
               const getUserToken = async () => {
-              const codeVerifier = localStorage.getItem('code_verifier-spotify');
-              const client_id='dc90f37b8774443685687850b885de75';
-              const redirect_uri = "http://localhost:5173/";
-               try{
-                const responseUserToken = await fetch('https://accounts.spotify.com/api/token',{
-                  method:'POST',
-                  headers:{
-                    'content-type':'application/x-www-form-urlencoded',
-                  },
-                  body: new URLSearchParams({
-                    client_id: client_id,
-                    grant_type: 'authorization_code',
-                    code:Authorization_code,
-                    redirect_uri: redirect_uri,
-                    code_verifier: codeVerifier,
-                  }),
-                });
-                const data = await responseUserToken.json();
-                  if (responseUserToken.ok){
+                const codeVerifier = localStorage.getItem('code_verifier-spotify');
+                const client_id = 'dc90f37b8774443685687850b885de75';
+                const redirect_uri = "http://localhost:5173/";
+          
+                try {
+                  const response = await fetch('https://accounts.spotify.com/api/token', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                      grant_type: 'authorization_code',
+                      code: authorizationCode,
+                      redirect_uri: redirect_uri,
+                      client_id: client_id,
+                      code_verifier: codeVerifier,
+                    }),
+                  });
+          
+                  const data = await response.json();
+          
+                  if (response.ok) {
                     setUserToken(data.access_token);
                     console.log('User access token:', data.access_token);
-                  }else{
+                  } else {
                     console.error('Error fetching access token:', data);
                   }
-                
-               }  catch (error) {
-                console.error('Error fetching access token:', error);
-               }
-              }
+                } catch (error) {
+                  console.error('Error in fetch request:', error);
+                }
+              };
+          
               getUserToken();
             }
           }, []);
+          
           
           
           
