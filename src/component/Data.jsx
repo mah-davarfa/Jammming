@@ -1,14 +1,14 @@
 import React, { useState, useEffect ,useContext} from 'react';
 import { AppContext } from '../context/AppContext.jsx';
-
+import axios from 'axios';
 
 export default function Data({onSearchTerm}) {
-  console.log("📦 Data component mounted!");
+  console.log("Data component mounted!");
     //While up dating fetch i need to use searchTerm to be fetched and Spotify guideline fetching( based on artist song and album)
 const [data ,setdata] = useState(null);
 const [guestToken ,setGuestToken] = useState(null);  
 
-    const {searchTerm,userToken,setUserToken,
+    const {searchTerm,userToken,
       continueToSearchAsGuest,
       continueToSearchAfterLogin,
       setContinueToSearchAfterLogin,handleLoginToSpotify} = useContext(AppContext);
@@ -46,12 +46,59 @@ const [guestToken ,setGuestToken] = useState(null);
               
     },[continueToSearchAsGuest] )
     
+      useEffect(() => {
+            if (!searchTerm) return;
+          
+            const token = userToken || guestToken;
+            if (!token) return;
+          
+            const isId = /^[0-9a-zA-Z]{22}$/.test(searchTerm);
+          
+            const fetchData = async () => {
+              try {
+                const response = await axios.get(
+                  isId
+                    ? `https://api.spotify.com/v1/artists/${searchTerm}/top-tracks?market=US`
+                    
+                    :`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=album,artist,track&limit=15&include_external=audio`,
+
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                );
+          
+                const data = response.data;
+                onSearchTerm(data);
+                setdata(data);
+                console.log(" Fetched data:", data);
+              } catch (error) {
+                console.error(" Error fetching data:", error);
+              }
+            };
+          
+            fetchData();
+      }, [searchTerm]);
+    
+
+           
 
     return (
         <div>
 
         </div>
     )}
+     
+
+
+
+
+
+
+
+
+
 
           //////fetching the searches based on what token need to be use 
 

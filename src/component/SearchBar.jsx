@@ -3,12 +3,13 @@ import {AppContext} from '../context/AppContext.jsx';
 import '../styles/searchBar.css';
 import '../styles/darkmode.css';
 
+
+
 export default function SearchBar({onSearch}){
 const [search , setSearch] = useState('');
 const [cleanSearch , setCleanSearch] = useState(true);
 //const [errorSearch , setErrorSearch] = useState(fales);
 const {noResult} = useContext(AppContext);
-
 
 
 const handleSubmit = (e) => {

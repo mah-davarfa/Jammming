@@ -151,10 +151,12 @@ export const AppProvider = ({children}) => {
           `&code_challenge=${codeChallenge}`;
           window.location.href= SPOTIFY_AUTH_URL;
           }
+          ///this UseEffect checks if we have Authorization code in the URL after redirecting from spotify
+          //and then it will call for UserToken function to get the access token
           useEffect(() => {
             const queryParams = new URLSearchParams(window.location.search);
             const authorizationCode = queryParams.get('code');
-          
+            
             if (authorizationCode) {
               console.log('Authorization code found in URL:', authorizationCode);
               setContinueToSearchAfterLogin(true);

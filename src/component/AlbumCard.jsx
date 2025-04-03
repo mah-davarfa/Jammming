@@ -2,6 +2,7 @@ import react , {useContext , useState} from 'react';
 import { AppContext } from '../context/AppContext';
 import '../styles/darkmode.css';
 
+
 function AlbumCard({name, artist, image, releaseDate, genre, songs, totalOfSongs,id}) {
 
   const {setSearchTerm, setSearchResults, setSearchResultsAll} = useContext(AppContext);
