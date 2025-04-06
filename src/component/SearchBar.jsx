@@ -9,7 +9,7 @@ export default function SearchBar({onSearch}){
 const [search , setSearch] = useState('');
 const [cleanSearch , setCleanSearch] = useState(true);
 //const [errorSearch , setErrorSearch] = useState(fales);
-const {noResult} = useContext(AppContext);
+const {noResult,setSearchType} = useContext(AppContext);
 
 
 const handleSubmit = (e) => {
@@ -17,6 +17,7 @@ const handleSubmit = (e) => {
         if(search.trim()){
         onSearch(search);
         setCleanSearch(false);
+        setSearchType('search');
     }
     }
     const handleOnChange = (e) => {

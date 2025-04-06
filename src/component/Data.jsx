@@ -5,13 +5,14 @@ import axios from 'axios';
 export default function Data({onSearchTerm}) {
   console.log("Data component mounted!");
     //While up dating fetch i need to use searchTerm to be fetched and Spotify guideline fetching( based on artist song and album)
-const [data ,setdata] = useState(null);
+
 const [guestToken ,setGuestToken] = useState(null);  
 
-    const {searchTerm,userToken,
+    const {searchType,searchTerm,userToken,
       continueToSearchAsGuest,
       continueToSearchAfterLogin,
-      setContinueToSearchAfterLogin,handleLoginToSpotify} = useContext(AppContext);
+      setContinueToSearchAfterLogin,
+      handleLoginToSpotify} = useContext(AppContext);
 
       const client_id='dc90f37b8774443685687850b885de75' 
       const client_Secret='9b08e01df6924139973772576d03d47b'
@@ -56,34 +57,46 @@ const [guestToken ,setGuestToken] = useState(null);
           
             const fetchData = async () => {
               try {
-                const response = await axios.get(
-                  isId
-                    ? `https://api.spotify.com/v1/artists/${searchTerm}/top-tracks?market=US`
-                    
-                    :`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=album,artist,track&limit=15&include_external=audio`,
-
-                  {
+                let url = '';
+                
+                  
+                if (!isId || searchType === 'search') {
+                  url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=album,artist,track&limit=15&include_external=audio`;
+                } else if (searchType === 'artist') {
+                  url = `https://api.spotify.com/v1/artists/${searchTerm}/top-tracks?market=US`;
+                } else if (searchType === 'album') {
+                  url = `https://api.spotify.com/v1/albums/${searchTerm}`;
+                } else {
+                  console.warn('No valid search type defined for ID. Ignoring search.');
+                  return;
+                }
+                  
+                    const response = await axios.get(url ,{
                     headers: {
                       Authorization: `Bearer ${token}`,
                     },
-                  }
-                );
+                  });
           
-                const data = response.data;
-                onSearchTerm(data);
-                setdata(data);
-                console.log(" Fetched data:", data);
-              } catch (error) {
-                console.error(" Error fetching data:", error);
-              }
-            };
-          
+                  const data = response.data;
+                  const formattedData = Array.isArray(data) ? data :[
+                    ...(data.tracks?.items || []),
+                    ...(data.artists?.items || []),
+                    ...(data.albums?.items || []),
+                  ];
+  
+                  onSearchTerm(formattedData);
+                  
+                  console.log(" data:", data);
+                  console.log("Formatted data:", formattedData);
+                } catch (error) {
+                  console.error("Error fetching data:", error);
+                }
+              };
+              
             fetchData();
-      }, [searchTerm]);
+          
+      }, [searchTerm,searchType,userToken, guestToken]);
     
-
-           
-
     return (
         <div>
 

@@ -4,7 +4,7 @@ import '../styles/darkmode.css';
 
 function ArtistCard({id, name, image, genre, popularity}){
 
-    const {setSearchTerm,setSearchResults,setSearchResultsAll} = useContext(AppContext);
+    const {setSearchTerm,setSearchResults,setSearchResultsAll,setSearchType} = useContext(AppContext);
     const handleRemove =(e)=>{
         e.stopPropagation();
         setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
@@ -13,16 +13,23 @@ function ArtistCard({id, name, image, genre, popularity}){
 
     const handelgetSong=()=>{
         setSearchTerm(id);//adjust latter
+        setSearchType('artist');
     };
     
     return(
         <div className='playlist-item-card'>
-        <img src={image} alt={name} width={250} height={250}/>
-        <h3>{name}<button onClick={handelgetSong}>Get top Songs</button></h3>
+       {image ? (
+  <img src={image} alt={name} width={250} height={250}/>
+) : (
+  <div style={{ width: '50px', height: '50px', backgroundColor: '#ddd', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <span>No Image</span>
+  </div>
+)}
+        <h3>{name}</h3>
         <p>Genre: {genre}</p>   
         <p>Popularity: {popularity}</p>
-        {/*<p>id:{id}</p> */}
         <button  onClick={handleRemove}>Remove</button>
+        <button onClick={handelgetSong}>Get top Songs</button>
         </div>
     )
 }

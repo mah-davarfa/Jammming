@@ -18,6 +18,7 @@ export const AppProvider = ({children}) => {
   const [continueToSearchAsGuest , setContinueToSearchAsGuest] = useState(false);
   const [continueToSearchAfterLogin , setContinueToSearchAfterLogin] = useState(false);
   const [userToken ,setUserToken] = useState(null);
+  const [searchtype, setSearchType] = useState('search');
   
   const [name, setName] = useState(() => {
     const stored = localStorage.getItem('name');
@@ -204,7 +205,8 @@ export const AppProvider = ({children}) => {
           
 return (
     <AppContext.Provider value=
-    {{name, setName,submitted ,setSubmitted,
+    {{ searchtype, setSearchType,
+      name, setName,submitted ,setSubmitted,
       userToken ,setUserToken,
       continueToSearchAsGuest , setContinueToSearchAsGuest,
       continueToSearchAfterLogin , setContinueToSearchAfterLogin, 

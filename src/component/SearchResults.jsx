@@ -27,7 +27,7 @@ const SearchResults = () => {
     } else if (searchResultsAll.length > 0 && searchResults.length === 0 && searchResultTag)
       {setNoResult(true);}
     },[searchResults])   
-    
+    console.log('searchResultsAll',searchResultsAll);
   
    return(
     <div>
@@ -36,8 +36,9 @@ const SearchResults = () => {
           { searchResultsAll && searchResultsAll.length > 0  ? (
           
           searchResultsAll.map((item)=>{
-                
+                   if (!item || !item.type) return null;
                 if(item.type && item.type.toLowerCase()==='album'){
+                  console.log('Album:',item.type);
                   return (
                   <AlbumCard
                       key={item.id} 
@@ -47,12 +48,12 @@ const SearchResults = () => {
                       image={item.images[0]?.url}
                       releaseDate={item.release_date}
                       genre={item.genres?.join(',') || 'Unknown'}
-                      songs={item.tracks?.items}
-                      totalOfSongs={item.tracks.total}
+                      songs={item.tracks?.items || []}
+                      totalOfSongs={item.tracks?.total || 0}
                   />);
 
                 }else if(item.type && item.type.trim().toLowerCase()==='track'){
-                  
+                  console.log('Track:',item.type);
                   return  (
                   <SongCard 
                       key={item.id}  
@@ -68,6 +69,7 @@ const SearchResults = () => {
                   />);
     
                 }else if(item.type && item.type.trim().toLowerCase()==='artist'){
+                  console.log('Artist:',item.type);
                   return  (
                   <ArtistCard 
                       key={item.id} 
