@@ -36,7 +36,7 @@ const SearchResults = () => {
           { searchResultsAll && searchResultsAll.length > 0  ? (
           
           searchResultsAll.map((item)=>{
-                   if (!item || !item.type) return null;
+                   if (!item ) return null;
                 if(item.type && item.type.toLowerCase()==='album'){
                   console.log('Album:',item.type);
                   return (
