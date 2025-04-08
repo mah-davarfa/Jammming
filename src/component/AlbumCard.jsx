@@ -4,6 +4,7 @@ import '../styles/darkmode.css';
 
 function AlbumCard({ name, artist, image, releaseDate, genre, songs, totalOfSongs, id }) {
   const {
+    setSearchCommand,
     setSearchType,
     setSearchTerm,
     handleRemove,
@@ -14,8 +15,9 @@ function AlbumCard({ name, artist, image, releaseDate, genre, songs, totalOfSong
   } = useContext(AppContext);
 
   const handleFetchTracks = () => {
-    setSearchTerm(id); // if tracks is not in the response triggers new fetch by album ID in Data.jsx
-    setSearchType('album'); // set search type to album
+   // setSearchTerm(id); // if tracks is not in the response triggers new fetch by album ID in Data.jsx
+    //setSearchType('artist'); // set search type to album
+    setSearchCommand({type:'artist', id:id});//must check the console log to see am i getting id for the song?
   };
 
   return (

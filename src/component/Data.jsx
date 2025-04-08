@@ -12,7 +12,8 @@ const [guestToken ,setGuestToken] = useState(null);
       continueToSearchAsGuest,
       continueToSearchAfterLogin,
       setContinueToSearchAfterLogin,
-      handleLoginToSpotify} = useContext(AppContext);
+      handleLoginToSpotify,setSearchResults,
+      searchCommand , setSearchCommand} = useContext(AppContext);
 
       const client_id='dc90f37b8774443685687850b885de75' 
       const client_Secret='9b08e01df6924139973772576d03d47b'
@@ -48,24 +49,27 @@ const [guestToken ,setGuestToken] = useState(null);
     },[continueToSearchAsGuest] )
     
       useEffect(() => {
-            if (!searchTerm) return;
+            if (!searchCommand || !searchCommand.id) return;
           
             const token = userToken || guestToken;
             if (!token) return;
           
-            const isId = /^[0-9a-zA-Z]{22}$/.test(searchTerm);
+            const isId = /^[0-9a-zA-Z]{22}$/.test(searchCommand.id);
           
             const fetchData = async () => {
               try {
                 let url = '';
                 
+                console.log('searchCommand', searchCommand);
+               // console.log('searchType:', searchType);
+               // console.log('isId:', isId);
                   
-                if (!isId || searchType === 'search') {
-                  url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=album,artist,track&limit=15&include_external=audio`;
-                } else if (searchType === 'artist') {
-                  url = `https://api.spotify.com/v1/artists/${searchTerm}/top-tracks?market=US`;
-                } else if (searchType === 'album') {
-                  url = `https://api.spotify.com/v1/albums/${searchTerm}`;
+                if (!isId || searchCommand.type === 'search') {
+                  url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchCommand.id)}&type=album%2Ctrack&limit=5&include_external=audio`;
+                } else if (searchCommand.type === 'artist') {
+                  url = `https://api.spotify.com/v1/artists/${searchCommand.id}/top-tracks?market=US`;
+                } else if (searchCommand.type === 'album') {
+                  url = `https://api.spotify.com/v1/albums/${searchCommand.id}`;
                 } else {
                   console.warn('No valid search type defined for ID. Ignoring search.');
                   return;
@@ -78,24 +82,95 @@ const [guestToken ,setGuestToken] = useState(null);
                   });
           
                   const data = response.data;
-                  const formattedData = Array.isArray(data) ? data :[
-                    ...(data.tracks?.items || []),
-                    ...(data.artists?.items || []),
-                    ...(data.albums?.items || []),
-                  ];
-  
-                  onSearchTerm(formattedData);
+                  onSearchTerm(data); // Pass the data to the parent component
+                  console.log("Data fetched:", data);
+       /*  test 1           function detectSearchType(data, term) {
+                    const lowerTerm = term.toLowerCase();
                   
-                  console.log(" data:", data);
-                  console.log("Formatted data:", formattedData);
-                } catch (error) {
-                  console.error("Error fetching data:", error);
-                }
-              };
-              
+                    const exactTrack = data.tracks?.items?.find(track => track.name.toLowerCase() === lowerTerm);
+                    const exactArtist = data.artists?.items?.find(artist => artist.name.toLowerCase() === lowerTerm);
+                    const exactAlbum = data.albums?.items?.find(album => album.name.toLowerCase() === lowerTerm);
+                  
+                    if (exactTrack) return { tracks: [exactTrack] };
+                    if (exactArtist) return { artists: [exactArtist] };
+                    if (exactAlbum) return { albums: [exactAlbum] };
+                  
+                    // fallback to longest list if no exact match
+                    const trackCount = data.tracks?.items?.length || 0;
+                    const artistCount = data.artists?.items?.length || 0;
+                    const albumCount = data.albums?.items?.length || 0;
+                  
+                    const maxCount = Math.max(trackCount, artistCount, albumCount);
+                  
+                    if (maxCount === trackCount) return { tracks: data.tracks?.items || [] };
+                    if (maxCount === artistCount) return { artists: data.artists?.items || [] };
+                    if (maxCount === albumCount) return { albums: data.albums?.items || [] };
+                  
+                    return {};
+                  }
+                  const filteredResults = detectSearchType(data, searchTerm);
+                  onSearchTerm(filteredResults); 
+    */              
+                  // Extract album information
+   /*   testing 2      const albums = data.albums?.items.map(album => ({
+                    name: album.name, // Album name
+                    type: album.album_type, // Album type (e.g., "album" or "single")
+                    totalTracks: album.total_tracks, // Total number of tracks
+                    href: album.href, // API URL for this album
+                    externalUrl: album.external_urls?.spotify, // Spotify URL
+                    availableMarkets: album.available_markets.length // Count of markets available
+                  })) || [];
+                  
+                  // Extract artist information
+                  const artists = data.artists?.items.map(artist => ({
+                    name: artist.name, // Artist name
+                    followers: artist.followers?.total, // Number of followers
+                    genres: artist.genres, // Genres associated with the artist
+                    href: artist.href, // API URL for this artist
+                    externalUrl: artist.external_urls?.spotify // Spotify URL
+                  })) || [];
+
+                  // Extract track information
+                  const tracks = data.tracks?.items.map(track => ({
+                    name: track.name, // Track name
+                    durationMs: track.duration_ms, // Duration in milliseconds
+                    album: track.album?.name, // Album the track belongs to
+                    artists: track.artists.map(artist => artist.name), // Array of artist names
+                    href: track.href, // API URL for this track
+                    externalUrl: track.external_urls?.spotify // Spotify URL
+                  })) || [];
+
+                  // Log the extracted data
+                  console.log("Albums:", albums);
+                  console.log("Artists:", artists);
+                  console.log("Tracks:", tracks);
+                  function identifyType(data) {
+                    if (data.tracks?.items?.length > 0) {
+                      return "Track";
+                    } else if (data.albums?.items?.length > 0) {
+                      return "Album";
+                    } else if (data.artists?.items?.length > 0) {
+                      return "Artist";
+                    }
+                return "Unknown";
+            }
+
+                  // Example usage
+          const type = identifyType(data); // Pass the API response object
+            console.log("Search type:", type);
+                      const dataType = data.tracks;    
+                      console.log('data type:',dataType)          
+              console.log(" data:", data);
+              onSearchTerm(data); // Pass the data to the parent component               
+                    //console.log('detectSearchType:', detectSearchType);         *////   testing
+                                  } catch (error) {
+                       console.error("Error fetching data:", error);
+                                  }
+                  };
+                                
             fetchData();
           
-      }, [searchTerm,searchType,userToken, guestToken]);
+      }, [searchCommand,userToken, guestToken]);
     
     return (
         <div>

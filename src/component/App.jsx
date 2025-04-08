@@ -18,18 +18,35 @@ import '../styles/darkmode.css';
   
   const [isSearchStarted, setIsSearchStarted] = useState(false);
  
-  const{isDarkMode,setSearchTerm,setSearchType, setSearchResults,searchResultsAll,continueToSearchAfterLogin,continueToSearchAsGuest} = useContext(AppContext);
+  const{
+    isDarkMode,
+    setSearchTerm,
+    setSearchType, 
+    setSearchResults,
+    searchResultsAll,
+    continueToSearchAfterLogin,
+    continueToSearchAsGuest,
+    setSearchCommand
+  } = useContext(AppContext);
   
   ///search to term ?
   const handleSearch =(search)=>{
-    setSearchTerm(search);
-    setSearchType('search');
+    //setSearchTerm(search);
+    //setSearchType('search');
+    setSearchCommand({type:'search', id:search});// check to see does search:search works?
   }
 const handleSearchTerm = (data) => {
-  setSearchResults(Array.isArray(data)? data :[data]);
+ const allItems=[
+  ...data.tracks?.items || [],
+  ...data.albums?.items || [],
+  ...data.artists?.items || [],
+ ]
+  setSearchResults(allItems);
   setIsSearchStarted(true);
-  console.log('searchResults',data);
-}
+  console.log('searchResults',allItems);
+ }
+  
+
 
 useEffect(()=>{
   if(searchResultsAll.length === 0){

@@ -4,7 +4,7 @@ import '../styles/darkmode.css';
 
 function ArtistCard({id, name, image, genre, popularity}){
 
-    const {setSearchTerm,setSearchResults,setSearchResultsAll,setSearchType} = useContext(AppContext);
+    const {searchCommand , setSearchCommand,setSearchTerm,setSearchResults,setSearchResultsAll,setSearchType} = useContext(AppContext);
     const handleRemove =(e)=>{
         e.stopPropagation();
         setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
@@ -12,8 +12,9 @@ function ArtistCard({id, name, image, genre, popularity}){
     }
 
     const handelgetSong=()=>{
-        setSearchTerm(id);//adjust latter
-        setSearchType('artist');
+       // setSearchTerm(id);//adjust latter
+       // setSearchType('artist');
+        setSearchCommand({type:'artist', id:id});
     };
     
     return(

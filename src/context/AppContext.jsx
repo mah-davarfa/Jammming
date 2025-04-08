@@ -19,6 +19,7 @@ export const AppProvider = ({children}) => {
   const [continueToSearchAfterLogin , setContinueToSearchAfterLogin] = useState(false);
   const [userToken ,setUserToken] = useState(null);
   const [searchtype, setSearchType] = useState('search');
+  const [searchCommand , setSearchCommand] = useState(null);
   
   const [name, setName] = useState(() => {
     const stored = localStorage.getItem('name');
@@ -67,9 +68,29 @@ export const AppProvider = ({children}) => {
           }  
       }
 
-      const handlePlay =(song)=>{
-          setSelectedSong(song);
-      } 
+  // Function to handle playing a song from 3rd party tool
+
+const handlePlay = async (song) => {
+  if (!song.preview) {
+    try {
+      const response = await fetch(`http://localhost:4000/api/preview?song=${encodeURIComponent(song.name)}&artist=${encodeURIComponent(song.artist)}`);
+      const data = await response.json();
+
+      if (data.success && data.results.length > 0) {
+        song.preview = data.results[0].previewUrls[0];
+        console.log("Fetched preview URL from backend:", song.preview);
+      } else {
+        console.warn("No preview found from backend.");
+      }
+    } catch (err) {
+      console.error("Error fetching preview from backend:", err);
+    }
+  }
+
+  setSelectedSong(song);
+};
+
+
         //cap for playlist at 10 song
       const handleAddToPlaylist=(song)=>
                     setPlaylist((prev)=> {      
@@ -205,7 +226,8 @@ export const AppProvider = ({children}) => {
           
 return (
     <AppContext.Provider value=
-    {{ searchtype, setSearchType,
+    {{searchCommand , setSearchCommand, 
+      searchtype, setSearchType,
       name, setName,submitted ,setSubmitted,
       userToken ,setUserToken,
       continueToSearchAsGuest , setContinueToSearchAsGuest,

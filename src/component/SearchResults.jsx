@@ -27,18 +27,19 @@ const SearchResults = () => {
     } else if (searchResultsAll.length > 0 && searchResults.length === 0 && searchResultTag)
       {setNoResult(true);}
     },[searchResults])   
+
     console.log('searchResultsAll',searchResultsAll);
   
    return(
     <div>
         {searchResultTag ? <h3 className={'SearchResult-title'}>search results</h3>:null}
         <div className='list'>
-          { searchResultsAll && searchResultsAll.length > 0  ? (
+          { searchResultsAll && searchResultsAll.length > 0  ? (//remove
           
           searchResultsAll.map((item)=>{
-                   if (!item || !item.type) return null;
-                if(item.type && item.type.toLowerCase()==='album'){
-                  console.log('Album:',item.type);
+                   if (!item ) return null;
+                if('album_type' in item && 'total_tracks' in item && !('preview_url' in item) ){
+                  console.log('Album1:',item.type);
                   return (
                   <AlbumCard
                       key={item.id} 
@@ -52,8 +53,8 @@ const SearchResults = () => {
                       totalOfSongs={item.tracks?.total || 0}
                   />);
 
-                }else if(item.type && item.type.trim().toLowerCase()==='track'){
-                  console.log('Track:',item.type);
+                } if('album' in item && 'duration_ms' in item){
+                  console.log('Track1:',item.type);
                   return  (
                   <SongCard 
                       key={item.id}  
@@ -68,8 +69,8 @@ const SearchResults = () => {
                       uri={item.uri}
                   />);
     
-                }else if(item.type && item.type.trim().toLowerCase()==='artist'){
-                  console.log('Artist:',item.type);
+                }if('followers' in item && 'genres' in item && !('album' in item) && !('album_type' in item)){
+                  console.log('Artist1:',item.type);
                   return  (
                   <ArtistCard 
                       key={item.id} 
@@ -81,7 +82,8 @@ const SearchResults = () => {
                     />);
                   }           
             })
-          ) : null
+          )//remove 
+          : null
 
           } 
       </div> 
