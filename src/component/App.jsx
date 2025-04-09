@@ -35,16 +35,26 @@ import '../styles/darkmode.css';
     //setSearchType('search');
     setSearchCommand({type:'search', id:search});// check to see does search:search works?
   }
-const handleSearchTerm = (data) => {
- const allItems=[
-  ...data.tracks?.items || [],
-  ...data.albums?.items || [],
-  ...data.artists?.items || [],
- ]
-  setSearchResults(allItems);
-  setIsSearchStarted(true);
-  console.log('searchResults',allItems);
- }
+  const handleSearchTerm = (data) => {
+    let allItems = [];
+  
+    // ✅ Case 1: fetched an album by ID
+    if ('album_type' in data && data.tracks?.items) {
+      allItems = [...data.tracks.items]; // just the songs
+    }
+    // ✅ Case 2: standard search (songs + albums + artists)
+    else {
+      allItems = [
+        ...(data.tracks?.items || []),
+        ...(data.albums?.items || []),
+        ...(data.artists?.items || [])
+      ];
+    }
+  
+    setSearchResults(allItems);
+    setIsSearchStarted(true);
+    console.log("searchResults", allItems);
+  };
   
 
 

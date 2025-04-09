@@ -17,83 +17,34 @@ function AlbumCard({ name, artist, image, releaseDate, genre, songs, totalOfSong
   const handleFetchTracks = () => {
    // setSearchTerm(id); // if tracks is not in the response triggers new fetch by album ID in Data.jsx
     //setSearchType('artist'); // set search type to album
-    setSearchCommand({type:'artist', id:id});//must check the console log to see am i getting id for the song?
+    setSearchCommand({type:'album', id:id});//must check the console log to see am i getting id for the song?
   };
 
-  return (
-    <div className="playlist-item-card">
-      <img src={image} alt={name} width={250} height={250} />
-      <h3>{name}</h3>
-      <p>Artist: {artist}</p>
-      <p>Release Date: {releaseDate}</p>
-      <p>Genre: {genre}</p>
-      <p>Total of Songs: {totalOfSongs}</p>
+  return(
+    <div className="playlist-item-card"  >
+  <img src={image} alt={name} width={250} height={250}/>
+  <h3>Album: {name}</h3>
+  <p>Artist: {artist}</p>
+  <p>Release Date: {releaseDate}</p>
+  <p>Genre: {genre}</p>
+  {/*<p>Total of Songs: {totalOfSongs}</p>*/}
+  <p></p>
+ 
+  <ul>
+   
+    {songs?.map((song,index)=>(
+      <li key={index}>{song.name}<button onClick={handleClick} > Get this song</button></li>
+      
+  ))}
+      
+  </ul>
+  
+ {/* <p>ID:{id}</p>*/}
+  <button onClick={() => handleRemove(id, 'albumcard')}>Remove</button>
+  <button onClick={handleFetchTracks}>Get Songs</button>
+</div>
 
-      <div>
-        {Array.isArray(songs) && songs.length > 0 ? (
-          songs.map((song, index) => {
-            const trackId = song.id;
-            const trackName = song.name;
-            const trackArtist = song.artists?.[0]?.name || artist;
-            const trackPreview = song.preview_url;
-            const trackPopularity = song.popularity || 'Unknown';
-            const trackUri = song.uri;
-
-            return (
-              <div key={trackId} className="playlist-item-card">
-                <h4>{trackName}</h4>
-                {trackPreview ? (
-                  <audio controls>
-                    <source src={trackPreview} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                ) : (
-                  <p>Preview not available</p>
-                )}
-                <button onClick={() => handleRemove(trackId, 'songcard')}>Remove</button>
-                <button
-                  onClick={() =>
-                    handleAddToPlaylist({
-                      name: trackName,
-                      artist: trackArtist,
-                      album: name,
-                      preview: trackPreview,
-                      popularity: trackPopularity,
-                      uri: trackUri,
-                      id: trackId,
-                      image,
-                    })
-                  }
-                >
-                  {addedToPlaylist.includes(trackId)
-                    ? 'Already in Playlist'
-                    : 'Add to Playlist'}
-                </button>
-                <button
-                  onClick={() =>
-                    handlePlay({
-                      name: trackName,
-                      artist: trackArtist,
-                      album: name,
-                      preview: trackPreview,
-                      popularity: trackPopularity,
-                      uri: trackUri,
-                      id: trackId,
-                      image,
-                    })
-                  }
-                >
-                  {currentSong === trackId ? 'Now Playing' : 'Play'}
-                </button>
-              </div>
-            );
-          })
-        ) : (
-          <button onClick={handleFetchTracks}>Get Album Songs</button>
-        )}
-      </div>
-    </div>
-  );
+)
 }
 
 export default AlbumCard;

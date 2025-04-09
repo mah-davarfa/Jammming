@@ -65,12 +65,17 @@ export const AppProvider = ({children}) => {
           }
           if(form==='playlist'){
              setPlaylist((pre)=>pre.filter((item)=>item.id !==id));
-          }  
+          } 
+          if(form==='albumcard'){
+            setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
+            setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
+          }
       }
 
   // Function to handle playing a song from 3rd party tool
 
 const handlePlay = async (song) => {
+  console.log("🟨 Trying to get preview for:", song.name, song.artist);
   if (!song.preview) {
     try {
       const response = await fetch(`http://localhost:4000/api/preview?song=${encodeURIComponent(song.name)}&artist=${encodeURIComponent(song.artist)}`);

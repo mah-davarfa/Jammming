@@ -18,18 +18,19 @@ const ToggleMode = () => {
                 {isDarkMode?'Light  Mode': 'Dark Mode'}
 
             </button>
-            <button onClick={()=>{
-                localStorage.setItem('name',JSON.stringify('')) 
-                localStorage.setItem('submitted',JSON.stringify(false))
-                localStorage.setItem('code_verifier-spotify',JSON.stringify(''))
+             <button onClick={() => {
+                localStorage.setItem('name', JSON.stringify(''));
+                localStorage.setItem('submitted', JSON.stringify(false));
+                localStorage.removeItem('code_verifier-spotify');  
                 setName('');
                 setSubmitted(false);
                 setContinueToSearchAfterLogin(false);
                 setUserToken(null);
                 setContinueToSearchAsGuest(false);
-                 }}>
+              }}>
                 Log Out
-            </button>
+             </button>
+              
         </div>
     )
 }

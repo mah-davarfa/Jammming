@@ -1,7 +1,9 @@
-require('dotenv').config(); // Load .env variables
-const express = require('express');
-const previewFinder = require('spotify-preview-finder');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import previewFinder from 'spotify-preview-finder';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const app = express();
 app.use(cors()); // Allow requests from your React frontend

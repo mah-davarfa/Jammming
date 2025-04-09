@@ -29,7 +29,11 @@ const SearchResults = () => {
     },[searchResults])   
 
     console.log('searchResultsAll',searchResultsAll);
-  
+    searchResultsAll.map((item, i) => {
+      console.log(`Item ${i}:`, item);
+      // ...
+    });
+    
    return(
     <div>
         {searchResultTag ? <h3 className={'SearchResult-title'}>search results</h3>:null}
@@ -53,8 +57,11 @@ const SearchResults = () => {
                       totalOfSongs={item.tracks?.total || 0}
                   />);
 
-                } if('album' in item && 'duration_ms' in item){
-                  console.log('Track1:',item.type);
+                } if (
+                  ('album' in item || 'duration_ms' in item) &&
+                  typeof item.name === 'string' &&
+                  typeof item.duration_ms === 'number'
+                ) {
                   return  (
                   <SongCard 
                       key={item.id}  
