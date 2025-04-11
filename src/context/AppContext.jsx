@@ -7,9 +7,9 @@ export const AppProvider = ({children}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [noResult  , setNoResult] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
-  const [playlist, setPlaylist] = useState([]);
-  const [searchResultsAll, setSearchResultsAll] = useState([]);
-  const[isDarkMode, setIsDarkMode] = useState(true);
+  
+  
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [currentSong,setCurrentSong] = useState(null);
   const [addedToPlaylist , setAddedToPlaylist]=useState(null);
@@ -36,6 +36,39 @@ export const AppProvider = ({children}) => {
     return storedSubmitted ? JSON.parse(storedSubmitted) : false;
   });
 
+  const [playlist, setPlaylist] = useState(() => {
+    const storedPlaylist = localStorage.getItem('playlist');
+    try {
+      const parsed =  JSON.parse(storedPlaylist) ;
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  });
+  
+  const [searchResultsAll, setSearchResultsAll] = useState(()=>{
+    const storedSearchResultsAll = localStorage.getItem('searchResultsAll');
+    try{
+      const parsed =  JSON.parse(storedSearchResultsAll) ;
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [isSearchStarted, setIsSearchStarted] = useState(()=>{
+    // had error then use try catch
+    try{
+    const storedIsSearchStartedValue =localStorage.getItem('isSearchStarted');
+      return storedIsSearchStartedValue ? JSON.parse(storedIsSearchStartedValue) : false;
+    }catch{
+      return false;
+    }
+  });
+  useEffect(() => {
+       localStorage.setItem('isSearchStarted', JSON.stringify(isSearchStarted));  
+  }, [isSearchStarted]);
+
   const handlerNameInput = (e) => {setName(e.target.value)};
         
   const submitHandler = (e) => {  
@@ -45,11 +78,14 @@ export const AppProvider = ({children}) => {
      
      }
   }
+
+  
   //useing useEffect to save the logical atate for after re-directing from spotify
   useEffect(()=>{
       localStorage.setItem('name', JSON.stringify(name));
       localStorage.setItem('submitted', JSON.stringify(submitted));
-       }, [name,submitted]);
+      localStorage.setItem('playlist', JSON.stringify(playlist));
+       }, [name,submitted,playlist]);
  
   
       const handleRemove=(id,form)=>{
@@ -72,7 +108,8 @@ export const AppProvider = ({children}) => {
           }
       }
 
-  // Function to handle playing a song from 3rd party tool
+  // Function to handle playing a song from 3rd party tool using express server
+  // This function fetches the preview URL from the backend if it doesn't exist in the song object
 
 const handlePlay = async (song) => {
   console.log("🟨 Trying to get preview for:", song.name, song.artist);
@@ -172,7 +209,7 @@ const handlePlay = async (song) => {
           const SPOTIFY_AUTH_URL = `https://accounts.spotify.com/authorize` +
           `?response_type=code` +
           `&client_id=${client_id}` +
-          `&scope=${encodeURIComponent(scope)}` +
+          `&scope=${encodeURIComponent(scope)}` + 
           `&redirect_uri=${encodeURIComponent(redirect_uri)}` +
           `&code_challenge_method=S256` +
           `&code_challenge=${codeChallenge}`;
@@ -231,7 +268,8 @@ const handlePlay = async (song) => {
           
 return (
     <AppContext.Provider value=
-    {{searchCommand , setSearchCommand, 
+    {{isSearchStarted, setIsSearchStarted,
+      searchCommand , setSearchCommand, 
       searchtype, setSearchType,
       name, setName,submitted ,setSubmitted,
       userToken ,setUserToken,

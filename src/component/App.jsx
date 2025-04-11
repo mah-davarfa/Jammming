@@ -16,9 +16,10 @@ import '../styles/darkmode.css';
 
  function App () {
   
-  const [isSearchStarted, setIsSearchStarted] = useState(false);
  
   const{
+    isSearchStarted, 
+    setIsSearchStarted, 
     isDarkMode,
     setSearchTerm,
     setSearchType, 
@@ -59,6 +60,7 @@ import '../styles/darkmode.css';
 
 
 useEffect(()=>{
+  localStorage.setItem('searchResultsAll', JSON.stringify(searchResultsAll));
   if(searchResultsAll.length === 0){
     setIsSearchStarted(false); 
   }

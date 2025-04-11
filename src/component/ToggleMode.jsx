@@ -5,8 +5,9 @@ import '../styles/darkMode.css';
 
 const ToggleMode = () => {
 
-    const {isDarkMode , setIsDarkMode,setUserToken,setContinueToSearchAsGuest,
-        setContinueToSearchAfterLogin,setSubmitted,setName} = useContext(AppContext);
+    const {isDarkMode , setIsDarkMode,setUserToken,setContinueToSearchAsGuest, setIsSearchStarted,
+        setContinueToSearchAfterLogin,setSubmitted,setName,setSearchResults,
+        setSearchResultsAll,setPlaylist,setSelectedSong,setCurrentSong,setSearchCommand} = useContext(AppContext);
         const togglMode = () => {
             setIsDarkMode((prevMode) => !prevMode);
         }
@@ -21,12 +22,21 @@ const ToggleMode = () => {
              <button onClick={() => {
                 localStorage.setItem('name', JSON.stringify(''));
                 localStorage.setItem('submitted', JSON.stringify(false));
-                localStorage.removeItem('code_verifier-spotify');  
+                localStorage.removeItem('code_verifier-spotify'); 
+                localStorage.removeItem('isSearchStarted'); 
+                localStorage.removeItem('playlist'); 
+                localStorage.removeItem('searchResultsAll'); 
                 setName('');
                 setSubmitted(false);
                 setContinueToSearchAfterLogin(false);
                 setUserToken(null);
                 setContinueToSearchAsGuest(false);
+                setSearchResults([]);
+                setSearchResultsAll([]);
+                setPlaylist([]);
+                setSelectedSong(null);
+                setCurrentSong(null);
+                setSearchCommand(null);
               }}>
                 Log Out
              </button>
