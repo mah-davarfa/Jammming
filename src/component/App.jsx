@@ -87,10 +87,10 @@ useEffect(()=>{
                   </div>
                 <Data  onSearchTerm={handleSearchTerm}/>
                 {!isSearchStarted ? (<div>
-                  <img src='../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg' 
-                    alt='startup-Background' 
-                    className='search-startup-Background'
-                  />
+                  <video autoPlay muted loop className='startup-Background'>
+                      <source src="/video/backgroung.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                   </video>
                   </div>):(
                 <div className='main-container'>
                     <div className={"search-results-c"}>
@@ -105,10 +105,12 @@ useEffect(()=>{
                 </div>)}
               </div>
               ):(<div>
-                <img src='../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg'
-                 alt='startUpBackground' 
-                 className='startup-Background'
-                 />
+                <video className='startup-Background' autoPlay muted loop>
+                      <source src="/video/backgroung.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                   </video>
+                 
+                 
               </div>)}
         </div>
       </div> 

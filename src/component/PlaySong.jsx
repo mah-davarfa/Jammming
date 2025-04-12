@@ -1,11 +1,12 @@
-import React, {useContext} from 'react';
+import React, {useContext,useState} from 'react';
 import {AppContext} from '../context/AppContext';
 import '../styles/darkmode.css';
  
 export const PlaySong = ()=>{
     const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,searchResultTag}=useContext(AppContext);
     
-    
+    const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
+      const [imgSrcs, setImgSrcs] = useState(selectedSong?.image || fallbackImg);
    
     
     if(searchResultsAll.length>0){
@@ -27,11 +28,17 @@ export const PlaySong = ()=>{
              }
     return (  
         <div className='play-song'>
-             <img src={selectedSong.image} alt={selectedSong.name}  width={250} height={250}/>
+             <img src={imgSrcs} 
+             alt={selectedSong.name} 
+              width={250} 
+              height={250}
+                onError={() => setImgSrcs(fallbackImg)}
+              />
             <h3>Playing : {selectedSong.name}</h3>
             <p>Artist: {selectedSong.artist}</p>
-            <p>Album: {selectedSong.album}</p>
-            <p>popularity:{selectedSong.popularity}</p>
+            {(selectedSong.album && selectedSong.album !== 'Unknown') ?<p>Album: {selectedSong.album}</p> : null}
+            {selectedSong.popularity !=='Unknown'?<p>popularity:{selectedSong.popularity}</p> : null}
+            {(selectedSong.genre && selectedSong.genre !=='Unknown')?(<p>Genre:{selectedSong.genre}</p>) : null}
            {/* <p>uri:{selectedSong.uri}</p>*/}
            {/* <p>ID:{selectedSong.id}</p>*/}
             {selectedSong.preview ? (

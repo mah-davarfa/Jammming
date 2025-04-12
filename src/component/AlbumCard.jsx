@@ -26,8 +26,8 @@ function AlbumCard({ name, artist, image, releaseDate, genre, songs, totalOfSong
   <h3>Album: {name}</h3>
   <p>Artist: {artist}</p>
   <p>Release Date: {releaseDate}</p>
-  <p>Genre: {genre}</p>
-  {/*<p>Total of Songs: {totalOfSongs}</p>*/}
+ {genre !== 'Unknown' ? <p>Genre: {genre}</p> : null}
+  {totalOfSongs !==0 ? (<p>Total of Songs: {totalOfSongs}</p>) : null}
   <p></p>
  
   <ul>

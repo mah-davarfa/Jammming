@@ -11,7 +11,7 @@ const Playlist=()=>{
    const [playlistTitle,setPlaylistTitle]=useState("PlayList");
    const [isLoggedIn,setIsLoggedIn]=useState(false);
    
-   
+   const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
    
    const handleEdit =()=>{
         if(isEditing){
@@ -133,11 +133,16 @@ const Playlist=()=>{
           <div className="playlist-list">
             {playlist.map((song, index) => (
               <div key={index} className="playlist-item-card">
-                <img src={song.image} alt={song.name} width={150} height={150} />
+                <img 
+                src={song.image || fallbackImg}
+                alt={song.name}
+                width={150} height={150}
+                 onError={(e)=>e.target.src = fallbackImg} 
+                  />
                 <h3>{song.name}</h3>
                 <p>Artist: {song.artist}</p>
-                <p>Album: {song.album}</p>
-                <p>popularity: {song.popularity}</p>
+               {song.album && song.album !==''?(<p>Album: {song.album}</p> ): null}
+               {song.popularity !== 'Unknown' ? (<p>popularity: {song.popularity}</p>) : null}
                 <button onClick={() => handleRemove(song.id, 'playlist')}>Remove this song</button>
                 
                 <button onClick={() => handlePlay(song)}>

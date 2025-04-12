@@ -1,6 +1,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap");
 
+  
 .frame-container {
     display: flex;
     flex-direction: column;
@@ -14,8 +15,7 @@
   font-family: 'Cinzel', serif;
   
 }
-.startup-Background,
-.search-startup-Background {
+.startup-Background {
     width: 100%;
     object-fit:contain;
      height: auto;

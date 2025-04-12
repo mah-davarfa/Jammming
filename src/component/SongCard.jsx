@@ -27,14 +27,14 @@ function SongCard({ name, artist, album, preview, popularity, uri, id, image }) 
       />
       <h3>{name}</h3>
       <p>Artist: {artist}</p>
-      <p>Album: {album}</p>
+      {album && album !== 'Unknown'? (<p>Album: {album}</p>) : null}
       {preview ? (
         <audio>
           <source src={preview} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
       ) : null}
-      <p>Popularity: {popularity}</p>
+     {popularity !== 'Unknown'? (<p>Popularity: {popularity}</p>) : null}
 
       <button onClick={() => handleRemove(id, 'songcard')}>Remove</button>
       <button onClick={() => handleAddToPlaylist({ name, artist, album, preview, popularity, uri, id, image })}>
