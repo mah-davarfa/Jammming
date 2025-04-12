@@ -6,7 +6,7 @@ export const PlaySong = ()=>{
     const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,searchResultTag}=useContext(AppContext);
     
     const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
-      const [imgSrcs, setImgSrcs] = useState(selectedSong?.image || fallbackImg);
+    
    
     
     if(searchResultsAll.length>0){
@@ -28,11 +28,11 @@ export const PlaySong = ()=>{
              }
     return (  
         <div className='play-song'>
-             <img src={imgSrcs} 
+             <img src={selectedSong?.image||fallbackImg} 
              alt={selectedSong.name} 
               width={250} 
               height={250}
-                onError={() => setImgSrcs(fallbackImg)}
+                onError={(e) => e.target.src = fallbackImg} // Fallback image
               />
             <h3>Playing : {selectedSong.name}</h3>
             <p>Artist: {selectedSong.artist}</p>
