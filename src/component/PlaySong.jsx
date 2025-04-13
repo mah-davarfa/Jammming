@@ -42,7 +42,9 @@ export const PlaySong = ()=>{
            {/* <p>uri:{selectedSong.uri}</p>*/}
            {/* <p>ID:{selectedSong.id}</p>*/}
             {selectedSong.preview ? (
-                <audio controls>
+                <audio 
+                key={selectedSong.id}
+                controls>
                 <source src={selectedSong.preview} type="audio/mpeg"/>
                 Your browser does not support the audio element.
             </audio>): (<p>This song is not playable from source, try another song.</p>)}

@@ -112,7 +112,9 @@ export const AppProvider = ({children}) => {
   // This function fetches the preview URL from the backend if it doesn't exist in the song object
 
 const handlePlay = async (song) => {
-  console.log("🟨 Trying to get preview for:", song.name, song.artist);
+  console.log("🟨 Trying to get preview for:", song.name, song.artist,song.preview);
+ 
+  
   if (!song.preview) {
     try {
       const response = await fetch(`http://localhost:4000/api/preview?song=${encodeURIComponent(song.name)}&artist=${encodeURIComponent(song.artist)}`);
@@ -121,6 +123,7 @@ const handlePlay = async (song) => {
       if (data.success && data.results.length > 0) {
         song.preview = data.results[0].previewUrls[0];
         console.log("Fetched preview URL from backend:", song.preview);
+        setSelectedSong(song);
       } else {
         console.warn("No preview found from backend.");
       }
@@ -128,8 +131,7 @@ const handlePlay = async (song) => {
       console.error("Error fetching preview from backend:", err);
     }
   }
-
-  setSelectedSong(song);
+  
 };
 
 
