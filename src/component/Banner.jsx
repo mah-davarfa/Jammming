@@ -36,8 +36,10 @@ export default function Banner() {
                         </button>: '' }
             </div> ): ''}           
             {!submitted && 
-            <form onSubmit= {submitHandler} 
-             className="search-container">
+            <form 
+             onSubmit= {submitHandler} 
+             className="search-container"
+            >
                 <input  onChange={handlerNameInput}
                  className='bannerInput' 
                  value={name} 

@@ -18,20 +18,21 @@ function ArtistCard({id, name, image, genre, popularity}){
     };
     
     return(
-        <div className='playlist-item-card'>
-       {image ? (
-  <img src={image} alt={name} width={250} height={250}/>
-) : (
-  <div style={{ width: '50px', height: '50px', backgroundColor: '#ddd', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <span>No Image</span>
-  </div>
-)}
-        <h3>{name}</h3>
-        <p>Genre: {genre}</p>   
-        <p>Popularity: {popularity}</p>
-        <button  onClick={handleRemove}>Remove</button>
-        <button onClick={handelgetSong}>Get top Songs</button>
-        </div>
+      <div className='playlist-item-card'>
+                  {image ?
+                   (
+                       <img src={image} alt={name} width={250} height={250}/>
+                    ) : (
+                      <div style={{ width: '50px', height: '50px', backgroundColor: '#ddd', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span>No Image</span>
+                      </div>
+                    )}
+                    <h3>{name}</h3>
+                    <p>Genre: {genre}</p>   
+                    <p>Popularity: {popularity}</p>
+                    <button  onClick={handleRemove}>Remove</button>
+                    <button onClick={handelgetSong}>Get top Songs</button>
+      </div>
     )
 }
 export default ArtistCard;

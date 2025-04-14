@@ -40,7 +40,7 @@ const SearchResults = () => {
         <div className='list'>
           { searchResultsAll && searchResultsAll.length > 0  ? (//remove
           
-          searchResultsAll.map((item)=>{
+          searchResultsAll.map((item , index)=>{
                    if (!item ) return null;
                 if('album_type' in item && 'total_tracks' in item && !('preview_url' in item) ){
                   console.log('Album1:',item.type);
@@ -70,7 +70,7 @@ const SearchResults = () => {
                       artist={item.artists[0]?.name}
                       album={item.album?.name}
                       image={item.album?.images[0]?.url}
-                    preview={ (!(item.preview_url===null))?item.preview_url:null}
+                      preview={ (!(item.preview_url===null))?item.preview_url:null}
                       genre={item.artists[0]?.genres?.join(',') || 'Unknown'}
                       popularity={item.popularity || 'Unknown'}
                       uri={item.uri}
@@ -89,7 +89,7 @@ const SearchResults = () => {
                     />);
                   }           
             })
-          )//remove 
+          ) 
           : null
 
           } 

@@ -35,10 +35,10 @@ const handleSubmit = (e) => {
             className='search-container'>
                 <input 
                 
-                onChange={handleOnChange}
-                type='text'
-                placeholder='Search for Artist or Album Name' 
-                value={cleanSearch ? search : ''} 
+                    onChange={handleOnChange}
+                    type='text'
+                    placeholder='Search for Artist or Album Name' 
+                    value={cleanSearch ? search : ''} 
                 />
                 <button 
                     type='submit' 
