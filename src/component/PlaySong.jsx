@@ -1,19 +1,20 @@
 import React, {useContext,useState} from 'react';
 import {AppContext} from '../context/AppContext';
 import '../styles/darkmode.css';
+import Playlist from './Playlist';
  
 export const PlaySong = ()=>{
-    const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,searchResultTag}=useContext(AppContext);
+    const {addedToPlaylist,playlist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,playlistTitle}=useContext(AppContext);
     
     const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
     
    
     
-    if(searchResultsAll.length>0){
+    if(playlist.length>0 || searchResultsAll.length>0){
        
     if (!selectedSong ) {
         return (
-            <div className='play-song'>
+            <div className='play-song-empty'>
                 <p>
                 No song selected. Click 'Play' on a song to start playing.
                 </p>
@@ -69,7 +70,7 @@ export const PlaySong = ()=>{
                 </button>
                 <button onClick={()=>handleAddToPlaylist(selectedSong)}>
                     {addedToPlaylist.includes(selectedSong.id) ? 
-                    'Already in Playlist':"Add To PlayList"}
+                    `Already in ${playlistTitle}`:`Add To ${playlistTitle}`}
                 </button>    
         </div>
 

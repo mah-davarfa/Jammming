@@ -47,7 +47,7 @@ const handleSubmit = (e) => {
                  </button>
                  {noResult && 
                  <p className='no-result'>
-                    Search result not available
+                    "No results to display. Try searching again!"
                 </p> }
             </form>
         </div>

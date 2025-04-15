@@ -10,7 +10,8 @@ function SongCard({ name, artist, album, preview, popularity, uri, id, image }) 
     currentSong,
     handlePlay,
     handleAddToPlaylist,
-    addedToPlaylist
+    addedToPlaylist,
+    playlistTitle
   } = useContext(AppContext);
 
   const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
@@ -41,7 +42,7 @@ function SongCard({ name, artist, album, preview, popularity, uri, id, image }) 
           Remove
         </button>
         <button onClick={() => handleAddToPlaylist({ name, artist, album, preview, popularity, uri, id, image })}>
-          {addedToPlaylist.includes(id) ? 'Already in Playlist' : 'Add To Playlist'}
+          {addedToPlaylist.includes(id) ? `Already in ${playlistTitle}`:`Add To ${playlistTitle}`}
         </button>
         <button onClick={() => handlePlay({ name, artist, album, preview, popularity, uri, id, image })}>
           {currentSong === id ? 'Now Playing' : 'Play'}

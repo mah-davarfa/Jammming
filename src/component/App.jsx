@@ -18,6 +18,7 @@ import '../styles/darkmode.css';
   
  
   const{
+    playlist,
     isSearchStarted, 
     setIsSearchStarted, 
     isDarkMode,
@@ -61,10 +62,10 @@ import '../styles/darkmode.css';
 
 useEffect(()=>{
   localStorage.setItem('searchResultsAll', JSON.stringify(searchResultsAll));
-  if(searchResultsAll.length === 0){
+  if(!playlist.length>0 && searchResultsAll.length === 0 ){
     setIsSearchStarted(false); 
   }
-},[searchResultsAll])
+},[searchResultsAll,playlist]);
 
   return (
     <>

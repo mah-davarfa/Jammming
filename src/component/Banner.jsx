@@ -6,7 +6,7 @@ import { AppContext } from '../context/AppContext.jsx';
 export default function Banner() {
    
    
-    const { continueToSearchAfterLogin,setContinueToSearchAsGuest,
+    const { continueToSearchAfterLogin,setContinueToSearchAsGuest,setContinueToSearchAfterLogin,
     continueToSearchAsGuest,handleLoginToSpotify,submitted,name,handlerNameInput,submitHandler} = useContext(AppContext);
     
     
@@ -14,6 +14,7 @@ export default function Banner() {
 
     const handleContinueAsGuest = () => {
         setContinueToSearchAsGuest(true);
+        
     }
    
 
@@ -22,19 +23,23 @@ export default function Banner() {
         <div className='banner'>
            
             <h1>welcome to Jammming {submitted ? name : ''}! </h1>
-            {submitted?(
-            <div>
-            {!continueToSearchAfterLogin &&  (<button 
-                         type='submit'
-                         onClick={handleLoginToSpotify} >
-                            Log in to Spotify
-                        </button>)}
-                        {(!continueToSearchAsGuest && !continueToSearchAfterLogin) ? <button
-                         type='submit'
-                         onClick={handleContinueAsGuest}>
-                            continue As Guest
-                        </button>: '' }
-            </div> ): ''}           
+           
+            {(submitted && !continueToSearchAfterLogin && !continueToSearchAsGuest) ? 
+            (<div>
+              <button 
+                type='submit'
+                onClick={handleLoginToSpotify}
+              >
+                 Log in to Spotify
+              </button>
+              <button
+                type='submit'
+                onClick={handleContinueAsGuest}
+            >
+                continue As Guest
+              </button>
+            </div> ): ''} 
+                  
             {!submitted && 
             <form 
              onSubmit= {submitHandler} 

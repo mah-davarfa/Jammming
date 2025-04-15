@@ -7,8 +7,8 @@ export const AppProvider = ({children}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [noResult  , setNoResult] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
-  
-  
+  const [playlistTitle,setPlaylistTitle]=useState("PlayList");
+  const [isSaved,setIsSaved]=useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [currentSong,setCurrentSong] = useState(null);
@@ -136,7 +136,8 @@ const handlePlay = async (song) => {
 
 
         //cap for playlist at 10 song
-      const handleAddToPlaylist=(song)=>
+      const handleAddToPlaylist=(song)=>{
+                    setIsSaved(false)
                     setPlaylist((prev)=> {      
                       if(prev.length>=10){
                         return prev;
@@ -146,7 +147,7 @@ const handlePlay = async (song) => {
                           } else {
                              return [...prev , song]
                             }}
-                         })          
+                         })}          
                     
            //CHANGING PLAY TO NOW PLAYING AND REVERSE
            useEffect(()=>{
@@ -226,8 +227,8 @@ const handlePlay = async (song) => {
             if (authorizationCode) {
               console.log('Authorization code found in URL:', authorizationCode);
               setContinueToSearchAfterLogin(true);
-          
-              const getUserToken = async () => {
+                    
+                const getUserToken = async () => {
                 const codeVerifier = localStorage.getItem('code_verifier-spotify');
                 const client_id = 'dc90f37b8774443685687850b885de75';
                 const redirect_uri = "http://localhost:5173/";
@@ -271,6 +272,7 @@ const handlePlay = async (song) => {
 return (
     <AppContext.Provider value=
     {{isSearchStarted, setIsSearchStarted,
+      isSaved,setIsSaved,
       searchCommand , setSearchCommand, 
       searchtype, setSearchType,
       name, setName,submitted ,setSubmitted,
@@ -289,7 +291,8 @@ return (
      playlist,  setPlaylist,
      handleRemove,handlePlay,handleAddToPlaylist, 
      handleLoginToSpotify,playlistLimitReached, 
-     handlerNameInput,submitHandler}}>
+     handlerNameInput,submitHandler,
+     playlistTitle,setPlaylistTitle}}>
       {children}
     </AppContext.Provider>
   )

@@ -336,7 +336,11 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.main-container h2, h3{
+.main-container  h2, h3 ,
+.play-song-empty,
+.playlist-empty,
+.no-result
+{
     color: #fff;
     text-align: center;
     

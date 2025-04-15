@@ -8,7 +8,7 @@ import '../styles/darkmode.css'
 
 const SearchResults = () => {
  
-  const {setNoResult,searchResultsAll,setSearchResultsAll,searchResults,setSearchResultTag,searchResultTag} = useContext(AppContext);
+  const {playlist,setNoResult,searchResultsAll,setSearchResultsAll,searchResults,setSearchResults,setSearchResultTag,searchResultTag} = useContext(AppContext);
   
   
   useEffect(()=>{
@@ -36,7 +36,16 @@ const SearchResults = () => {
     
    return(
     <div>
-        {searchResultsAll.length>0 || searchResultTag ? <h2 className={'SearchResult-title'}>search results</h2>:null}
+        {searchResultsAll.length>0 || searchResultTag || playlist.length>0 ? (
+         <div className={'SearchResult-title'}> 
+            <h2 >search results</h2>
+            <button
+              type='button'
+              onClick={()=> setSearchResultsAll([])}
+              onClickCapture={()=>setSearchResults([])}>
+              Clear Search Results
+            </button>
+         </div> ):null}
         <div className='list'>
           { searchResultsAll && searchResultsAll.length > 0  ? (//remove
           

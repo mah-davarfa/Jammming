@@ -7,14 +7,18 @@ const Playlist=()=>{
     currentSong,
     handleRemove,
     playlist,
+    setPlaylist,
     searchResultsAll,
     playlistLimitReached,
     continueToSearchAsGuest,
+    handleLoginToSpotify,
+    isSaved,setIsSaved,
+    playlistTitle,setPlaylistTitle,
     userToken}=useContext(AppContext);
     const [isEditing,setIsEditing]=useState(false);
-    const [playlistTitle,setPlaylistTitle]=useState("PlayList");
+    
     const [isLoggedIn,setIsLoggedIn]=useState(false);
-   
+    
     const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
    
     const handleEdit =()=>{
@@ -34,11 +38,12 @@ const Playlist=()=>{
       if (searchResultsAll.length>0 && playlist.length === 0 ){
         return (
         <div className={'playlist-empty'}>
-          <p>{`Your ${playlistTitle} is empty. Add a song!`}</p>
+          <p>{`${isSaved  ? '✅ successfully saved to your Spotify account!': ''} The ${playlistTitle} is empty. Add a song!`}</p>
+          
         </div>
     );
     }
-
+   
     const handleSaveToSpotify = () => {
       if (continueToSearchAsGuest){
         setIsLoggedIn(true);
@@ -93,7 +98,8 @@ const Playlist=()=>{
                uris : uris,
          }),
           });
-          alert('✅ Playlist saved to your Spotify account!');
+          setIsSaved(true);
+          setPlaylist([])
       } catch (error){
                   console.error('Error saving playlist to Spotify:', error);
                   alert('Playlist DID NOT SAVED to your Spotify account!');
@@ -130,9 +136,17 @@ const Playlist=()=>{
                       >Save to Spotify 
                     </button>
                    {isLoggedIn ?(
+                    <div>
                      <h3>
-                      {`"To save your ${playlistTitle} to Spotify, please use The 'log in to Spotify' Tab first."`}
-                    </h3>) : ''}
+                      {`"To save your ${playlistTitle} to Spotify, please login first."`}
+                    </h3>
+                    <button 
+                      onClick={handleLoginToSpotify}
+                      type='submit'>
+                        Log in to Spotify
+                    </button>
+                  </div>) : ''}
+                 
                   </>
                 )}
               </div>
