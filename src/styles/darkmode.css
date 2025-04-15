@@ -1,7 +1,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap");
 
-  
+
 .frame-container {
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     margin: 0 auto;
     padding: 0;
   } 
-.SearchResult-title,
+  
 .warning-text {
   font-family: 'Cinzel', serif;
   
@@ -27,24 +27,29 @@
    grid-template-columns: 3fr 2fr 2fr;
    gap:5px; 
   } 
-
+  .SearchResult-title{
+    text-align: center;
+    font-family: 'Cinzel', serif;
+  }
 .frame-container h3 {
     text-align: center;
     font-family: 'Cinzel', serif;
     word-wrap: break-word;
-    font-size: clamp(0.8rem,1.5vw,1.1rem);
+    font-size:  clamp(0.8rem, 1.1vw, 0.95rem);
+    font-weight: bold;
+    margin: 1px;
    } 
 .frame-container p {
-text-align: center;
-font-family: 'Cinzel', serif;
-word-wrap: break-word;
-font-size: clamp(0.7rem,1.5vw,1rem);
-line-height: 1.5rem;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    word-wrap: break-word;
+    font-size: clamp(0.7rem, 1vw, 0.9rem);
+    margin: 1px;
 }
 .frame-container button{
   padding: 4px 6px;
   margin: 2px 4px;
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem,.8vw,0.8rem);
   border-radius: 20px;
 }
 .SearchToggleBar{
@@ -62,25 +67,25 @@ line-height: 1.5rem;
     }
     
 .toggle-dark-button{
-        padding: 10px 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: white;
-        color: #000000;
-        cursor: pointer;
-        font-weight: bold;  
-        margin: 10px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    color: #000000;
+    cursor: pointer;
+    font-weight: bold;  
+    margin: 10px;
         
     }
 .toggle-light-button{
-        padding: 10px 10px;
-        border-radius: 5px;
-        border: none;
-        background-color:#000000;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;  
-        margin: 10px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:#000000;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;  
+    margin: 10px;
     }
 
 .playlist-item-card {
@@ -90,11 +95,12 @@ line-height: 1.5rem;
     align-items: center;
     justify-content: center;
     border: 1px solid #aaa; 
-    padding:5px;
-    gap:5px;
+    padding:2px;
+    gap:2px;
     width: 100%;
     max-width: 300px;
-       
+    height:auto;   
+    box-sizing: border-box;
   }
 .playlist-item-card img {
     max-width:120px;
@@ -108,7 +114,7 @@ line-height: 1.5rem;
     padding: 5px;;
   }
 .play-song img{
-    max-width:300px;
+    max-width:250px;
     width: 100%;
    object-fit:contain;
     height: auto;
@@ -116,23 +122,14 @@ line-height: 1.5rem;
     padding: 10px;
   }
 
- /*.list  .playlist-list{
-    display: flex;
-    flex-direction: column;
-    min-width: 200px; 
-    max-width: min(25vw, 300px); 
-    overflow-y: auto;
-    height: 70vh;
-    border-right: 2px solid #ddd;
-    
-  }*/
+ 
 .list{
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
     gap:10px;
     overflow-y:auto;
     padding: 5px;
-    
+    height: 65vh;
   }
 .playlist-title{
     position: sticky;
@@ -148,26 +145,10 @@ line-height: 1.5rem;
     gap:10px;
     padding: 5px;
     overflow-y:auto;
-  
+    height: 60vh;
     align-content: flex-start;
   }
- /*
-.play-song {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #aaa;  
-    margin: auto;
-    padding:10px;
-    
-}
-.play-song img{
-   max-width:100%;
-   object-fit:contain;
-   height: auto;
-}
-   */
+ 
 .play-song-c {
     text-align: center;
     margin-top: 10px;
@@ -209,7 +190,10 @@ line-height: 1.5rem;
     background-color: #66a5ad75;
     color: #000;
 }
-
+.light-mode .banner{
+    background-color: #66a5ad75;
+    
+}
 
 .light-mode .playlist-item-card {
     background-color: #688eada9;
@@ -332,17 +316,39 @@ line-height: 1.5rem;
 }
 
 
-.main-container button:hover{
-    margin:.1rem;
-    border-radius: 10px;
-    padding: .1rem;
-    background-color: #ccccd1;
-    color: black;
+.main-container button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.main-container button:hover {
+    transform: scale(1.05);
+    background-color: #ccccd1;
+    color: black;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25)
+}
+.list , .playlist-list, .play-song{
+    transition: transform 0.2s ease ,box-shadow 0.2s ease;
+}
+.list :hover, 
+.playlist-list :hover,
+.play-song:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
+.main-container h2, h3{
+    color: #fff;
+    text-align: center;
+    
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f; 
+    animation: neon-glow 2.5s infinite alternate;
+}
 
-
+@keyframes neon-glow {
+    0% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f; }
+    50% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #8a2be2, 0 0 20px #8a2be2; }
+    100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #00f, 0 0 20px #00f; }
+}
 
 /*  **Make it responsive for tablets & mobile** */
 @media (max-width: 1024px) {

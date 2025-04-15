@@ -34,7 +34,7 @@ const Playlist=()=>{
       if (searchResultsAll.length>0 && playlist.length === 0 ){
         return (
         <div className={'playlist-empty'}>
-          <p>Your playlist is empty. Add a song!</p>
+          <p>{`Your ${playlistTitle} is empty. Add a song!`}</p>
         </div>
     );
     }
@@ -107,12 +107,12 @@ const Playlist=()=>{
               <div >
                 {playlistLimitReached ? (
                   <h3 className="warning-text">
-                    Playlist has reached limit of 10 songs. Either Transfer or Remove.
+                  { ` ${playlistTitle} has reached limit of 10 songs. Either Transfer or Remove.`}
                   </h3>
                 ) : (
                   <>
                     {!isEditing ? (
-                      <h3 className='warning-text'>{playlistTitle}</h3>
+                      <h2 className='warning-text'>{playlistTitle}</h2>
                     ) : (
                       <input
                         onChange={handlePlaylistTitle}
@@ -131,7 +131,7 @@ const Playlist=()=>{
                     </button>
                    {isLoggedIn ?(
                      <h3>
-                      "To save your playlist to Spotify, please use (log in to Spotify) Tab first."
+                      {`"To save your ${playlistTitle} to Spotify, please use The 'log in to Spotify' Tab first."`}
                     </h3>) : ''}
                   </>
                 )}

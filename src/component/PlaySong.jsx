@@ -17,11 +17,10 @@ export const PlaySong = ()=>{
                 <p>
                 No song selected. Click 'Play' on a song to start playing.
                 </p>
-                <img 
-                src='../../imag/background.jpg'
-                alt='Background'
-                width={400} height={380}
-                />
+                <video autoPlay muted loop className='startup-Background'>
+                      <source src="/video/background2.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                   </video>
             </div>
             
             );
