@@ -35,7 +35,7 @@ const Playlist=()=>{
     
    
    
-      if (searchResultsAll.length>0 && playlist.length === 0 ){
+      if ( playlist.length === 0 ){
         return (
         <div className={'playlist-empty'}>
           <p>{`${isSaved  ? '✅ successfully saved to your Spotify account!': ''} The ${playlistTitle} is empty. Add a song!`}</p>

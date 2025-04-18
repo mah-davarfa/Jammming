@@ -8,7 +8,11 @@ import '../styles/darkmode.css'
 
 const SearchResults = () => {
  
-  const {playlist,setNoResult,searchResultsAll,setSearchResultsAll,searchResults,setSearchResults,setSearchResultTag,searchResultTag} = useContext(AppContext);
+  const {playlist,setNoResult,
+    searchResultsAll,setSearchResultsAll,
+    searchResults,setSearchResults,
+    setSearchResultTag,searchResultTag,
+    searchCommand} = useContext(AppContext);
   
   
   useEffect(()=>{
@@ -39,23 +43,41 @@ const SearchResults = () => {
         {searchResultsAll.length>0 || searchResultTag || playlist.length>0 ? (
          <div className={'SearchResult-title'}> 
             <h2 >search results</h2>
+            {!searchResultsAll.length && searchCommand ?(<p className='playlist-empty'>Search Results is Empty!  Search For Song or Artist or Album! </p>): null}
+            {!searchResultsAll.length && searchCommand ? null :(
             <button
               type='button'
-              onClick={()=> setSearchResultsAll([])}
-              onClickCapture={()=>setSearchResults([])}>
-              Clear Search Results
-            </button>
+              onClick={()=> {
+                setSearchResultsAll([]);
+                setSearchResults([]);
+                }}>
+               Clear Search Results
+            </button>)}
          </div> ):null}
+         { searchResultsAll && searchResultsAll.length > 0  ? (
         <div className='list'>
-          { searchResultsAll && searchResultsAll.length > 0  ? (//remove
+         
           
-          searchResultsAll.map((item , index)=>{
+         { searchResultsAll.map((item , index)=>{
                    if (!item ) return null;
+                   if('followers' in item && 'genres' in item && item.type === 'artist' && !('album' in item) && !('album_type' in item)){
+                    console.log('Artist1:',item.type);
+                    return  (
+                    <ArtistCard 
+                        key={item.id} 
+                        id={item.id}
+                        name={item.name}
+                        image={item.images[0]?.url}
+                        genre={item.genres?.join(',') || 'Unknown'}
+                        popularity={item.popularity || 'Unknown'}
+                      />);
+                    } 
+
                 if('album_type' in item && 'total_tracks' in item && !('preview_url' in item) ){
                   console.log('Album1:',item.type);
                   return (
                   <AlbumCard
-                      key={item.id} 
+                      key={index} 
                       id={item.id}
                       name={item.name}
                       artist={item.artists[0].name}
@@ -85,24 +107,11 @@ const SearchResults = () => {
                       uri={item.uri}
                   />);
     
-                }if('followers' in item && 'genres' in item && !('album' in item) && !('album_type' in item)){
-                  console.log('Artist1:',item.type);
-                  return  (
-                  <ArtistCard 
-                      key={item.id} 
-                      id={item.id}
-                      name={item.name}
-                      image={item.images[0]?.url}
-                      genre={item.genres?.join(',') || 'Unknown'}
-                      popularity={item.popularity || 'Unknown'}
-                    />);
-                  }           
+                }          
             })
-          ) 
-          : null
-
-          } 
+          }
       </div> 
+    ): null } 
     </div>
    )
 }

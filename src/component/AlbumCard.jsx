@@ -30,22 +30,7 @@ function AlbumCard({ name, artist, image, releaseDate, genre, songs, totalOfSong
             <p>Genre: {genre}</p> : null}
             {totalOfSongs !==0 ? 
              (<p>Total of Songs: {totalOfSongs}</p>) : null}
-            <ul>
-            
-              {songs?.map((song,index)=>(
-              <li 
-                  key={index}>
-                  {song.name}
-                  <button onClick={handleClick} >
-                    Get this song
-                  </button> 
-              </li>
-                
-            ))}
-                
-            </ul>
-        
-                {/* <p>ID:{id}</p>*/}
+            {/* <p>ID:{id}</p>*/}
             <button onClick={() => handleRemove(id, 'albumcard')}>
               Remove
             </button>

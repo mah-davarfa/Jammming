@@ -28,7 +28,7 @@ import '../styles/darkmode.css';
     searchResultsAll,
     continueToSearchAfterLogin,
     continueToSearchAsGuest,
-    setSearchCommand
+    setSearchCommand,searchCommand
   } = useContext(AppContext);
   
   ///search to term ?
@@ -43,8 +43,11 @@ import '../styles/darkmode.css';
     // ✅ Case 1: fetched an album by ID
     if ('album_type' in data && data.tracks?.items) {
       allItems = [...data.tracks.items]; // just the songs
+      //case 2 : fetched top songs from artistCard
+    }else if (Array.isArray(data.tracks)){
+      allItems =[...data.tracks];
     }
-    // ✅ Case 2: standard search (songs + albums + artists)
+    // ✅ Case 3: standard search (songs + albums + artists)
     else {
       allItems = [
         ...(data.tracks?.items || []),
@@ -87,9 +90,9 @@ useEffect(()=>{
                     </div>
                   </div>
                 <Data  onSearchTerm={handleSearchTerm}/>
-                {!isSearchStarted ? (<div>
+                {!searchCommand  ? (<div>
                   <video autoPlay muted loop className='startup-Background'>
-                      <source src="/video/backgroung.mp4" type="video/mp4" />
+                      <source src="/video/background2.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                    </video>
                   </div>):(
@@ -107,7 +110,7 @@ useEffect(()=>{
               </div>
               ):(<div>
                 <video className='startup-Background' autoPlay muted loop>
-                      <source src="/video/backgroung.mp4" type="video/mp4" />
+                      <source src="/video/background2.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                    </video>
                  

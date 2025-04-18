@@ -47,7 +47,7 @@ input::placeholder {
       button:hover {
         background-color: #444;
       }
-      .banner h1 {
+  .banner h1 {
         color: #fff;
         text-align: center;
         font-size: 2rem;

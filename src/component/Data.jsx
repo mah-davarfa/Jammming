@@ -65,7 +65,8 @@ const [guestToken ,setGuestToken] = useState(null);
                // console.log('isId:', isId);
                   
                 if (!isId || searchCommand.type === 'search') {
-                  url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchCommand.id)}&type=album%2Ctrack&limit=5&include_external=audio`;
+                  url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchCommand.id)}&type=album,track,artist&limit=5&include_external=audio`;
+
                 } else if (searchCommand.type === 'artist') {
                   url = `https://api.spotify.com/v1/artists/${searchCommand.id}/top-tracks?market=US`;
                 } else if (searchCommand.type === 'album') {
