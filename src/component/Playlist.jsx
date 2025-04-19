@@ -21,13 +21,18 @@ const Playlist=()=>{
     
     const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
    
-    const handleEdit =()=>{
-        if(isEditing){
-            setIsEditing(false);
-        }else{
-            setIsEditing(true);
+    const handleEdit = () => {
+      if (isEditing) {
+        if (!playlistTitle.trim()) {
+          alert("Playlist name cannot be empty.");
+          return;
         }
-    }
+        setIsEditing(false);
+      } else {
+        setIsEditing(true);
+      }
+    };
+    
 
      const handlePlaylistTitle=(e)=>{
         setPlaylistTitle(e.target.value);
@@ -132,7 +137,7 @@ const Playlist=()=>{
                     </button>
                     <button
                         onClick={handleSaveToSpotify}
-                        disabled={playlist.length === 0}
+                        disabled={playlist.length === 0 || isEditing  }
                       >Save to Spotify 
                     </button>
                    {isLoggedIn ?(
@@ -145,6 +150,7 @@ const Playlist=()=>{
                       type='submit'>
                         Log in to Spotify
                     </button>
+                    <button onClick={() => setIsLoggedIn(false)}>Cancel</button>
                   </div>) : ''}
                  
                   </>

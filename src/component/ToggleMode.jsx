@@ -26,6 +26,7 @@ const ToggleMode = () => {
                 localStorage.removeItem('isSearchStarted'); 
                 localStorage.removeItem('playlist'); 
                 localStorage.removeItem('searchResultsAll'); 
+               // localStorage.removeItem('command');
                 setName('');
                 setSubmitted(false);
                 setContinueToSearchAfterLogin(false);

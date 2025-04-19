@@ -12,7 +12,7 @@ const SearchResults = () => {
     searchResultsAll,setSearchResultsAll,
     searchResults,setSearchResults,
     setSearchResultTag,searchResultTag,
-    searchCommand} = useContext(AppContext);
+    searchCommand,setSearchCommand} = useContext(AppContext);
   
   
   useEffect(()=>{
@@ -50,6 +50,7 @@ const SearchResults = () => {
               onClick={()=> {
                 setSearchResultsAll([]);
                 setSearchResults([]);
+                
                 }}>
                Clear Search Results
             </button>)}

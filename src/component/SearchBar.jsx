@@ -19,6 +19,7 @@ const handleSubmit = (e) => {
         setCleanSearch(false);
        // setSearchType('search');
         setSearchCommand({type:'search', id:search});// check to see does search:search works?
+        setSearch('');
     }
     }
     const handleOnChange = (e) => {

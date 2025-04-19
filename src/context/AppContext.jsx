@@ -19,7 +19,16 @@ export const AppProvider = ({children}) => {
   const [continueToSearchAfterLogin , setContinueToSearchAfterLogin] = useState(false);
   const [userToken ,setUserToken] = useState(null);
   const [searchtype, setSearchType] = useState('search');
-  const [searchCommand , setSearchCommand] = useState(null);
+  
+  const [searchCommand , setSearchCommand] = useState(()=>{
+        const storedCommand = localStorage.getItem('command');
+    try{
+      const parsed = JSON.parse(storedCommand)
+      return storedCommand && storedCommand !== 'undefined' ? parsed : [null];
+    }catch{
+
+    }
+  });
   
   const [name, setName] = useState(() => {
     const stored = localStorage.getItem('name');
@@ -85,7 +94,8 @@ export const AppProvider = ({children}) => {
       localStorage.setItem('name', JSON.stringify(name));
       localStorage.setItem('submitted', JSON.stringify(submitted));
       localStorage.setItem('playlist', JSON.stringify(playlist));
-       }, [name,submitted,playlist]);
+      localStorage.setItem('command', JSON.stringify(searchCommand));
+       }, [name,submitted,playlist,searchCommand]);
  
   
       const handleRemove=(id,form)=>{

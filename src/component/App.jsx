@@ -69,7 +69,7 @@ useEffect(()=>{
     setIsSearchStarted(false); 
   }
 },[searchResultsAll,playlist]);
-
+console.log('search command',searchCommand);
   return (
     <>
       <div className={'frame-container'}>
@@ -90,7 +90,8 @@ useEffect(()=>{
                     </div>
                   </div>
                 <Data  onSearchTerm={handleSearchTerm}/>
-                {!searchCommand  ? (<div>
+                
+                {(!searchCommand ) ? (<div>
                   <video autoPlay muted loop className='startup-Background'>
                       <source src="/video/background2.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
