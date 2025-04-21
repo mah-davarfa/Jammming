@@ -19,11 +19,8 @@ import '../styles/darkmode.css';
  
   const{
     playlist,
-    isSearchStarted, 
-    setIsSearchStarted, 
+     setIsSearchStarted, 
     isDarkMode,
-    setSearchTerm,
-    setSearchType, 
     setSearchResults,
     searchResultsAll,
     continueToSearchAfterLogin,
@@ -40,14 +37,14 @@ import '../styles/darkmode.css';
   const handleSearchTerm = (data) => {
     let allItems = [];
   
-    // ✅ Case 1: fetched an album by ID
+    //  Case 1: fetched an album by ID
     if ('album_type' in data && data.tracks?.items) {
       allItems = [...data.tracks.items]; // just the songs
       //case 2 : fetched top songs from artistCard
     }else if (Array.isArray(data.tracks)){
       allItems =[...data.tracks];
     }
-    // ✅ Case 3: standard search (songs + albums + artists)
+    // Case 3: standard search (songs + albums + artists)
     else {
       allItems = [
         ...(data.tracks?.items || []),
@@ -86,7 +83,7 @@ console.log('search command',searchCommand);
                     <ToggleMode /> 
                     </div>
                     <div className={"right-SearchToggleBar"}>
-                    <SearchBar onSearch={handleSearch}/>
+                    <SearchBar />
                     </div>
                   </div>
                 <Data  onSearchTerm={handleSearchTerm}/>

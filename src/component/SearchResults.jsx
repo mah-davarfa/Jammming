@@ -12,7 +12,7 @@ const SearchResults = () => {
     searchResultsAll,setSearchResultsAll,
     searchResults,setSearchResults,
     setSearchResultTag,searchResultTag,
-    searchCommand,setSearchCommand} = useContext(AppContext);
+    searchCommand} = useContext(AppContext);
   
   
   useEffect(()=>{

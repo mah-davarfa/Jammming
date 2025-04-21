@@ -8,12 +8,9 @@ export default function Data({onSearchTerm}) {
 
 const [guestToken ,setGuestToken] = useState(null);  
 
-    const {searchType,searchTerm,userToken,
+    const {userToken,
       continueToSearchAsGuest,
-      continueToSearchAfterLogin,
-      setContinueToSearchAfterLogin,
-      handleLoginToSpotify,setSearchResults,
-      searchCommand , setSearchCommand} = useContext(AppContext);
+      searchCommand} = useContext(AppContext);
 
       const client_id='dc90f37b8774443685687850b885de75' 
       const client_Secret='9b08e01df6924139973772576d03d47b'

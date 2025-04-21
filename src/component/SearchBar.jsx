@@ -5,20 +5,24 @@ import '../styles/darkmode.css';
 
 
 
-export default function SearchBar({onSearch}){
+export default function SearchBar(){
 const [search , setSearch] = useState('');
 const [cleanSearch , setCleanSearch] = useState(true);
-//const [errorSearch , setErrorSearch] = useState(fales);
-const {setSearchCommand,noResult,setSearchType} = useContext(AppContext);
+const {setSearchCommand,noResult} = useContext(AppContext);
 
-
+///in input user search for song album and artist 
+// at asme time handleonchange  captres the input and 
+// sets the search state .
+// handlesubmit after user clicks sets Searchcommand with type and id 
+// the Searchcommand  will be use later in data.jsx for fetching base on id and type, 
+// then empty out the search state, 
+//then cleans the input for next search
 const handleSubmit = (e) => {
         e.preventDefault();
         if(search.trim()){
-       // onSearch(search);
+       
         setCleanSearch(false);
-       // setSearchType('search');
-        setSearchCommand({type:'search', id:search});// check to see does search:search works?
+        setSearchCommand({type:'search', id:search});
         setSearch('');
     }
     }
