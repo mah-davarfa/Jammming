@@ -33,7 +33,7 @@ describe('SearchResults', () => {
       handlePlay: jest.fn(),
       playlistTitle: 'My Playlist',
       currentSong: null,
-      ...overrides
+      ...overrides 
     };
 
     render(

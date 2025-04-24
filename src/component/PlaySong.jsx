@@ -4,13 +4,13 @@ import '../styles/darkmode.css';
 import Playlist from './Playlist';
  
 export const PlaySong = ()=>{
-    const {addedToPlaylist,playlist,handleAddToPlaylist,handleRemove,selectedSong,searchResultsAll,playlistTitle,searchCommand}=useContext(AppContext);
+    const {addedToPlaylist,handleAddToPlaylist,handleRemove,selectedSong,playlistTitle,searchCommand}=useContext(AppContext);
     
     const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
     
    console.log('search command ;',searchCommand);
    console.log('selectedsong :',selectedSong ); 
-    if(playlist.length>0 || searchResultsAll.length>0 || searchCommand){
+    
        
     if (!selectedSong && searchCommand ) {
         return (
@@ -75,5 +75,5 @@ export const PlaySong = ()=>{
         </div>
 
     )
-}};
+};
 export default PlaySong;

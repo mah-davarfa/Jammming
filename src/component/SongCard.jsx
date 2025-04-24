@@ -5,6 +5,13 @@ import PlaySong from './PlaySong';
 import '../styles/darkmode.css';
 
 function SongCard({ name, artist, album, preview, popularity, uri, id, image }) {
+  
+  //the song info comes as props to here, but the handleRemove, handlePlay,
+  //  handleAddToPlaylist, addedToPlaylist, playlistTitle come from the context
+  //the handleRemove, handlePlay, handleAddToPlaylist, addedToPlaylist,
+  //  playlistTitle are used to remove add the song from the playlist, play the song,
+  //  add the song to the play song, check if the song is already in the playlist and in playsong and get 
+  // the title of the playlist respectively if changes,
   const {
     handleRemove,
     currentSong,
