@@ -8,7 +8,6 @@ const Playlist=()=>{
     handleRemove,
     playlist,
     setPlaylist,
-    searchResultsAll,
     playlistLimitReached,
     continueToSearchAsGuest,
     handleLoginToSpotify,
@@ -180,11 +179,16 @@ const Playlist=()=>{
                   (<p>
                     popularity: {song.popularity}
                   </p>) : null}
-                  <button onClick={() => handleRemove(song.id, 'playlist')}>
+                  <button onClick={() =>
+                    handleRemove(song.id, 'playlist')
+                    }>
                     Remove this song
                   </button>
                   
-                  <button onClick={() => handlePlay(song)}>
+                  <button onClick={() => {
+                    handlePlay(song);
+                    console.log('🎵 Playlist song clicked in play list:', song);
+                    }}>
                     {currentSong === song.id ? 'Now Playing' : 'Play'}
                 </button>
               </div>

@@ -123,7 +123,7 @@ export const AppProvider = ({children}) => {
 
 const handlePlay = async (song) => {
   console.log("🟨 Trying to get preview for:", song.name, song.artist,song.preview);
- 
+  console.log('🎵 Playlist song clicked data in top of fetch:', song);
   
   if (!song.preview) {
     try {
@@ -133,7 +133,7 @@ const handlePlay = async (song) => {
       if (data.success && data.results.length > 0) {
         song.preview = data.results[0].previewUrls[0];
         console.log("Fetched preview URL from backend:", song.preview);
-        setSelectedSong(song);
+       // setSelectedSong(song);
       } else {
         console.warn("No preview found from backend.");
       }
@@ -141,7 +141,8 @@ const handlePlay = async (song) => {
       console.error("Error fetching preview from backend:", err);
     }
   }
-  
+  setSelectedSong(song);
+  console.log('🎶 Currently selected by playlist song in button of fetch:', selectedSong);
 };
 
 
