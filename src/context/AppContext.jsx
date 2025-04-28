@@ -116,6 +116,10 @@ export const AppProvider = ({children}) => {
             setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
             setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
           }
+          if(form==='artistcard'){
+            setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
+            setSearchResultsAll((prevs)=>prevs.filter((item)=>item.id !==id));
+          }
       }
 
   // Function to handle playing a song from 3rd party tool using express server

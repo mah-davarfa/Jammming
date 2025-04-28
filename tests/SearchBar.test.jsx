@@ -29,7 +29,7 @@ describe ('SearchBar',()=>{
         const button = screen.getByRole('button',{name: /search/i});
         
         expect(button).toBeDisabled();
-        expect(screen.getByRole('button',{name:/search/i})).toBeDisabled();
+        // expect(screen.getByRole('button',{name:/search/i})).toBeDisabled();
     });
 
     it (' if input is not empty the button is enable',()=>{

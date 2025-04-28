@@ -1,15 +1,11 @@
-import react, {useState,useContext} from 'react';
+import React, {useState,useContext} from 'react';
 import  {AppContext} from '../context/AppContext';
 import '../styles/darkmode.css';
 
 function ArtistCard({id, name, image, genre, popularity}){
 
-    const {searchCommand , setSearchCommand,setSearchTerm,setSearchResults,setSearchResultsAll,setSearchType} = useContext(AppContext);
-    const handleRemove =(e)=>{
-        e.stopPropagation();
-        setSearchResults((prev)=>prev.filter((item)=>item.id !==id));
-        setSearchResultsAll((prev)=>prev.filter((item)=>item.id !==id));
-    }
+    const { setSearchCommand,handleRemove} = useContext(AppContext);
+    
 
     const handelgetSong=()=>{
        // setSearchTerm(id);//adjust latter
@@ -30,7 +26,7 @@ function ArtistCard({id, name, image, genre, popularity}){
                     <h3>{name}</h3>
                     <p>Genre: {genre}</p>   
                     <p>Popularity: {popularity}</p>
-                    <button  onClick={handleRemove}>Remove</button>
+                    <button  onClick={()=>handleRemove(id, 'artistcard')}>Remove</button>
                     <button onClick={handelgetSong}>Get top Songs</button>
       </div>
     )

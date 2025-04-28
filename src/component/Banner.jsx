@@ -6,7 +6,7 @@ import { AppContext } from '../context/AppContext.jsx';
 export default function Banner() {
    
    
-    const { continueToSearchAfterLogin,setContinueToSearchAsGuest,setContinueToSearchAfterLogin,
+    const { continueToSearchAfterLogin,setContinueToSearchAsGuest,
     continueToSearchAsGuest,handleLoginToSpotify,submitted,name,handlerNameInput,submitHandler} = useContext(AppContext);
     
     

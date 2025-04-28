@@ -40,6 +40,7 @@ describe('SongCard',()=>{
             />
         </AppContext.Provider>
       );
+      return defaultContext;
   }
   it('renders song details correctly',()=>{
     renderWithContext();
