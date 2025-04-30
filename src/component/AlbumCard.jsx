@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-import '../styles/darkmode.css';
+import '../styles/darkMode.css';
 
 function AlbumCard({ name, artist, image, releaseDate, genre, songs, totalOfSongs, id }) {
   const {

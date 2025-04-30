@@ -6,43 +6,34 @@ export default function Data({ onSearchTerm }) {
   console.log("Data component mounted!");
 
   const [guestToken, setGuestToken] = useState(null);
+  const { userToken, continueToSearchAsGuest, searchCommand } = useContext(AppContext);
 
-  const { userToken, continueToSearchAsGuest, searchCommand } =
-    useContext(AppContext);
-
-  const client_id = "dc90f37b8774443685687850b885de75";
-  const client_Secret = "9b08e01df6924139973772576d03d47b";
-
+  // ✅ Securely fetch guest token from your backend
   useEffect(() => {
     if (continueToSearchAsGuest) {
       const getGuestToken = async () => {
-        const credentials = btoa(`${client_id}:${client_Secret}`);
         try {
-          const response = await fetch(
-            "https://accounts.spotify.com/api/token",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                Authorization: `Basic ${credentials}`,
-              },
-              body: "grant_type=client_credentials",
-            }
-          );
-          if (response.ok) {
-            const token = await response.json();
-            setGuestToken(token.access_token);
-            console.log("guest token is:", token.access_token);
+          // const response = await fetch(
+          //   "https://jammming-backend.onrender.com/api/token"
+          // );
+          const response = await fetch("http://localhost:4000/api/token");
+          const data = await response.json();
+
+          if (data.access_token) {
+            setGuestToken(data.access_token);
+            console.log("guest token is:", data.access_token);
+          } else {
+            throw new Error("Failed to retrieve token from backend.");
           }
-          throw new Error(`HTTP status:${response.status}`);
         } catch (error) {
-          console.log("Error in fetching gust token:", error);
+          console.log("Error fetching guest token from backend:", error);
         }
       };
       getGuestToken();
     }
   }, [continueToSearchAsGuest]);
 
+  // 🔁 Fetch Spotify data when a command is triggered
   useEffect(() => {
     if (!searchCommand || !searchCommand.id) return;
 

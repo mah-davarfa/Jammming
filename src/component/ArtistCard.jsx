@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import "../styles/darkmode.css";
+import '../styles/darkMode.css';
 
 function ArtistCard({ id, name, image, genre, popularity }) {
   const { setSearchCommand, handleRemove } = useContext(AppContext);

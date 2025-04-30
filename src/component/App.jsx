@@ -7,7 +7,7 @@ import SearchResults from "./SearchResults.jsx";
 import { AppContext } from "../context/AppContext.jsx";
 import PlaySong from "./PlaySong.jsx";
 import Playlist from "./Playlist.jsx";
-import "../styles/darkmode.css";
+import '../styles/darkMode.css';
 
 ///
 

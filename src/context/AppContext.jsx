@@ -15,8 +15,7 @@ export const AppProvider = ({ children }) => {
   const [playlistLimitReached, setPlaylistLimitReached] = useState(false);
   const [searchResultTag, setSearchResultTag] = useState(false);
   const [continueToSearchAsGuest, setContinueToSearchAsGuest] = useState(false);
-  const [continueToSearchAfterLogin, setContinueToSearchAfterLogin] =
-    useState(false);
+  const [continueToSearchAfterLogin, setContinueToSearchAfterLogin] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [searchtype, setSearchType] = useState("search");
 
@@ -25,7 +24,9 @@ export const AppProvider = ({ children }) => {
     try {
       const parsed = JSON.parse(storedCommand);
       return storedCommand && storedCommand !== "undefined" ? parsed : [null];
-    } catch {}
+    } catch {
+      return [null];
+    }
   });
 
   const [name, setName] = useState(() => {
@@ -39,7 +40,6 @@ export const AppProvider = ({ children }) => {
 
   const [submitted, setSubmitted] = useState(() => {
     const storedSubmitted = localStorage.getItem("submitted");
-
     return storedSubmitted ? JSON.parse(storedSubmitted) : false;
   });
 
@@ -64,31 +64,17 @@ export const AppProvider = ({ children }) => {
   });
 
   const [isSearchStarted, setIsSearchStarted] = useState(() => {
-    // had error then use try catch
     try {
-      const storedIsSearchStartedValue =
-        localStorage.getItem("isSearchStarted");
-      return storedIsSearchStartedValue
-        ? JSON.parse(storedIsSearchStartedValue)
-        : false;
+      const stored = localStorage.getItem("isSearchStarted");
+      return stored ? JSON.parse(stored) : false;
     } catch {
       return false;
     }
   });
+
   useEffect(() => {
     localStorage.setItem("isSearchStarted", JSON.stringify(isSearchStarted));
   }, [isSearchStarted]);
-
-  const handlerNameInput = (e) => {
-    setName(e.target.value);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (name.trim()) {
-      setSubmitted(true);
-    }
-  };
 
   useEffect(() => {
     localStorage.setItem("name", JSON.stringify(name));
@@ -102,7 +88,7 @@ export const AppProvider = ({ children }) => {
       setSelectedSong(null);
       setCurrentSong(null);
     }
-    if (form === "songcard") {
+    if (form === "songcard" || form === "albumcard" || form === "artistcard") {
       setSearchResults((prev) => prev.filter((item) => item.id !== id));
       setSearchResultsAll((prevs) => prevs.filter((item) => item.id !== id));
       setSelectedSong(null);
@@ -111,63 +97,34 @@ export const AppProvider = ({ children }) => {
     if (form === "playlist") {
       setPlaylist((pre) => pre.filter((item) => item.id !== id));
     }
-    if (form === "albumcard") {
-      setSearchResults((prev) => prev.filter((item) => item.id !== id));
-      setSearchResultsAll((prevs) => prevs.filter((item) => item.id !== id));
-    }
-    if (form === "artistcard") {
-      setSearchResults((prev) => prev.filter((item) => item.id !== id));
-      setSearchResultsAll((prevs) => prevs.filter((item) => item.id !== id));
-    }
   };
 
   const handlePlay = async (song) => {
-    console.log(
-      " Trying to get preview for:",
-      song.name,
-      song.artist,
-      song.preview
-    );
-    console.log(" Playlist song clicked data in top of fetch:", song);
-
     if (!song.preview) {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/preview?song=${encodeURIComponent(
-            song.name
-          )}&artist=${encodeURIComponent(song.artist)}`
+          `https://jammming-backend.onrender.com/api/preview?song=${encodeURIComponent(song.name)}&artist=${encodeURIComponent(song.artist)}`
         );
         const data = await response.json();
-
         if (data.success && data.results.length > 0) {
           song.preview = data.results[0].previewUrls[0];
-          console.log("Fetched preview URL from backend:", song.preview);
         } else {
-          console.warn("No preview found from backend.");
+          console.warn("No preview found.");
         }
       } catch (err) {
-        console.error("Error fetching preview from backend:", err);
+        console.error("Error fetching preview:", err);
       }
     }
     setSelectedSong(song);
-    console.log(
-      " Currently selected by playlist song in button of fetch:",
-      selectedSong
-    );
   };
 
   const handleAddToPlaylist = (song) => {
     setIsSaved(false);
     setPlaylist((prev) => {
-      if (prev.length >= 10) {
+      if (prev.length >= 10 || prev.some((item) => item.id === song.id)) {
         return prev;
-      } else {
-        if (prev.some((item) => item.id === song.id)) {
-          return prev;
-        } else {
-          return [...prev, song];
-        }
       }
+      return [...prev, song];
     });
   };
 
@@ -175,7 +132,7 @@ export const AppProvider = ({ children }) => {
     if (selectedSong) {
       setCurrentSong(selectedSong.id);
     }
-  }, [selectedSong, setCurrentSong]);
+  }, [selectedSong]);
 
   useEffect(() => {
     setPlaylistLimitReached(playlist.length >= 10);
@@ -186,105 +143,88 @@ export const AppProvider = ({ children }) => {
   }, [playlist]);
 
   const generateRandomString = (length) => {
-    const ster =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
-    for (let j = 0; j < length; j++) {
-      const randomSterindex = Math.floor(Math.random() * ster.length);
-      result += ster[randomSterindex];
-    }
-    return result;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
   };
-  async function generateChallengeCode(codeVerifier) {
-    ///convert string to binary data
+
+  const generateChallengeCode = async (verifier) => {
     const encoder = new TextEncoder();
-    //convert to UTF-8 bytes
-    const data = encoder.encode(codeVerifier);
-    //hash the bytes using SHA-256
+    const data = encoder.encode(verifier);
     const digest = await window.crypto.subtle.digest("SHA-256", data);
-    // calling next function to convert to safe base64url
     return base64UrlEncode(digest);
-  }
-  //convert to safe base64url
-  function base64UrlEncode(buffer) {
-    //Take a binary buffer, convert it into an array of bytes, then turn those bytes into string into Base64 and
-    // convert or remove(/\+=)
-    //new Uint8Array(buffer) will convert the buffer to an array of bytes
-    //String.fromCharCode will convert the array of bytes to a string
-    //btoa will convert the string to Base64
+  };
+
+  const base64UrlEncode = (buffer) => {
     return btoa(String.fromCharCode(...new Uint8Array(buffer)))
       .replace(/\+/g, "-")
       .replace(/\//g, "_")
       .replace(/=+$/, "");
-  }
+  };
 
   const handleLoginToSpotify = async () => {
     const codeVerifier = generateRandomString(128);
     const codeChallenge = await generateChallengeCode(codeVerifier);
     localStorage.setItem("code_verifier-spotify", codeVerifier);
-    const client_id = "dc90f37b8774443685687850b885de75";
-    const redirect_uri = "http://localhost:5173/";
+
+    const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+    const redirect_uri = import.meta.env.VITE_REDIRECT_URI;
     const scope = "playlist-modify-public playlist-modify-private";
 
-    const SPOTIFY_AUTH_URL =
-      `https://accounts.spotify.com/authorize` +
-      `?response_type=code` +
-      `&client_id=${client_id}` +
-      `&scope=${encodeURIComponent(scope)}` +
-      `&redirect_uri=${encodeURIComponent(redirect_uri)}` +
-      `&code_challenge_method=S256` +
-      `&code_challenge=${codeChallenge}`;
-    window.location.href = SPOTIFY_AUTH_URL;
+    const authURL =
+      `https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}` +
+      `&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirect_uri)}` +
+      `&code_challenge_method=S256&code_challenge=${codeChallenge}`;
+
+    window.location.href = authURL;
   };
-  ///this UseEffect checks if we have Authorization code in the URL after redirecting from spotify
-  //and then it will call for UserToken function to get the access token
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const authorizationCode = queryParams.get("code");
 
     if (authorizationCode) {
-      console.log("Authorization code found in URL:", authorizationCode);
       setContinueToSearchAfterLogin(true);
 
       const getUserToken = async () => {
         const codeVerifier = localStorage.getItem("code_verifier-spotify");
-        const client_id = "dc90f37b8774443685687850b885de75";
-        const redirect_uri = "http://localhost:5173/";
+        const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+        const redirect_uri = import.meta.env.VITE_REDIRECT_URI;
 
         try {
-          const response = await fetch(
-            "https://accounts.spotify.com/api/token",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-              body: new URLSearchParams({
-                grant_type: "authorization_code",
-                code: authorizationCode,
-                redirect_uri: redirect_uri,
-                client_id: client_id,
-                code_verifier: codeVerifier,
-              }),
-            }
-          );
+          const response = await fetch("https://accounts.spotify.com/api/token", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({
+              grant_type: "authorization_code",
+              code: authorizationCode,
+              redirect_uri: redirect_uri,
+              client_id: client_id,
+              code_verifier: codeVerifier,
+            }),
+          });
 
           const data = await response.json();
-
           if (response.ok) {
             setUserToken(data.access_token);
-            console.log("User access token:", data.access_token);
           } else {
             console.error("Error fetching access token:", data);
           }
         } catch (error) {
-          console.error("Error in fetch request:", error);
+          console.error("Fetch error:", error);
         }
       };
 
       getUserToken();
     }
   }, []);
+
+  const handlerNameInput = (e) => setName(e.target.value);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (name.trim()) {
+      setSubmitted(true);
+    }
+  };
 
   return (
     <AppContext.Provider

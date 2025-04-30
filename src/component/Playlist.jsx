@@ -1,6 +1,6 @@
 import React,{useContext,useState} from 'react';
 import {AppContext} from '../context/AppContext';
-import '../styles/darkmode.css';
+import '../styles/darkMode.css';
 
 const Playlist=()=>{
   const {handlePlay,

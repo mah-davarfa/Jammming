@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import Playlist from "./Playlist";
 import PlaySong from "./PlaySong";
-import "../styles/darkmode.css";
+import '../styles/darkMode.css';
 
 function SongCard({
   name,

@@ -3,7 +3,7 @@ import AlbumCard from "./AlbumCard";
 import SongCard from "./SongCard";
 import ArtistCard from "./ArtistCard";
 import { AppContext } from "../context/AppContext";
-import "../styles/darkmode.css";
+import '../styles/darkMode.css';
 
 const SearchResults = () => {
   const {
