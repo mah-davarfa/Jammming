@@ -8,8 +8,7 @@ function ArtistCard({id, name, image, genre, popularity}){
     
 
     const handelgetSong=()=>{
-       // setSearchTerm(id);//adjust latter
-       // setSearchType('artist');
+     
         setSearchCommand({type:'artist', id:id});
     };
     

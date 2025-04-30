@@ -5,7 +5,7 @@ import '../styles/darkMode.css';
 
 const ToggleMode = () => {
 
-    const {isDarkMode , setIsDarkMode,setUserToken,setContinueToSearchAsGuest, setIsSearchStarted,
+    const {isDarkMode , setIsDarkMode,setUserToken,setContinueToSearchAsGuest, 
         setContinueToSearchAfterLogin,setSubmitted,setName,setSearchResults,
         setSearchResultsAll,setPlaylist,setSelectedSong,setCurrentSong,setSearchCommand} = useContext(AppContext);
         const togglMode = () => {
@@ -26,7 +26,7 @@ const ToggleMode = () => {
                 localStorage.removeItem('isSearchStarted'); 
                 localStorage.removeItem('playlist'); 
                 localStorage.removeItem('searchResultsAll'); 
-               // localStorage.removeItem('command');
+               
                 setName('');
                 setSubmitted(false);
                 setContinueToSearchAfterLogin(false);

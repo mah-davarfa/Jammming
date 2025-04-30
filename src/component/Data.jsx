@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default function Data({onSearchTerm}) {
   console.log("Data component mounted!");
-    //While up dating fetch i need to use searchTerm to be fetched and Spotify guideline fetching( based on artist song and album)
+    
 
 const [guestToken ,setGuestToken] = useState(null);  
 
@@ -14,10 +14,10 @@ const [guestToken ,setGuestToken] = useState(null);
 
       const client_id='dc90f37b8774443685687850b885de75' 
       const client_Secret='9b08e01df6924139973772576d03d47b'
-            //check if user picked to login or continue as guest
+            
             useEffect(()=>{
       
-            ///////checks if user cclicked on guest,then fetch the Client Credentials Flow to get guestToken
+            
                   if (continueToSearchAsGuest){
                     const getGuestToken = async ()=>{
                       const credentials = btoa(`${client_id}:${client_Secret}`);
@@ -58,8 +58,7 @@ const [guestToken ,setGuestToken] = useState(null);
                 let url = '';
                 
                 console.log('searchCommand', searchCommand);
-               // console.log('searchType:', searchType);
-               // console.log('isId:', isId);
+               
                   
                 if (!isId || searchCommand.type === 'search') {
                   url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchCommand.id)}&type=album,track,artist&limit=5&include_external=audio`;
@@ -80,7 +79,7 @@ const [guestToken ,setGuestToken] = useState(null);
                   });
           
                   const data = response.data;
-                  onSearchTerm(data); // Pass the data to the parent component
+                  onSearchTerm(data); 
                   console.log("Data fetched:", data);
       
                                   } catch (error) {

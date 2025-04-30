@@ -89,7 +89,7 @@ export const AppProvider = ({children}) => {
   }
 
   
-  //useing useEffect to save the logical atate for after re-directing from spotify
+  
   useEffect(()=>{
       localStorage.setItem('name', JSON.stringify(name));
       localStorage.setItem('submitted', JSON.stringify(submitted));
@@ -122,12 +122,11 @@ export const AppProvider = ({children}) => {
           }
       }
 
-  // Function to handle playing a song from 3rd party tool using express server
-  // This function fetches the preview URL from the backend if it doesn't exist in the song object
+ 
 
 const handlePlay = async (song) => {
-  console.log("🟨 Trying to get preview for:", song.name, song.artist,song.preview);
-  console.log('🎵 Playlist song clicked data in top of fetch:', song);
+  console.log(" Trying to get preview for:", song.name, song.artist,song.preview);
+  console.log(' Playlist song clicked data in top of fetch:', song);
   
   if (!song.preview) {
     try {
@@ -137,7 +136,7 @@ const handlePlay = async (song) => {
       if (data.success && data.results.length > 0) {
         song.preview = data.results[0].previewUrls[0];
         console.log("Fetched preview URL from backend:", song.preview);
-       // setSelectedSong(song);
+       
       } else {
         console.warn("No preview found from backend.");
       }
@@ -146,12 +145,12 @@ const handlePlay = async (song) => {
     }
   }
   setSelectedSong(song);
-  console.log('🎶 Currently selected by playlist song in button of fetch:', selectedSong);
+  console.log(' Currently selected by playlist song in button of fetch:', selectedSong);
 };
 
 
-        //cap for playlist at 10 song
-      const handleAddToPlaylist=(song)=>{
+        
+  const handleAddToPlaylist=(song)=>{
                     setIsSaved(false)
                     setPlaylist((prev)=> {      
                       if(prev.length>=10){
@@ -162,28 +161,27 @@ const handlePlay = async (song) => {
                           } else {
                              return [...prev , song]
                             }}
-                         })}          
+                    })}          
                     
-           //CHANGING PLAY TO NOW PLAYING AND REVERSE
-           useEffect(()=>{
+           
+    useEffect(()=>{
             if(selectedSong){
                 setCurrentSong(selectedSong.id)
             }
            },[selectedSong,setCurrentSong])
 
-            //check for fales or true
+            
             useEffect(()=>{
                setPlaylistLimitReached(playlist.length>=10)
             },[playlist])
          
-         //changing the add to playlist to already added to playlist
+         
          useEffect(()=>{
           setAddedToPlaylist((playlist.map((item)=>item.id)))
          },[playlist])
          
          
-         /////////PKCE AUTHORIZATION CODE FLOW FOR SPOTIFY LOGIN///////////
-         //create a random string for the code_verifier
+        
           const generateRandomString =(length)=>{
             const ster = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let result='';

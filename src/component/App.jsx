@@ -28,11 +28,10 @@ import '../styles/darkmode.css';
     setSearchCommand,searchCommand
   } = useContext(AppContext);
   
-  ///search to term ?
+ 
   const handleSearch =(search)=>{
-    //setSearchTerm(search);
-    //setSearchType('search');
-    setSearchCommand({type:'search', id:search});// check to see does search:search works?
+    
+    setSearchCommand({type:'search', id:search}); 
   }
   const handleSearchTerm = (data) => {
     let allItems = [];

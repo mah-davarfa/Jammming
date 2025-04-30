@@ -10,13 +10,7 @@ const [search , setSearch] = useState('');
 const [cleanSearch , setCleanSearch] = useState(true);
 const {setSearchCommand,noResult} = useContext(AppContext);
 
-///in input user search for song album and artist 
-// at asme time handleonchange  captres the input and 
-// sets the search state .
-// handlesubmit after user clicks sets Searchcommand with type and id 
-// the Searchcommand  will be use later in data.jsx for fetching base on id and type, 
-// then empty out the search state, 
-//then cleans the input for next search
+
 const handleSubmit = (e) => {
         e.preventDefault();
         if(search.trim()){

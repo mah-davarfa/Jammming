@@ -32,7 +32,7 @@ export const PlaySong = ()=>{
                     alt={selectedSong.name} 
                     width={250} 
                     height={250}
-                    onError={(e) => e.target.src = fallbackImg} // Fallback image
+                    onError={(e) => e.target.src = fallbackImg} 
                 />
                 <h3>Playing : {selectedSong.name}</h3>
                 <p>Artist: {selectedSong.artist}</p>
