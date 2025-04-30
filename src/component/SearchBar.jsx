@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext.jsx";
 import "../styles/SearchBar.css";
-import '../styles/darkMode.css';
+import "../styles/darkMode.css";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
