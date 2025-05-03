@@ -18,7 +18,8 @@ const ToggleMode = () => {
     setSelectedSong,
     setCurrentSong,
     setSearchCommand,
-    setIsSaved
+    setIsSaved,
+    setPlaylistTitle
   } = useContext(AppContext);
   const togglMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -40,6 +41,7 @@ const ToggleMode = () => {
           localStorage.removeItem("isSearchStarted");
           localStorage.removeItem("playlist");
           localStorage.removeItem("searchResultsAll");
+          setPlaylistTitle("PlayList");
           setIsDarkMode(true);
           setIsSaved(false);
           setName("");
