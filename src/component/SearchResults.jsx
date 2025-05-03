@@ -44,18 +44,18 @@ const SearchResults = () => {
     console.log(`Item ${i}:`, item);
     // ...
   });
-
+  //removing:  {searchResultsAll.length > 0 || searchResultTag || playlist.length > 0 ? (<div className={"SearchResult-title"}> : null}
   return (
     <div>
-      {searchResultsAll.length > 0 || searchResultTag || playlist.length > 0 ? (
+      
         <div className={"SearchResult-title"}>
           <h2>search results</h2>
-          {!searchResultsAll.length && searchCommand ? (
+          {searchResultsAll.length === 0  ? (
             <p className="playlist-empty">
               Search Results is Empty! Search For Song or Artist or Album!{" "}
             </p>
           ) : null}
-          {!searchResultsAll.length && searchCommand ? null : (
+          {searchResultsAll.length > 0 ? (
             <button
               type="button"
               onClick={() => {
@@ -65,9 +65,10 @@ const SearchResults = () => {
             >
               Clear Search Results
             </button>
-          )}
+          ) : null}
         </div>
-      ) : null}
+       { /*removing: ) : null}*/}
+      
       {searchResultsAll && searchResultsAll.length > 0 ? (
         <div className="list">
           {searchResultsAll.map((item, index) => {

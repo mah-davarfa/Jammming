@@ -24,7 +24,7 @@ function SongCard({
   } = useContext(AppContext);
 
   const fallbackImg =
-    "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
+    "/imag/fallbackimg.jpg"; // Fallback image path
   const [imgSrc, setImgSrc] = useState(image || fallbackImg);
 
   return (

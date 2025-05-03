@@ -14,12 +14,12 @@ export const PlaySong = () => {
   } = useContext(AppContext);
 
   const fallbackImg =
-    "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
+    "/imag/fallbackimg.jpg";
 
   console.log("search command ;", searchCommand);
   console.log("selectedsong :", selectedSong);
-
-  if (!selectedSong && searchCommand) {
+  //removed  && searchCommand
+  if (!selectedSong ) {
     return (
       <div className="play-song-empty">
         <p>No song selected. Click 'Play' on a song to start playing.</p>

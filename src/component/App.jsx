@@ -65,7 +65,7 @@ function App() {
           <div>
             <Banner />
           </div>
-
+          
           {continueToSearchAsGuest || continueToSearchAfterLogin ? (
             <div>
               <div className={"SearchToggleBar"}>
@@ -78,14 +78,9 @@ function App() {
               </div>
               <Data onSearchTerm={handleSearchTerm} />
 
-              {!searchCommand ? (
-                <div>
-                  <video autoPlay muted loop className="startup-Background">
-                    <source src="/video/background2.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              ) : (
+             
+                
+              
                 <div className="main-container">
                   <div className={"search-results-c"}>
                     <SearchResults />
@@ -97,7 +92,7 @@ function App() {
                     <Playlist />
                   </div>
                 </div>
-              )}
+              
             </div>
           ) : (
             <div>

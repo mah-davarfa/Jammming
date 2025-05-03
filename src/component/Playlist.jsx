@@ -18,7 +18,7 @@ const Playlist=()=>{
     
     const [isLoggedIn,setIsLoggedIn]=useState(false);
     
-    const fallbackImg = "../../imag/vecteezy_wireframe-landscape-elevation-particle-background-abstract_8009451.jpg";
+    const fallbackImg = "/imag/fallbackimg.jpg"; // Fallback image path
    
     const handleEdit = () => {
       if (isEditing) {
@@ -42,6 +42,7 @@ const Playlist=()=>{
       if ( playlist.length === 0 ){
         return (
         <div className={'playlist-empty'}>
+          <h2 className='warning-text'>{playlistTitle}</h2>
           <p>{`${isSaved  ? '✅ successfully saved to your Spotify account!': ''} The ${playlistTitle} is empty. Add a song!`}</p>
           
         </div>
