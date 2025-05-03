@@ -3,7 +3,7 @@ import AlbumCard from "./AlbumCard";
 import SongCard from "./SongCard";
 import ArtistCard from "./ArtistCard";
 import { AppContext } from "../context/AppContext";
-import '../styles/darkMode.css';
+import "../styles/darkMode.css";
 
 const SearchResults = () => {
   const {
@@ -44,31 +44,29 @@ const SearchResults = () => {
     console.log(`Item ${i}:`, item);
     // ...
   });
-  //removing:  {searchResultsAll.length > 0 || searchResultTag || playlist.length > 0 ? (<div className={"SearchResult-title"}> : null}
+
   return (
     <div>
-      
-        <div className={"SearchResult-title"}>
-          <h2>search results</h2>
-          {searchResultsAll.length === 0  ? (
-            <p className="playlist-empty">
-              Search Results is Empty! Search For Song or Artist or Album!{" "}
-            </p>
-          ) : null}
-          {searchResultsAll.length > 0 ? (
-            <button
-              type="button"
-              onClick={() => {
-                setSearchResultsAll([]);
-                setSearchResults([]);
-              }}
-            >
-              Clear Search Results
-            </button>
-          ) : null}
-        </div>
-       { /*removing: ) : null}*/}
-      
+      <div className={"SearchResult-title"}>
+        <h2>search results</h2>
+        {searchResultsAll.length === 0 ? (
+          <p className="playlist-empty">
+            Search Results is Empty! Search For Song or Artist or Album!{" "}
+          </p>
+        ) : null}
+        {searchResultsAll.length > 0 ? (
+          <button
+            type="button"
+            onClick={() => {
+              setSearchResultsAll([]);
+              setSearchResults([]);
+            }}
+          >
+            Clear Search Results
+          </button>
+        ) : null}
+      </div>
+
       {searchResultsAll && searchResultsAll.length > 0 ? (
         <div className="list">
           {searchResultsAll.map((item, index) => {

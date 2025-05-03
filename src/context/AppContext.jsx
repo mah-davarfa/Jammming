@@ -15,7 +15,8 @@ export const AppProvider = ({ children }) => {
   const [playlistLimitReached, setPlaylistLimitReached] = useState(false);
   const [searchResultTag, setSearchResultTag] = useState(false);
   const [continueToSearchAsGuest, setContinueToSearchAsGuest] = useState(false);
-  const [continueToSearchAfterLogin, setContinueToSearchAfterLogin] = useState(false);
+  const [continueToSearchAfterLogin, setContinueToSearchAfterLogin] =
+    useState(false);
   const [userToken, setUserToken] = useState(null);
   const [searchtype, setSearchType] = useState("search");
 
@@ -103,7 +104,9 @@ export const AppProvider = ({ children }) => {
     if (!song.preview) {
       try {
         const response = await fetch(
-          `https://jammming-backend.onrender.com/api/preview?song=${encodeURIComponent(song.name)}&artist=${encodeURIComponent(song.artist)}`
+          `https://jammming-backend.onrender.com/api/preview?song=${encodeURIComponent(
+            song.name
+          )}&artist=${encodeURIComponent(song.artist)}`
         );
         const data = await response.json();
         if (data.success && data.results.length > 0) {
@@ -143,8 +146,12 @@ export const AppProvider = ({ children }) => {
   }, [playlist]);
 
   const generateRandomString = (length) => {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    return Array.from(
+      { length },
+      () => chars[Math.floor(Math.random() * chars.length)]
+    ).join("");
   };
 
   const generateChallengeCode = async (verifier) => {
@@ -172,7 +179,9 @@ export const AppProvider = ({ children }) => {
 
     const authURL =
       `https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}` +
-      `&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirect_uri)}` +
+      `&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(
+        redirect_uri
+      )}` +
       `&code_challenge_method=S256&code_challenge=${codeChallenge}`;
 
     window.location.href = authURL;
@@ -191,17 +200,20 @@ export const AppProvider = ({ children }) => {
         const redirect_uri = import.meta.env.VITE_REDIRECT_URI;
 
         try {
-          const response = await fetch("https://accounts.spotify.com/api/token", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-              grant_type: "authorization_code",
-              code: authorizationCode,
-              redirect_uri: redirect_uri,
-              client_id: client_id,
-              code_verifier: codeVerifier,
-            }),
-          });
+          const response = await fetch(
+            "https://accounts.spotify.com/api/token",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: new URLSearchParams({
+                grant_type: "authorization_code",
+                code: authorizationCode,
+                redirect_uri: redirect_uri,
+                client_id: client_id,
+                code_verifier: codeVerifier,
+              }),
+            }
+          );
 
           const data = await response.json();
           if (response.ok) {

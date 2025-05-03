@@ -5,7 +5,7 @@ Jammming is a modern React app that allows users to search for songs, albums, an
 
 ## 🚀 Demo
 Watch the full demo on YouTube: [Jammming App Demo](https://youtu.be/OBKvTJaXZnY)
-
+🌐 Live Site:https://jammming-mahmoud.netlify.app/
 --------
 
 ## 📷 Screenshots
@@ -58,6 +58,12 @@ Tested components:
 Jammming/ ├── public/ ├── src/ │ ├── components/ │ ├── context/ │ ├── styles/ │ ├── assets/screenshots/ ├── backend/ (Express server for preview support) ├── README.md ├── package.json
 
 ## 🛠️ Setup & Run
+Make sure to set up the .env file with your Spotify credentials:
+
+VITE_SPOTIFY_CLIENT_ID=your_spotify_client_id
+VITE_REDIRECT_URI=http://localhost:5173/
+
+
 
 ```bash
 # Install frontend dependencies

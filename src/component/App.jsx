@@ -7,7 +7,7 @@ import SearchResults from "./SearchResults.jsx";
 import { AppContext } from "../context/AppContext.jsx";
 import PlaySong from "./PlaySong.jsx";
 import Playlist from "./Playlist.jsx";
-import '../styles/darkMode.css';
+import "../styles/darkMode.css";
 
 ///
 
@@ -65,7 +65,7 @@ function App() {
           <div>
             <Banner />
           </div>
-          
+
           {continueToSearchAsGuest || continueToSearchAfterLogin ? (
             <div>
               <div className={"SearchToggleBar"}>
@@ -78,21 +78,17 @@ function App() {
               </div>
               <Data onSearchTerm={handleSearchTerm} />
 
-             
-                
-              
-                <div className="main-container">
-                  <div className={"search-results-c"}>
-                    <SearchResults />
-                  </div>
-                  <div className={"play-song-c"}>
-                    <PlaySong />
-                  </div>
-                  <div className={"playlist-area-c"}>
-                    <Playlist />
-                  </div>
+              <div className="main-container">
+                <div className={"search-results-c"}>
+                  <SearchResults />
                 </div>
-              
+                <div className={"play-song-c"}>
+                  <PlaySong />
+                </div>
+                <div className={"playlist-area-c"}>
+                  <Playlist />
+                </div>
+              </div>
             </div>
           ) : (
             <div>

@@ -8,7 +8,7 @@ export default function Data({ onSearchTerm }) {
   const [guestToken, setGuestToken] = useState(null);
   const { userToken, continueToSearchAsGuest, searchCommand } = useContext(AppContext);
 
-  // ✅ Securely fetch guest token from your backend
+  //  Securely fetch guest token from your backend
   useEffect(() => {
     if (continueToSearchAsGuest) {
       const getGuestToken = async () => {
@@ -33,7 +33,7 @@ export default function Data({ onSearchTerm }) {
     }
   }, [continueToSearchAsGuest]);
 
-  // 🔁 Fetch Spotify data when a command is triggered
+  //  Fetch Spotify data when a command is triggered
   useEffect(() => {
     if (!searchCommand || !searchCommand.id) return;
 

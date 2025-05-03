@@ -7,9 +7,9 @@ import fetch from 'node-fetch';
 dotenv.config();
 
 const app = express();
-app.use(cors()); // Allow requests from your React frontend
+app.use(cors()); // Allow requests from  React frontend
 
-// ✅ NEW: Token fetch route
+//  NEW: Token fetch route
 app.get('/api/token', async (req, res) => {
 
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -34,7 +34,7 @@ app.get('/api/token', async (req, res) => {
   }
 });
 
-// ✅ Existing preview route
+//  Existing preview route
 app.get('/api/preview', async (req, res) => {
   const { song, artist } = req.query;
   try {

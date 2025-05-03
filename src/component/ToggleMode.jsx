@@ -19,7 +19,7 @@ const ToggleMode = () => {
     setCurrentSong,
     setSearchCommand,
     setIsSaved,
-    setPlaylistTitle
+    setPlaylistTitle,
   } = useContext(AppContext);
   const togglMode = () => {
     setIsDarkMode((prevMode) => !prevMode);

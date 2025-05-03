@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import Playlist from "./Playlist";
 import PlaySong from "./PlaySong";
-import '../styles/darkMode.css';
+import "../styles/darkMode.css";
 
 function SongCard({
   name,
@@ -23,8 +23,7 @@ function SongCard({
     playlistTitle,
   } = useContext(AppContext);
 
-  const fallbackImg =
-    "/imag/fallbackimg.jpg"; // Fallback image path
+  const fallbackImg = "/imag/fallbackimg.jpg";
   const [imgSrc, setImgSrc] = useState(image || fallbackImg);
 
   return (
