@@ -4,7 +4,7 @@
 Jammming is a modern React app that allows users to search for songs, albums, and artists via the Spotify API, preview tracks, create playlists, and save them to their Spotify account.
 
 ## 🚀 Demo
-Watch the full demo on YouTube: [Jammming App Demo](https://youtu.be/OBKvTJaXZnY)
+Watch the full demo on YouTube: [Jammming App Demo]:(https://youtu.be/_vE6uD0FLhg)
 🌐 Live Site:https://jammming-mahmoud.netlify.app/
 --------
 
