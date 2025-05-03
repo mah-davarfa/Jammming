@@ -13,7 +13,6 @@ Watch the full demo on YouTube: [Jammming App Demo]:(https://youtu.be/_vE6uD0FLh
 ![Screenshot 2](./src/assets/screenshots/Screenshot%202.png)
 ![Screenshot 3](./src/assets/screenshots/Screenshot%203.png)
 ![Screenshot 4](./src/assets/screenshots/Screenshot%204.png)
-![Screenshot 5](./src/assets/screenshots/Screenshot%205.png)
 ![Screenshot 6](./src/assets/screenshots/Screenshot%206.png)
 ![Screenshot 7](./src/assets/screenshots/Screenshot%207.png)
 ![Screenshot 8](./src/assets/screenshots/Screenshot%208.png)
