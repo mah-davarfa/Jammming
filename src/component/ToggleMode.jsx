@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import "../styles/darkMode.css";
+import { isDescendantOrSelf } from "@testing-library/user-event/dist/cjs/utils/index.js";
 
 const ToggleMode = () => {
   const {
@@ -17,6 +18,7 @@ const ToggleMode = () => {
     setSelectedSong,
     setCurrentSong,
     setSearchCommand,
+    setIsSaved
   } = useContext(AppContext);
   const togglMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -38,7 +40,8 @@ const ToggleMode = () => {
           localStorage.removeItem("isSearchStarted");
           localStorage.removeItem("playlist");
           localStorage.removeItem("searchResultsAll");
-
+          setIsDarkMode(true);
+          setIsSaved(false);
           setName("");
           setSubmitted(false);
           setContinueToSearchAfterLogin(false);
