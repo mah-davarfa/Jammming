@@ -33,6 +33,7 @@ const ToggleMode = () => {
       >
         {isDarkMode ? "Light  Mode" : "Dark Mode"}
       </button>
+      
       <button
         onClick={() => {
           localStorage.setItem("name", JSON.stringify(""));

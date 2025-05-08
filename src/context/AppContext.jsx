@@ -19,9 +19,13 @@ export const AppProvider = ({ children }) => {
     useState(false);
   const [userToken, setUserToken] = useState(null);
   const [searchtype, setSearchType] = useState("search");
-
+  const [userPlaylistInPlaylistId, setUserPlaylistInPlaylistId] = useState("");
+  const [userPlaylists, setUserPlaylists] = useState([]);
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+  
   const [searchCommand, setSearchCommand] = useState(() => {
-    const storedCommand = localStorage.getItem("command");
+  const storedCommand = localStorage.getItem("command");
+ 
     try {
       const parsed = JSON.parse(storedCommand);
       return storedCommand && storedCommand !== "undefined" ? parsed : [null];
@@ -72,6 +76,7 @@ export const AppProvider = ({ children }) => {
       return false;
     }
   });
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("isSearchStarted", JSON.stringify(isSearchStarted));
@@ -102,6 +107,8 @@ export const AppProvider = ({ children }) => {
 
   const handlePlay = async (song) => {
     if (!song.preview) {
+      setSelectedSong(song);
+      setIsLoadingPreview(true);
       try {
         const response = await fetch(
           `https://jammming-backend.onrender.com/api/preview?song=${encodeURIComponent(
@@ -111,6 +118,7 @@ export const AppProvider = ({ children }) => {
         const data = await response.json();
         if (data.success && data.results.length > 0) {
           song.preview = data.results[0].previewUrls[0];
+          setSelectedSong({...song});
         } else {
           console.warn("No preview found.");
         }
@@ -118,7 +126,8 @@ export const AppProvider = ({ children }) => {
         console.error("Error fetching preview:", err);
       }
     }
-    setSelectedSong(song);
+    
+    setIsLoadingPreview(false);
   };
 
   const handleAddToPlaylist = (song) => {
@@ -173,20 +182,18 @@ export const AppProvider = ({ children }) => {
     const codeChallenge = await generateChallengeCode(codeVerifier);
     localStorage.setItem("code_verifier-spotify", codeVerifier);
 
-    const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-    const redirect_uri = import.meta.env.VITE_REDIRECT_URI;
+    const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;//for published version and local version
+    const redirect_uri = import.meta.env.VITE_REDIRECT_URI; //for published version and local version
     const scope = "playlist-modify-public playlist-modify-private";
-
+   
     const authURL =
-      `https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}` +
-      `&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(
-        redirect_uri
-      )}` +
-      `&code_challenge_method=S256&code_challenge=${codeChallenge}`;
-
+    `https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}` +
+    `&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirect_uri)}` +
+    `&code_challenge_method=S256&code_challenge=${codeChallenge}`;
+   
     window.location.href = authURL;
   };
-
+  // when Authorization code is received, dynamically gets the user access token
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const authorizationCode = queryParams.get("code");
@@ -237,7 +244,33 @@ export const AppProvider = ({ children }) => {
       setSubmitted(true);
     }
   };
-
+      // get the user id for playlist and userplaylists
+      async function getUserId() {
+        try {
+          const token = userToken;
+          if ( !token) return;
+          /// get the user id
+          const getUserId = await fetch("https://api.spotify.com/v1/me", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const userIdData = await getUserId.json();
+          setUserId(userIdData.id || []);
+          console.log("user id :", userIdData.id);
+          return userIdData.id;
+          
+  }catch (error) {
+          console.error("Fetching load playlist error:", error);
+        }
+  }
+  useEffect(() => {
+    if (playlist.length === 0 && userPlaylistInPlaylistId) {
+      setPlaylistTitle("Playlist");
+      setUserPlaylistInPlaylistId(""); 
+    }
+  }, [playlist]);
   return (
     <AppContext.Provider
       value={{
@@ -283,11 +316,20 @@ export const AppProvider = ({ children }) => {
         handlePlay,
         handleAddToPlaylist,
         handleLoginToSpotify,
+        getUserId,
         playlistLimitReached,
         handlerNameInput,
         submitHandler,
         playlistTitle,
         setPlaylistTitle,
+        userId, 
+        setUserId,
+        userPlaylistInPlaylistId, 
+        setUserPlaylistInPlaylistId,
+        userPlaylists, 
+        setUserPlaylists,
+        isLoadingPreview, 
+        setIsLoadingPreview
       }}
     >
       {children}

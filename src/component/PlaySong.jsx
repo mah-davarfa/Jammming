@@ -11,6 +11,8 @@ export const PlaySong = () => {
     selectedSong,
     playlistTitle,
     searchCommand,
+    isLoadingPreview, 
+    setIsLoadingPreview
   } = useContext(AppContext);
 
   const fallbackImg =
@@ -52,7 +54,7 @@ export const PlaySong = () => {
       ) : null}
       {/* <p>uri:{selectedSong.uri}</p>*/}
       {/* <p>ID:{selectedSong.id}</p>*/}
-      {selectedSong.preview ? (
+      {isLoadingPreview ? (<p>...Loading</p>):selectedSong.preview ?(
         <audio key={selectedSong.id} controls>
           <source src={selectedSong.preview} type="audio/mpeg" />
           Your browser does not support the audio element.

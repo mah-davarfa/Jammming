@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 app.use(cors()); // Allow requests from  React frontend
 
-//  NEW: Token fetch route
+//  This route fetches a guest token from Spotify using client credentials
 app.get('/api/token', async (req, res) => {
 
   const clientId = process.env.SPOTIFY_CLIENT_ID;

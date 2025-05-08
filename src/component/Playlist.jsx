@@ -17,6 +17,10 @@ const Playlist = () => {
     playlistTitle,
     setPlaylistTitle,
     userToken,
+    userId,
+    getUserId,
+    userPlaylistInPlaylistId, 
+    setUserPlaylistInPlaylistId
   } = useContext(AppContext);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -51,30 +55,22 @@ const Playlist = () => {
     );
   }
 
-  const handleSaveToSpotify = () => {
+  const handleSaveToSpotify = async () => {
     if (continueToSearchAsGuest) {
       setIsLoggedIn(true);
       return;
-    } else {
-      savePlaylistToSpotify();
+    }
+    const id = userId || (await getUserId());
+    if (id) {
+      creatPlaylistidAndpostPlaylist(id);
     }
   };
-  /// savePlaylistToSpotify function to save the playlist to Spotify
-  async function savePlaylistToSpotify() {
+  //
+
+  async function creatPlaylistidAndpostPlaylist(userId) {
+    /// create a new playlist
+    const token = userToken;
     try {
-      const token = userToken;
-      if (playlist.length === 0 || !token) return;
-      /// get the user id
-      const getUserId = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const userData = await getUserId.json();
-      const userId = userData.id;
-      console.log("user id :", userId);
-      /// create a new playlist
       const creatPlaylist = await fetch(
         `https://api.spotify.com/v1/users/${userId}/playlists`,
         {
@@ -192,7 +188,7 @@ const Playlist = () => {
 
             <button
               onClick={() => {
-                handlePlay(song);
+                handlePlay({...song});
                 console.log("🎵 Playlist song clicked in play list:", song);
               }}
             >

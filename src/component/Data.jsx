@@ -13,10 +13,10 @@ export default function Data({ onSearchTerm }) {
     if (continueToSearchAsGuest) {
       const getGuestToken = async () => {
         try {
-          const response = await fetch(
-            "https://jammming-backend.onrender.com/api/token"
-          );
-          // const response = await fetch("http://localhost:4000/api/token");
+                     //for local version
+           const response = await fetch("http://localhost:4000/api/token"); 
+                      //for render for published version
+         //const response = await fetch("https://jammming-backend.onrender.com/api/token"); 
           const data = await response.json();
 
           if (data.access_token) {

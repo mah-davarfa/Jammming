@@ -24,7 +24,7 @@ export default function SearchBar() {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit} className="search-container">
+        <form onSubmit={handleSubmit} className={"search-container"}>
           <input
             onChange={handleOnChange}
             type="text"

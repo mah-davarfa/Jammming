@@ -7,6 +7,7 @@ import SearchResults from "./SearchResults.jsx";
 import { AppContext } from "../context/AppContext.jsx";
 import PlaySong from "./PlaySong.jsx";
 import Playlist from "./Playlist.jsx";
+import UserSpotifyPlaylist from "./UserSpotifyPlaylist.jsx";
 import "../styles/darkMode.css";
 
 ///
@@ -79,6 +80,9 @@ function App() {
               <Data onSearchTerm={handleSearchTerm} />
 
               <div className="main-container">
+                <div>
+                  <UserSpotifyPlaylist/>
+                </div>
                 <div className={"search-results-c"}>
                   <SearchResults />
                 </div>
@@ -88,7 +92,7 @@ function App() {
                 <div className={"playlist-area-c"}>
                   <Playlist />
                 </div>
-              </div>
+               </div>
             </div>
           ) : (
             <div>
