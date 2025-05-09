@@ -5,7 +5,6 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [noResult, setNoResult] = useState(false);
-  const [selectedSong, setSelectedSong] = useState(null);
   const [playlistTitle, setPlaylistTitle] = useState("PlayList");
   const [isSaved, setIsSaved] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -20,11 +19,30 @@ export const AppProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
   const [searchtype, setSearchType] = useState("search");
   const [userPlaylistInPlaylistId, setUserPlaylistInPlaylistId] = useState("");
-  const [userPlaylists, setUserPlaylists] = useState([]);
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
-  
+  const [expairationTime, setExpairationTime] = useState(null);
+  const [times, setTimes] = useState(null);
+  const [userPlaylists, setUserPlaylists] = useState(()=>{
+    const storePlaylists = localStorage.getItem("userPlaylists");
+    try {
+      const parsed = JSON.parse(storePlaylists);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [selectedSong, setSelectedSong] = useState(()=>{
+    const storedSong = localStorage.getItem("selectedSong");
+    try {
+      return storedSong && storedSong !== "undefined" ? JSON.parse(storedSong) : null;
+    } catch {
+      return null;
+    }
+  });
+
   const [searchCommand, setSearchCommand] = useState(() => {
-  const storedCommand = localStorage.getItem("command");
+    const storedCommand = localStorage.getItem("command");
  
     try {
       const parsed = JSON.parse(storedCommand);
@@ -78,16 +96,22 @@ export const AppProvider = ({ children }) => {
   });
   const [userId, setUserId] = useState(null);
 
+ useEffect(()=>{
+    if (expairationTime) setTimes(expairationTime - Date.now());
+ },[expairationTime]);
+
   useEffect(() => {
     localStorage.setItem("isSearchStarted", JSON.stringify(isSearchStarted));
   }, [isSearchStarted]);
 
   useEffect(() => {
+    localStorage.setItem("userPlaylists", JSON.stringify(userPlaylists));
+    localStorage.setItem("selectedSong", JSON.stringify(selectedSong));
     localStorage.setItem("name", JSON.stringify(name));
     localStorage.setItem("submitted", JSON.stringify(submitted));
     localStorage.setItem("playlist", JSON.stringify(playlist));
     localStorage.setItem("command", JSON.stringify(searchCommand));
-  }, [name, submitted, playlist, searchCommand]);
+  }, [name, submitted, playlist, searchCommand,selectedSong,userPlaylists]);
 
   const handleRemove = (id, form) => {
     if (form === "playsong") {
@@ -200,7 +224,7 @@ export const AppProvider = ({ children }) => {
 
     if (authorizationCode) {
       setContinueToSearchAfterLogin(true);
-
+      //get a user token by using authorization code
       const getUserToken = async () => {
         const codeVerifier = localStorage.getItem("code_verifier-spotify");
         const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
@@ -225,6 +249,7 @@ export const AppProvider = ({ children }) => {
           const data = await response.json();
           if (response.ok) {
             setUserToken(data.access_token);
+            setExpairationTime (Date.now() + data.expires_in*1000);
           } else {
             console.error("Error fetching access token:", data);
           }
@@ -329,7 +354,10 @@ export const AppProvider = ({ children }) => {
         userPlaylists, 
         setUserPlaylists,
         isLoadingPreview, 
-        setIsLoadingPreview
+        setIsLoadingPreview,
+        expairationTime,
+        times, 
+        setTimes
       }}
     >
       {children}

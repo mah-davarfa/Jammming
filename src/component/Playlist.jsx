@@ -20,12 +20,13 @@ const Playlist = () => {
     userId,
     getUserId,
     userPlaylistInPlaylistId, 
+    setUserPlaylists,
     setUserPlaylistInPlaylistId
   } = useContext(AppContext);
   const [isEditing, setIsEditing] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [savingToSpotify, setSavingToSpotify] = useState(false);
   const fallbackImg = "/imag/fallbackimg.jpg"; // Fallback image path
 
   const handleEdit = () => {
@@ -54,22 +55,72 @@ const Playlist = () => {
       </div>
     );
   }
+  const handleSaveToSpotify = async() =>{
+    setSavingToSpotify(true);
 
-  const handleSaveToSpotify = async () => {
-    if (continueToSearchAsGuest) {
-      setIsLoggedIn(true);
-      return;
-    }
-    const id = userId || (await getUserId());
-    if (id) {
-      creatPlaylistidAndpostPlaylist(id);
-    }
-  };
-  //
-
-  async function creatPlaylistidAndpostPlaylist(userId) {
-    /// create a new playlist
+    const uris = playlist.map((song)=>`spotify:track:${song.id}`);
+    console.log("uris: ", uris);
     const token = userToken;
+    if (userPlaylistInPlaylistId){
+      await replaceExistingUserPlaylist(userPlaylistInPlaylistId, uris,token);
+    }else{
+      if (continueToSearchAsGuest) {
+        setIsLoggedIn(true);
+        return;
+      }
+      const id = userId || (await getUserId());
+      if (id) {
+        await createPlaylistAndPostPlaylist(id, uris,token);
+      }
+    }
+  }
+ 
+  //modifing the existing playlist in spotify 
+  //after successful fetching need to 
+  // //remove this playlist from userSpotifyPlaylist(userPlaylists) 
+  // //reset playlistTitle to playlist 
+  // // reset userPlaylistInPlaylistId
+  // // clear this playlist
+  // // set isSaved to true
+  async function replaceExistingUserPlaylist(playlistId, uris,token) {
+    try{const res = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uris }),
+      }
+    );
+
+    if (!res.ok) {
+      const err = await res.json();
+      console.error("❌ Failed to update playlist:", err);
+      alert("Failed to update your playlist on Spotify.");
+    } else {
+      console.log("✅ Playlist updated on Spotify.");
+      //if all the songs deleted by user before save to spotify (safty) and then remove the playlist from userSpotifyPlaylist
+      setUserPlaylists((per)=>
+        Array.isArray(per)? per.filter((item)=>item.id !== userPlaylistInPlaylistId):[]);
+      setPlaylistTitle('Playlist');
+      setUserPlaylistInPlaylistId('');
+      setPlaylist([]);
+      setIsSaved(true);
+    }
+  } catch (error) {
+    console.error("❌ Error updating playlist:", error);
+  }
+  setSavingToSpotify(false);
+  }
+  //creating a new playlist and adding songs to it
+  // after successful fetching need to
+  // // clear this playlist
+  // // set isSaved to true
+  async function createPlaylistAndPostPlaylist(userId, uris,token) {
+    
+    // create a new playlist
     try {
       const creatPlaylist = await fetch(
         `https://api.spotify.com/v1/users/${userId}/playlists`,
@@ -90,9 +141,8 @@ const Playlist = () => {
       const playlistIdValue = playlistId.id;
       console.log("playlist id :", playlistIdValue);
 
-      const uris = playlist.map((song) => `spotify:track:${song.id}`);
-      console.log("songs: ", uris);
-      ///// add songs to the playlist
+      
+      // add songs to created playlist
       const addPlaylistToSpotify = await fetch(
         `https://api.spotify.com/v1/playlists/${playlistIdValue}/tracks`,
         {
@@ -113,7 +163,9 @@ const Playlist = () => {
       console.error("Error saving playlist to Spotify:", error);
       alert("Playlist DID NOT SAVED to your Spotify account!");
     }
+    setSavingToSpotify(false);
   }
+ 
 
   return (
     <div className="playlist-container">
@@ -141,10 +193,11 @@ const Playlist = () => {
                 </button>
                 <button
                   onClick={handleSaveToSpotify}
-                  disabled={playlist.length === 0 || isEditing}
+                  disabled={playlist.length === 0 || isEditing || savingToSpotify}
                 >
                   Save to Spotify
                 </button>
+                {savingToSpotify ?<p>Saving to spotify...</p>:''}
                 {isLoggedIn ? (
                   <div>
                     <h3>

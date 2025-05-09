@@ -13,7 +13,37 @@ export default function Banner() {
     name,
     handlerNameInput,
     submitHandler,
+    expairationTime,
+    times,
+    setTimes
   } = useContext(AppContext);
+
+ 
+
+  useEffect(() => {
+    if (!expairationTime || times <= 0) return;
+
+      const timer = setTimeout(() => {
+      const remainingtime = expairationTime - Date.now();
+      
+        setTimes(remainingtime > 0 ? remainingtime : 0);
+      
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [times, expairationTime]);
+
+  //Function to convert timer
+  const converterOfTime = (times) => {
+    let totalSecends = parseInt(Math.floor(times / 1000));
+    let totalMinutes = parseInt(Math.floor(totalSecends / 60));
+    let totalHoures = parseInt(Math.floor(totalMinutes / 60));
+
+    let second = parseInt(totalSecends % 60);
+    let minute = parseInt(totalMinutes % 60);
+    let hour = parseInt(totalHoures % 60);
+
+    return `${hour} : ${minute} : ${second}`;
+  };
 
   const handleContinueAsGuest = () => {
     setContinueToSearchAsGuest(true);
@@ -23,7 +53,10 @@ export default function Banner() {
     <>
       <div className="banner">
         <h1>welcome to Jammming {submitted ? name : ""}! </h1>
-
+        {/*<h3>{`your Spotify access expaires in: ${convertTimer(time)}`}</h3>*/}
+        <h3>{`The access to spotify account will expaire in : ${converterOfTime(
+          times
+        )}`}</h3>
         {submitted &&
         !continueToSearchAfterLogin &&
         !continueToSearchAsGuest ? (

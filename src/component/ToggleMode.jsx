@@ -20,6 +20,9 @@ const ToggleMode = () => {
     setSearchCommand,
     setIsSaved,
     setPlaylistTitle,
+    setUserPlaylists,
+    setTimes,
+    setExpirationTime,
   } = useContext(AppContext);
   const togglMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -36,16 +39,21 @@ const ToggleMode = () => {
       
       <button
         onClick={() => {
-          localStorage.setItem("name", JSON.stringify(""));
-          localStorage.setItem("submitted", JSON.stringify(false));
+          localStorage.removeItem("name");
+          localStorage.removeItem("submitted");
           localStorage.removeItem("code_verifier-spotify");
           localStorage.removeItem("isSearchStarted");
           localStorage.removeItem("playlist");
           localStorage.removeItem("searchResultsAll");
+          localStorage.removeItem("selectedSong");
+          localStorage.removeItem("userPlaylists");
+          localStorage.removeItem("command");
           setPlaylistTitle("PlayList");
           setIsDarkMode(true);
           setIsSaved(false);
           setName("");
+          setTimes(null);
+          //setExpirationTime(0);
           setSubmitted(false);
           setContinueToSearchAfterLogin(false);
           setUserToken(null);
@@ -56,6 +64,8 @@ const ToggleMode = () => {
           setSelectedSong(null);
           setCurrentSong(null);
           setSearchCommand(null);
+          setUserPlaylists([]);
+          
         }}
       >
         Log Out
