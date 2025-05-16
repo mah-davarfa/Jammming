@@ -14,9 +14,9 @@ export default function Data({ onSearchTerm }) {
       const getGuestToken = async () => {
         try {
                      //for local version
-           const response = await fetch("http://localhost:4000/api/token"); 
+           //const response = await fetch("http://localhost:4000/api/token"); 
                       //for render for published version
-         //const response = await fetch("https://jammming-backend.onrender.com/api/token"); 
+         const response = await fetch("https://jammming-backend.onrender.com/api/token"); 
           const data = await response.json();
 
           if (data.access_token) {

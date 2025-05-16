@@ -1,10 +1,10 @@
 
 # 🎵 Jammming - Spotify Playlist Creator
 
-Jammming is a modern React app that allows users to search for songs, albums, and artists via the Spotify API, preview tracks, create playlists, and save them to their Spotify account.
+Jammming is a full-featured React + Spotify web application that allows users to search for songs, create custom playlists, and manage their Spotify playlists. It uses the Spotify Web API for searching, playing previews, and uploading playlists to a user's Spotify account.
 
 ## 🚀 Demo
-Watch the full demo on YouTube: [Jammming App Demo]:(https://youtu.be/_vE6uD0FLhg)
+Watch the full demo on YouTube: [Jammming App Demo]:(https://youtu.be/XlmoQKLAJAQ)
 🌐 Live Site:https://jammming-mahmoud.netlify.app/
 --------
 
@@ -26,20 +26,37 @@ Watch the full demo on YouTube: [Jammming App Demo]:(https://youtu.be/_vE6uD0FLh
 
 ## 🔧 Technologies Used
 - React + Vite
-- Spotify Web API
+-  Spotify OAuth (PKCE), Spotify Web API
 - Axios
 - CSS (Responsive Grid & Flexbox)
-- React Context API
+- React Context + `localStorage` sync
 - Jest & React Testing Library
+ **Preview API**: Custom Express backend on Render for fetching 3rd-party preview URLs (when Spotify preview is missing)
+- **Deployment**: 
+- Frontend: Netlify
+  - Backend: Render
+
 
 ## 🔐 Features
-- Login with Spotify OAuth or continue as guest
+- Secure PKCE-based login flow.
+ Token Expiration Countdown
+- After login, the app retrieves a Spotify access token.
+- A real-time countdown timer is displayed, showing how long the session remains valid.
+- Countdown is based on a timestamp (`Date.now() + expires_in * 1000`) and is **persisted in `localStorage`** to survive refreshes.
+- When time runs out, users are prompted to re-login.
+- Load and Edit Existing Spotify Playlists
+- Load any of your existing Spotify playlists into the app.
+- Add or remove songs.
+- Supports guest mode (limited features) or full user login.
 - Search by song, album, or artist
 - Preview audio clips
-- Create and manage playlists
-- Save playlists to Spotify
+- Rename playlists before saving.
+- Save new playlists directly to your Spotify account.
 - Dark and Light mode toggle
 - Fully unit-tested components
+###  Replace Existing Playlist on Spotify
+- After editing, the updated playlist can **replace the original on Spotify** using Spotify’s `PUT` endpoint.
+- Prevents duplicate playlist clutter.
 
 ## 🧪 Testing
 Built using:
