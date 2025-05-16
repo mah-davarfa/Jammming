@@ -22,9 +22,11 @@ const UserSpotifyPlaylist = () => {
   const [hasLogedIn, setHasLogedIn] = useState(false);
   
   
-
+const handleRemoveUserPlaylist =(id)=>{
+   setUserPlaylists((pre)=>pre.filter((item)=>item.id !==id));
+}
   
- 
+
  
   //check to see if we have user's id or not, if not get user id, if yes fetch user playlist
   const handleFetchPlaylists = async () => {
@@ -136,6 +138,9 @@ const UserSpotifyPlaylist = () => {
               <p>{`Tracks: ${playlist.tracks?.total}`}</p>
               <button onClick={()=>handleAddUseraplaylistToPlaylist(playlist)}>
                 {(userPlaylistInPlaylistId !== playlist.id  ) ? 'add to playlist': 'already added to playlist' }
+              </button>
+              <button onClick={()=>handleRemoveUserPlaylist(playlist.id)}>
+                Remove from playlist
               </button>
             </div>
           ))}

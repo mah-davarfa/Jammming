@@ -468,5 +468,10 @@
              .play-song-c{
                 padding: 5px;
              }
+             .wellComeCountDown{
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+             }
         }
     

@@ -48,15 +48,21 @@ export default function Banner() {
   const handleContinueAsGuest = () => {
     setContinueToSearchAsGuest(true);
   };
-
+  ///log in button after token expaires instead taht p tag sss
   return (
     <>
       <div className="banner">
-        <h1>welcome to Jammming {submitted ? name : ""}! </h1>
-        {/*<h3>{`your Spotify access expaires in: ${convertTimer(time)}`}</h3>*/}
-        <h3>{`The access to spotify account will expaire in : ${converterOfTime(
-          times
-        )}`}</h3>
+        <div className ={'wellComeCountDown'}>
+         {expairationTime ? (<p>{`re-login in: ${converterOfTime(
+              times
+              )}`} </p>):''}
+              {times <= 1 && expairationTime ? <button onClick={() => handleLoginToSpotify()} type="submit">
+              Log in to Spotify
+            </button>:''}
+            <h1>welcome to Jammming {submitted ? name : ""}! </h1>
+            
+           
+        </div>    
         {submitted &&
         !continueToSearchAfterLogin &&
         !continueToSearchAsGuest ? (

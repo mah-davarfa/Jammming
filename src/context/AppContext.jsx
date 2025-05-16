@@ -20,7 +20,6 @@ export const AppProvider = ({ children }) => {
   const [searchtype, setSearchType] = useState("search");
   const [userPlaylistInPlaylistId, setUserPlaylistInPlaylistId] = useState("");
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
-  const [expairationTime, setExpairationTime] = useState(null);
   const [times, setTimes] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState(()=>{
     const storePlaylists = localStorage.getItem("userPlaylists");
@@ -94,6 +93,14 @@ export const AppProvider = ({ children }) => {
       return false;
     }
   });
+   const [expairationTime, setExpairationTime] = useState(()=>{
+    const storedEpitationTime = localStorage.getItem("expairationTime");
+    try{
+      return JSON.parse(storedEpitationTime);
+    }catch{
+      return null;
+    }
+   });
   const [userId, setUserId] = useState(null);
 
  useEffect(()=>{
@@ -111,7 +118,8 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("submitted", JSON.stringify(submitted));
     localStorage.setItem("playlist", JSON.stringify(playlist));
     localStorage.setItem("command", JSON.stringify(searchCommand));
-  }, [name, submitted, playlist, searchCommand,selectedSong,userPlaylists]);
+    localStorage.setItem('expairationTime', JSON.stringify(expairationTime));
+  }, [name, submitted, playlist, searchCommand,selectedSong,userPlaylists,expairationTime]);
 
   const handleRemove = (id, form) => {
     if (form === "playsong") {
@@ -356,6 +364,7 @@ export const AppProvider = ({ children }) => {
         isLoadingPreview, 
         setIsLoadingPreview,
         expairationTime,
+        setExpairationTime,
         times, 
         setTimes
       }}

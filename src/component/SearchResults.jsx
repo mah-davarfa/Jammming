@@ -48,7 +48,7 @@ const SearchResults = () => {
   return (
     <div>
       <div className={"SearchResult-title"}>
-        <h2>search results</h2>
+        <h2>search results : {searchResultsAll.length} </h2>
         {searchResultsAll.length === 0 ? (
           <p className="playlist-empty">
             Search Results is Empty! Search For Song or Artist or Album!{" "}

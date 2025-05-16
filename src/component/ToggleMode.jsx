@@ -22,7 +22,7 @@ const ToggleMode = () => {
     setPlaylistTitle,
     setUserPlaylists,
     setTimes,
-    setExpirationTime,
+    setExpairationTime
   } = useContext(AppContext);
   const togglMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -48,12 +48,13 @@ const ToggleMode = () => {
           localStorage.removeItem("selectedSong");
           localStorage.removeItem("userPlaylists");
           localStorage.removeItem("command");
+          localStorage.removeItem("expairationTime");
           setPlaylistTitle("PlayList");
           setIsDarkMode(true);
           setIsSaved(false);
           setName("");
           setTimes(null);
-          //setExpirationTime(0);
+          setExpairationTime(null);
           setSubmitted(false);
           setContinueToSearchAfterLogin(false);
           setUserToken(null);
