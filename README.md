@@ -9,6 +9,8 @@ Watch the full demo on YouTube: [Jammming App Demo]:(https://youtu.be/XlmoQKLAJA
 --------
 
 ## 📷 Screenshots
+![Screenshot 1](./src/assets/screenshots/new1.png)
+![Screenshot 1](./src/assets/screenshots/new2.png)
 ![Screenshot 1](./src/assets/screenshots/Screenshot%201.png)
 ![Screenshot 2](./src/assets/screenshots/Screenshot%202.png)
 ![Screenshot 3](./src/assets/screenshots/Screenshot%203.png)
