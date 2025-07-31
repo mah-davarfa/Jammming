@@ -8,13 +8,15 @@ export default function SearchBar() {
   const { setSearchCommand, noResult } = useContext(AppContext);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (search.trim()) {
-      setCleanSearch(false);
-      setSearchCommand({ type: "search", id: search });
-      setSearch("");
-    }
-  };
+  e.preventDefault();
+  const sanitized = search.replace(/[<>/"';]/g, ' ').trim(); // basic sanitization
+
+  if (sanitized) {
+    setCleanSearch(false);
+    setSearchCommand({ type: "search", id: sanitized });
+    setSearch("");
+  }
+};
   const handleOnChange = (e) => {
     setSearch(e.target.value);
     if (cleanSearch === false) {

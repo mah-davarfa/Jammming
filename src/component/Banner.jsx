@@ -11,7 +11,7 @@ export default function Banner() {
     handleLoginToSpotify,
     submitted,
     name,
-    handlerNameInput,
+   
     submitHandler,
     expairationTime,
     times,
@@ -81,9 +81,10 @@ export default function Banner() {
         {!submitted && (
           <form onSubmit={submitHandler} className="search-container">
             <input
-              onChange={handlerNameInput}
+             name='name'
+              
               className="bannerInput"
-              value={name}
+              
               type="text"
               placeholder="please Enter your name"
             />

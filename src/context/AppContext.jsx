@@ -208,13 +208,13 @@ export const AppProvider = ({ children }) => {
       .replace(/\//g, "_")
       .replace(/=+$/, "");
   };
-
+  
   const handleLoginToSpotify = async () => {
     const codeVerifier = generateRandomString(128);
     const codeChallenge = await generateChallengeCode(codeVerifier);
     localStorage.setItem("code_verifier-spotify", codeVerifier);
 
-    const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;//for published version and local version
+    const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID; //for published version and local version
     const redirect_uri = import.meta.env.VITE_REDIRECT_URI; //for published version and local version
     const scope = "playlist-modify-public playlist-modify-private";
    
@@ -269,14 +269,22 @@ export const AppProvider = ({ children }) => {
       getUserToken();
     }
   }, []);
-
-  const handlerNameInput = (e) => setName(e.target.value);
-  const submitHandler = (e) => {
+  ///sanitizing input name
+  const submitHandler = (e)=>{
     e.preventDefault();
-    if (name.trim()) {
-      setSubmitted(true);
-    }
-  };
+    const rawName=e.target.elements.name.value;
+    const sanitizedName= rawName.replace(/[<>/"';]/g,' ' ).trim();
+   if(sanitizedName)
+    {setName(sanitizedName);
+   setSubmitted(true);}
+  }
+  // const handlerNameInput = (e) => setName(e.target.value);
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   if (name.trim()) {
+  //     setSubmitted(true);
+  //   }
+  // };
       // get the user id for playlist and userplaylists
       async function getUserId() {
         try {
@@ -351,7 +359,7 @@ export const AppProvider = ({ children }) => {
         handleLoginToSpotify,
         getUserId,
         playlistLimitReached,
-        handlerNameInput,
+       
         submitHandler,
         playlistTitle,
         setPlaylistTitle,
