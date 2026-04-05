@@ -1,14 +1,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap");
 
-
+body, html, #root { margin: 0; padding: 0; width: 100%; min-height: 100vh;  }
 .frame-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0;
+   min-height: 100vh;  
+   padding: 0;
    
   } 
   .search-container {
@@ -229,6 +227,7 @@
 
 .dark-mode, .light-mode {
   transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 .dark-mode{
     background-color: #131111;
@@ -414,7 +413,7 @@
         }
         .playlist-area-c{
             grid-area: playlist;
-        }
+        } 
         
         
          .list,.playlist-list,

@@ -6,6 +6,7 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: hidden; /* Prevent horizontal scroll */
+  min-height: 100vh;
 }
 
 /* Apply consistent box-sizing to prevent width issues */
