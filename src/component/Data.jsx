@@ -14,7 +14,7 @@ export default function Data({ onSearchTerm }) {
       const getGuestToken = async () => {
         try {
                      //for local version
-           //const response = await fetch("http://localhost:4000/api/token"); 
+          //  const response = await fetch("http://localhost:4000/api/token"); 
                       //for render for published version
          const response = await fetch("https://jammming-backend.onrender.com/api/token"); 
          const data = await response.json();
@@ -39,7 +39,9 @@ export default function Data({ onSearchTerm }) {
 
     const token = userToken || guestToken;
     if (!token) return;
-
+    console.log("Using token source:", userToken ? "userToken" : guestToken ? "guestToken" : "none");
+    console.log("Token preview:", token ? token.slice(0, 12) + "..." : "no token");
+    console.log("searchCommand:", searchCommand);
     const isId = /^[0-9a-zA-Z]{22}$/.test(searchCommand.id);
 
     const fetchData = async () => {

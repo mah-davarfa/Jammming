@@ -14,7 +14,8 @@ app.get('/api/token', async (req, res) => {
 
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
+console.log("SPOTIFY_CLIENT_ID exists:", !!process.env.SPOTIFY_CLIENT_ID);
+console.log("SPOTIFY_CLIENT_SECRET exists:", !!process.env.SPOTIFY_CLIENT_SECRET);
   const encoded = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
   try {

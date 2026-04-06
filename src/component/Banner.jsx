@@ -70,9 +70,9 @@ export default function Banner() {
             <button type="submit" onClick={handleLoginToSpotify}>
               Log in to Spotify
             </button>
-            <button type="submit" onClick={handleContinueAsGuest}>
+            {/* <button type="submit" onClick={handleContinueAsGuest}>
               continue As Guest
-            </button>
+            </button> */}
           </div>
         ) : (
           ""

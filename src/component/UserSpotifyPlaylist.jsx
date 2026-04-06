@@ -130,7 +130,7 @@ const handleRemoveUserPlaylist =(id)=>{
               <h3>{playlist.name}</h3>
 
               <img
-                src={playlist.images[0]?.url || "/imag/fallbackimg.jpg"}
+                src={playlist.images?.[0]?.url || "/imag/fallbackimg.jpg"}
                 alt={playlist.name}
                 width={150}
                 height={150}
